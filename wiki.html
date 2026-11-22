@@ -1,0 +1,2008 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>射鵰三部曲 LLM Wiki</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@900&display=swap">
+<style>
+:root{--bg:#F4F4F2;--surface:#FFFFFF;--ink:#1D1D1F;--muted:#6E6E73;--line:#E2E2DE;--accent:#B8452E;--warnbg:#FBEFE6;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111112;--surface:#1C1C1E;--ink:#F5F5F7;--muted:#9A9AA0;--line:#2C2C2E;--accent:#F08A6E;--warnbg:#2E211C;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111112;--surface:#1C1C1E;--ink:#F5F5F7;--muted:#9A9AA0;--line:#2C2C2E;--accent:#F08A6E;--warnbg:#2E211C;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:16px;line-height:1.75}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px}
+@media (max-width:800px){.wrap{grid-template-columns:1fr}nav.side{position:static!important;max-height:none!important}}
+nav.side{position:sticky;top:16px;align-self:start;max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:2px;font-size:.88rem}
+nav.side .brand{font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.2rem;margin-bottom:8px}
+nav.side h4{margin:14px 0 4px;font-size:.75rem;color:var(--muted)}
+nav.side a{text-decoration:none;color:var(--ink);padding:2px 6px;border-radius:4px} nav.side a:hover{background:var(--surface)}
+main{display:flex;flex-direction:column;gap:20px;min-width:0}
+.page{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 26px;min-width:0;scroll-margin-top:16px}
+.page:target{border-color:var(--accent)}
+.path{font-family:ui-monospace,Menlo,monospace;font-size:.75rem;color:var(--muted)}
+.fm{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:.8rem;color:var(--muted);margin:8px 0;font-family:ui-monospace,Menlo,monospace}
+.fm dt{font-weight:600}.fm dd{margin:0}
+h1,h2,h3{line-height:1.35;text-wrap:balance} h1{font-family:"Noto Serif TC",serif;font-size:1.7rem;margin:.3em 0}
+table{border-collapse:collapse;display:block;overflow-x:auto;font-size:.92rem;margin:10px 0}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto;font-size:.82rem}
+blockquote{margin:10px 0;padding:8px 14px;border-left:4px solid var(--accent);background:var(--warnbg);border-radius:0 8px 8px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="side" aria-label="Wiki 目錄"><div class="brand">射鵰三部曲 Wiki</div><a href="index.html">← 回到簡報版型</a>
+<a href='#index'>index</a>
+<a href='#discussion'>discussion</a>
+<a href='#AGENTS'>AGENTS</a>
+<a href='#log'>log</a>
+<h4>概念頁</h4>
+<a href='#concepts-editions'>editions</a>
+<a href='#concepts-five-greats'>five-greats</a>
+<a href='#concepts-glossary'>glossary</a>
+<a href='#concepts-jin-yong'>jin-yong</a>
+<a href='#concepts-jiuyang'>jiuyang</a>
+<a href='#concepts-people-shediao'>people-shediao</a>
+<a href='#concepts-people-shendiao'>people-shendiao</a>
+<a href='#concepts-people-yitian'>people-yitian</a>
+<a href='#concepts-relations'>relations</a>
+<a href='#concepts-shediao-islands'>shediao-islands</a>
+<a href='#concepts-shediao'>shediao</a>
+<a href='#concepts-shendiao-islands'>shendiao-islands</a>
+<a href='#concepts-shendiao'>shendiao</a>
+<a href='#concepts-timeline'>timeline</a>
+<a href='#concepts-treasures'>treasures</a>
+<a href='#concepts-trilogy'>trilogy</a>
+<a href='#concepts-yitian-islands'>yitian-islands</a>
+<a href='#concepts-yitian'>yitian</a>
+<h4>來源摘要</h4>
+<a href='#sources-S01-jinyong'>S01-jinyong</a>
+<a href='#sources-S02-trilogy'>S02-trilogy</a>
+<a href='#sources-S03-five-greats'>S03-five-greats</a>
+<a href='#sources-S04-shediao'>S04-shediao</a>
+<a href='#sources-S05-shendiao'>S05-shendiao</a>
+<a href='#sources-S06-yitian'>S06-yitian</a>
+<a href='#sources-S07-shediao-plot'>S07-shediao-plot</a>
+<a href='#sources-S08-shendiao-plot'>S08-shendiao-plot</a>
+<a href='#sources-S09-yitian-plot'>S09-yitian-plot</a>
+<a href='#sources-S10-yitian-sword'>S10-yitian-sword</a>
+<a href='#sources-S11-tulong-saber'>S11-tulong-saber</a>
+<h4>查詢回存</h4>
+<a href='#queries-q01-slide-outline'>q01-slide-outline</a>
+<h4>原始資料（唯讀）</h4>
+<a href='#raw-S01-jinyong'>S01-jinyong</a>
+<a href='#raw-S02-trilogy'>S02-trilogy</a>
+<a href='#raw-S03-five-greats'>S03-five-greats</a>
+<a href='#raw-S04-shediao'>S04-shediao</a>
+<a href='#raw-S05-shendiao'>S05-shendiao</a>
+<a href='#raw-S06-yitian'>S06-yitian</a>
+<a href='#raw-S07-shediao-plot'>S07-shediao-plot</a>
+<a href='#raw-S08-shendiao-plot'>S08-shendiao-plot</a>
+<a href='#raw-S09-yitian-plot'>S09-yitian-plot</a>
+<a href='#raw-S10-yitian-sword'>S10-yitian-sword</a>
+<a href='#raw-S11-tulong-saber'>S11-tulong-saber</a>
+</nav>
+<main>
+<article id='index' class='page'><div class='path'>wiki/index.md</div><h1>Index — 金庸射鵰三部曲 Wiki</h1>
+<blockquote>
+<p>查詢時先讀這頁。</p>
+</blockquote>
+<h2>總覽</h2>
+<ul>
+<li><a href="#concepts-trilogy">concepts/trilogy</a> — 三本書一張表；三本書怎麼串起來</li>
+<li><a href="#concepts-timeline">concepts/timeline</a> — 1199 到元末的時間軸</li>
+<li><a href="#concepts-relations">concepts/relations</a> — 三部曲人物關係</li>
+</ul>
+<h2>三本書</h2>
+<ul>
+<li><a href="#concepts-shediao">concepts/shediao</a> — 射鵰英雄傳：郭靖、黃蓉</li>
+<li><a href="#concepts-shendiao">concepts/shendiao</a> — 神鵰俠侶：楊過、小龍女</li>
+<li><a href="#concepts-yitian">concepts/yitian</a> — 倚天屠龍記：張無忌</li>
+</ul>
+<h2>島嶼地圖（主線故事）與人物檔案</h2>
+<ul>
+<li><a href="#concepts-shediao-islands">concepts/shediao-islands</a> — 射鵰十座島：牛家村 → 華山</li>
+<li><a href="#concepts-shendiao-islands">concepts/shendiao-islands</a> — 神鵰十二座島：嘉興 → 華山</li>
+<li><a href="#concepts-yitian-islands">concepts/yitian-islands</a> — 倚天十一座島：少林寺 → 濠州</li>
+<li><a href="#concepts-people-shediao">concepts/people-shediao</a> — 射鵰七人：身世／經歷／武功／結局</li>
+<li><a href="#concepts-people-shendiao">concepts/people-shendiao</a> — 神鵰七人</li>
+<li><a href="#concepts-people-yitian">concepts/people-yitian</a> — 倚天八人</li>
+</ul>
+<h2>主題</h2>
+<ul>
+<li><a href="#concepts-five-greats">concepts/five-greats</a> — 天下五絕與華山論劍（第一次 vs 第三次）</li>
+<li><a href="#concepts-treasures">concepts/treasures</a> — 神兵百年：倚天劍與屠龍刀的持有者追蹤、內藏之物、版本差異</li>
+<li><a href="#concepts-jiuyang">concepts/jiuyang</a> — 九陽真經一分為三</li>
+<li><a href="#concepts-jin-yong">concepts/jin-yong</a> — 作者金庸；對聯記 14 部作品</li>
+<li><a href="#concepts-editions">concepts/editions</a> — 三個版本與閱讀順序</li>
+<li><a href="#concepts-glossary">concepts/glossary</a> — 名詞表：簡報用的一句話解釋</li>
+</ul>
+<h2>來源</h2>
+<ul>
+<li><a href="#sources-S01-jinyong">sources/S01-jinyong</a> — 〈金庸〉</li>
+<li><a href="#sources-S02-trilogy">sources/S02-trilogy</a> — 〈射鵰三部曲〉</li>
+<li><a href="#sources-S03-five-greats">sources/S03-five-greats</a> — 〈天下五絕〉（頁面缺參考來源）</li>
+<li><a href="#sources-S04-shediao">sources/S04-shediao</a> — 〈射鵰英雄傳〉</li>
+<li><a href="#sources-S05-shendiao">sources/S05-shendiao</a> — 〈神鵰俠侶〉</li>
+<li><a href="#sources-S06-yitian">sources/S06-yitian</a> — 〈倚天屠龍記〉</li>
+<li><a href="#sources-S07-shediao-plot">sources/S07-shediao-plot</a> — 〈射鵰英雄傳〉完整故事梗概與主要人物</li>
+<li><a href="#sources-S08-shendiao-plot">sources/S08-shendiao-plot</a> — 〈神鵰俠侶〉完整情節、後續發展與主要人物</li>
+<li><a href="#sources-S09-yitian-plot">sources/S09-yitian-plot</a> — 〈倚天屠龍記〉完整情節與登場人物</li>
+<li><a href="#sources-S10-yitian-sword">sources/S10-yitian-sword</a> — 〈倚天劍〉</li>
+<li><a href="#sources-S11-tulong-saber">sources/S11-tulong-saber</a> — 〈屠龍刀〉</li>
+</ul>
+<h2>查詢回存</h2>
+<ul>
+<li><a href="#queries-q01-slide-outline">queries/q01-slide-outline</a> — 教學簡報大綱</li>
+</ul>
+<h2>其他</h2>
+<ul>
+<li><a href="#discussion">discussion</a> · <a href="#log">log</a></li>
+</ul></article>
+<article id='discussion' class='page'><div class='path'>wiki/discussion.md</div><dl class='fm'><dt>title</dt><dd>先討論、後生成：範圍討論紀錄</dd><dt>type</dt><dd>meta</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>先討論、後生成</h1>
+<blockquote>
+<p>使用者指定主題「金庸小說介紹，做三部曲」，並要求頁面乾淨、互動多、做 2–3 種設計讓他挑。以下是生成 Wiki 之前的討論與決定。</p>
+</blockquote>
+<h2>Round 1：「三部曲」指哪三本？</h2>
+<ul>
+<li>金庸的三部曲有明確共識：<strong>射鵰三部曲</strong>＝《射鵰英雄傳》《神鵰俠侶》《倚天屠龍記》。</li>
+<li>有論者把《天龍八部》加進來叫「四部曲」→ <strong>不採用</strong>，只在 Wiki 記一筆，簡報不提，避免初學者混淆。</li>
+</ul>
+<h2>Round 2：受眾與成功標準</h2>
+<ul>
+<li>受眾：聽過金庸、但一本都沒讀過的大學生。</li>
+<li>看完要能回答：(1) 三本書的時代與主角是誰？(2) 三本書怎麼串起來？(3) 想開始讀，從哪本、哪個版本？</li>
+<li>不做：不逐回講劇情、不比較影視版本（來源不足，也會變成影劇八卦）。</li>
+</ul>
+<h2>Round 3：來源</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>來源</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S01</td>
+<td>維基百科〈金庸〉</td>
+<td>作者生平、對聯、版本</td>
+</tr>
+<tr>
+<td>S02</td>
+<td>維基百科〈射鵰三部曲〉</td>
+<td>三書關係、連載、寶物傳承</td>
+</tr>
+<tr>
+<td>S03</td>
+<td>維基百科〈天下五絕〉</td>
+<td>五絕與華山論劍（頁面本身缺參考來源 → 只用和 S04/S05 一致的內容）</td>
+</tr>
+<tr>
+<td>S04</td>
+<td>維基百科〈射鵰英雄傳〉</td>
+<td>第一部</td>
+</tr>
+<tr>
+<td>S05</td>
+<td>維基百科〈神鵰俠侶〉</td>
+<td>第二部</td>
+</tr>
+<tr>
+<td>S06</td>
+<td>維基百科〈倚天屠龍記〉</td>
+<td>第三部</td>
+</tr>
+<tr>
+<td>限制：都是維基百科（二手、可編輯）。處理方式：只用多頁互相一致的事實；版本差異與矛盾一律標出。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Round 4：簡報要長什麼樣</h2>
+<ul>
+<li>使用者要求：<strong>頁面乾淨、不要附註</strong>。→ 來源對應改成投影片資料裡的隱藏欄位 <code>wiki</code>，由程式檢查，不顯示在畫面上。</li>
+<li><strong>互動優先</strong>：對聯點字、時間軸拖拉、五絕羅盤、刀劍互砍、人物關係圖、九陽真經分家、測驗。</li>
+<li><strong>內容與版型分開</strong>：內容只寫一次（<code>slides/content.js</code>），三種版型共用，方便公平比較設計。</li>
+<li>三種設計概念（參考知名平台的設計語言，不使用其商標）：</li>
+<li>串流平台風：深色、紅色強調、三本書當成三季影集。</li>
+<li>闖關學習風：白底、綠色立體按鈕、經驗值，像語言學習 App。</li>
+<li>發表會風：極簡黑底、超大字、一頁一個重點。</li>
+</ul>
+<h2>Round 5：使用者選定 A 版之後的改版（2026-11-21）</h2>
+<p>使用者回饋（原話重點）：選 A 串流平台風；內容要更多，看完要能知道整個故事，不只是粗淺認識人物；故事用「島嶼地圖」呈現，三本書套同一個框架（從哪座島開始、看完跳到哪座島）；不要「刀劍互砍」這種寫法，改成「刀劍裡藏了東西」，互砍的情節放回它發生的那本書，並用前端設計帶出兩把神兵的完整歷史；人物卡、關係圖保留但內容加深。</p>
+<p>討論後的決定：
+| 問題 | 決定 | 理由 |
+|---|---|---|
+| 「不逐回講劇情」（Round 2）還成立嗎？ | 改成「每本書 10 座島 ≈ 10 個段落」，不逐回、但主線完整 | 使用者要看完整故事；10 段能涵蓋主線又不變成回目表 |
+| 現有 S04–S06 只有摘要，夠嗎？ | 不夠 → 新增 S07–S09（三本書維基頁的完整「故事梗概／情節／主要人物」段落）、S10〈倚天劍〉、S11〈屠龍刀〉 | 島嶼文字與人物檔案的每個事實都要能追到原文 |
+| 三本書的共同框架 | 每座島 = 地點 + 章節名 + 故事 + 登場人物 + 「關鍵」一句 + 下一站；最後一座島連到下一本書的第一座島 | 同一套操作方式，學一次三本都會看 |
+| 刀劍頁怎麼寫 | 改名「刀劍裡藏著什麼」；做成跨三本書的「神兵百年」：一站一站追兩把兵器的持有者，互砍取書的情節放在倚天的靈蛇島那一站 | 符合使用者要求；也把散在三本書的線索串成一條線 |
+| 人物 | 每本書 6–8 人，人物檔案分「身世／經歷／武功／結局」，並可跳到他出場的島 | 卡片只放一句話太淺 |
+| 每頁 300 字上限（K5） | 改成「每個可展開單元 ≤ 320 字」（一座島、一個人物、一站） | 內容加深後整頁一定超過；但一次展開在畫面上的文字仍要短 |
+| B、C 版 | 移到 <code>archive/three-versions/</code>，保留當時的程式與截圖 | 使用者已選 A；保留比較紀錄 |</p></article>
+<article id='AGENTS' class='page'><div class='path'>wiki/AGENTS.md</div><h1>Wiki Schema（給 LLM 維護者的規則）</h1>
+<p>依 Karpathy「LLM Wiki」模式：<strong>raw（原始資料，唯讀）→ wiki（LLM 編譯的知識頁）→ schema（本檔）</strong>。
+主題：<strong>金庸「射鵰三部曲」入門</strong>——《射鵰英雄傳》《神鵰俠侶》《倚天屠龍記》。</p>
+<h2>目錄</h2>
+<table>
+<thead>
+<tr>
+<th>路徑</th>
+<th>內容</th>
+<th>誰改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raw/Sxx-*.md</code></td>
+<td>來源書目 + 擷取重點</td>
+<td>不可改，只能新增</td>
+</tr>
+<tr>
+<td><code>sources/</code></td>
+<td>一來源一頁摘要</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td><code>concepts/</code></td>
+<td>跨來源概念頁（人物、時間軸、寶物、武功…）</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td><code>queries/</code></td>
+<td>查詢回存（簡報大綱）</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td><code>index.md</code> / <code>log.md</code></td>
+<td>目錄 / 只追加的操作紀錄</td>
+<td>LLM</td>
+</tr>
+<tr>
+<td><code>discussion.md</code></td>
+<td>先討論、後生成的範圍討論</td>
+<td>人 + LLM</td>
+</tr>
+</tbody>
+</table>
+<h2>頁面規則</h2>
+<ol>
+<li>frontmatter：<code>title</code>、<code>type</code>、<code>sources</code>、<code>updated</code>。</li>
+<li>互連用 <code>[資料夾/檔名](#------)</code>。</li>
+<li>含年份、數字的句子，句尾標 <code>[Sxx]</code>（lint L5）。</li>
+<li>內文用到的 <code>[Sxx]</code> 都要列進 frontmatter（lint L8）。</li>
+<li>版本差異或來源矛盾用 <code>&gt; ⚠️ 衝突：</code> 或 <code>&gt; 📖 版本差異：</code> 標出，不自行挑一個；衝突要寫進 log（lint L6）。</li>
+<li>概念頁要有「一句話」，給完全沒讀過金庸的人。</li>
+<li>人名以世紀新修版為主，舊版名稱寫在版本差異區塊。</li>
+</ol>
+<h2>操作</h2>
+<ul>
+<li><strong>ingest</strong>：讀 raw → 寫 sources 頁 → 更新 concepts → 更新 index、log → 跑 <code>lint_wiki.py</code>。</li>
+<li><strong>query</strong>：先讀 index → 相關頁 → 合成答案，存進 <code>queries/</code>。</li>
+<li><strong>lint</strong>：<code>pipeline/lint_wiki.py</code>。</li>
+<li><strong>產生簡報</strong>：大綱 q01 → <code>check_outline.py</code> → 寫 <code>slides/content.js</code> → <code>check_content.py</code> → 三種版型渲染 → 截圖檢查。全流程 <code>bash pipeline/run_all.sh</code>。</li>
+</ul></article>
+<article id='log' class='page'><div class='path'>wiki/log.md</div><h1>Log（只往後追加）</h1>
+<h2>[2026-11-21] discuss | 範圍討論</h2>
+<ul>
+<li>三部曲＝射鵰／神鵰／倚天；受眾、成功標準、6 篇來源、三種版型。見 <a href="#discussion">discussion</a>。</li>
+</ul>
+<h2>[2026-11-21] ingest | S01–S06 來源頁</h2>
+<ul>
+<li>新增 sources/S01–S06。lint #1 結果見 run_logs/01。</li>
+</ul>
+<h2>[2026-11-21] ingest | concepts + index</h2>
+<ul>
+<li>新增 11 個概念頁與 index。</li>
+<li>衝突記錄：concepts/timeline（第三次華山論劍 1259 vs 1260）、concepts/editions（修訂版、新修版年份兩頁不一致）。處理：簡報不寫具體年份。</li>
+<li>版本差異（非衝突）：金輪法王/國師、楊過之母、刀劍秘密，簡報以新修版為準或明示差異。</li>
+</ul>
+<h2>[2026-11-21] query | q01 大綱</h2>
+<ul>
+<li>16 頁大綱與名詞引入計畫，存為 <a href="#queries-q01-slide-outline">queries/q01-slide-outline</a>；check_outline PASS。</li>
+</ul>
+<h2>[2026-11-21] generate | content.js v1 → check_content：8 errors</h2>
+<ul>
+<li>無來源事實 2（時間軸自己補了 1370 年、武穆遺書解釋寫了岳飛）；引用範圍錯 3；Wiki 缺口 3（連載日期、主角名只在來源頁，不在概念頁）。紀錄：run_logs/05</li>
+<li>8 個裡有 3 個出在 {{名詞|解釋}} 的解釋文字 → 這些解釋是生成時臨時寫的，沒有來源。</li>
+</ul>
+<h2>[2026-11-21] ingest | v2：新增 concepts/glossary + lint L9（把「寫名詞解釋」往前移到 Wiki）</h2>
+<ul>
+<li>13 個名詞的一句話解釋都在 Wiki 寫好並標來源；簡報只能照抄（check_content K8）。</li>
+<li>補 trilogy 連載日期、timeline 主角名。</li>
+</ul>
+<h2>[2026-11-21] generate | content.js v2 → check_content PASS</h2>
+<ul>
+<li>名詞解釋改成照抄名詞表；拿掉自己補的年份；修正引用範圍。紀錄：run_logs/07</li>
+<li>故意改錯一個解釋，確認 K8 會抓到，再還原。紀錄：run_logs/07a</li>
+</ul>
+<h2>[2026-11-21] render | 三種版型 + 截圖檢查</h2>
+<ul>
+<li>靜態截圖發現：v2 五絕羅盤擠到底部導覽列、v2 關係圖太小。</li>
+<li>互動狀態截圖（自動點擊後再拍）發現：<strong>「刀劍互砍」在三個版型都沒有反應</strong>——engine.js 把 is-open 加在錯的元素上。靜態截圖和三個 gate 都抓不到這個錯，修正 engine 後三個版型同時恢復。</li>
+<li>截圖工具本身：第一次注入點擊的 sed 指令被 JS 裡的 # 弄壞，改用 Python。</li>
+</ul>
+<h2>[2026-11-21] run | run_all.sh：ALL GATES PASS</h2>
+<h2>[2026-11-21] discuss | Round 5：使用者選 A 版，要完整故事、島嶼地圖、神兵歷史</h2>
+<ul>
+<li>決定記在 <a href="#discussion">discussion</a> Round 5。B、C 版移到 archive/three-versions/。</li>
+</ul>
+<h2>[2026-11-21] ingest | S07–S11（完整情節段落、〈倚天劍〉〈屠龍刀〉）</h2>
+<ul>
+<li>新增 sources/S07–S11；新增 concepts/shediao-islands、shendiao-islands、yitian-islands、people-shediao、people-shendiao、people-yitian；改寫 treasures（神兵百年持有者追蹤）、relations（12 → 29 條關係）；名詞表「武穆遺書」改寫並改標 [S07][S10]。</li>
+<li>寫人物頁時刪掉 4 句來源沒有的填充句（如「郭芙武功書中著墨不多」），寧可少一段也不補。</li>
+<li>lint：0 errors（run_logs/09）。</li>
+</ul>
+<h2>[2026-11-21] query | q01 v3（18 頁）</h2>
+<ul>
+<li>舊版存 run_logs/q01_v2_snapshot.md；check_outline PASS（run_logs/10）。</li>
+</ul>
+<h2>[2026-11-21] generate | content.js v3 → check_content 第一次就 PASS，但突變測試抓到檢查漏洞</h2>
+<ul>
+<li>故意塞入：Wiki 沒有的年份、Wiki 沒有的人名、不存在的島、超長文字。第一次只抓到 1/4。</li>
+<li>原因：島嶼的「關鍵」欄位叫 <code>key</code>、航海圖的起訖點叫 <code>from</code>/<code>to</code>，和隱藏欄位同名，整段畫面文字被當成隱藏資料，K2/K3 沒掃。</li>
+<li>修正：欄位改名 gist / first / last；新增 K10「隱藏欄位不得含中文」防同類錯誤；K5 改逐單元計字；新增 K9 交叉連結。重跑突變測試全部抓到（run_logs/11a、12）。</li>
+</ul>
+<h2>[2026-11-21] render | A 版 + 截圖檢查</h2>
+<ul>
+<li>互動狀態截圖抓到：刀劍內藏物標籤跑到左上角（CSS class 名稱 sw/sb 和刀劍位移規則撞名）、版本切換按鈕裡又放了按鈕（HTML 巢狀錯誤，排版破掉）、目前站點被裁切、航海圖太高、關係圖標籤蓋到人名。都已修正並重拍。</li>
+<li>手機截圖：headless Chrome 最小視窗寬 500px，390px 截圖其實是裁切；改用 390px iframe 重拍。</li>
+</ul>
+<h2>[2026-11-21] run | run_all.sh：ALL GATES PASS（run_logs/13）</h2></article>
+<article id='concepts-editions' class='page'><div class='path'>wiki/concepts/editions.md</div><dl class='fm'><dt>title</dt><dd>版本與閱讀順序</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S01, S02, S05, S06</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>版本與閱讀順序</h1>
+<p><strong>一句話</strong>：金庸小說有三個版本——報紙連載版、修訂版、世紀新修版；初學者照出版順序從射鵰讀起最好。</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>時間</th>
+<th>特色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>連載版</td>
+<td>1955年–1972年報紙連載 [S01]</td>
+<td>最原始，現在不易買到</td>
+</tr>
+<tr>
+<td>修訂版</td>
+<td>1970年代修訂 [S01][S02]</td>
+<td>流傳最廣，很多人心中的「原版」</td>
+</tr>
+<tr>
+<td>世紀新修版</td>
+<td>1999年起 [S01][S02]</td>
+<td>金庸晚年再改，改了部分人名與情節</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ 衝突：修訂版的年份，〈金庸〉頁寫1970年起修訂、1980年完成 [S01]；〈射鵰三部曲〉頁寫1974年底單行本問世 [S02]。新修版完成年份也不一致（2006年 vs 2007年）[S01][S02]。簡報只寫「1970 年代」「1999 年起」。</p>
+</blockquote>
+<h2>新修版改了什麼（三部曲中的例子）</h2>
+<ul>
+<li>金輪法王 → 金輪國師 [S05]</li>
+<li>倚天劍屠龍刀裡的秘笈 → 改成玄鐵片，指向桃花島 [S06]</li>
+</ul>
+<h2>閱讀順序建議</h2>
+<p>射鵰 → 神鵰 → 倚天。後兩本有大量「上一代」的伏筆，跳著讀會錯過 [S02]。</p>
+<h2>相關</h2>
+<p><a href="#concepts-jin-yong">concepts/jin-yong</a> · <a href="#concepts-trilogy">concepts/trilogy</a></p></article>
+<article id='concepts-five-greats' class='page'><div class='path'>wiki/concepts/five-greats.md</div><dl class='fm'><dt>title</dt><dd>天下五絕與華山論劍</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S03, S04, S05</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>天下五絕與華山論劍</h1>
+<p><strong>一句話</strong>：華山論劍是武林高手的「排行榜大賽」，選出的五位頂尖高手依東西南北中稱為「五絕」。</p>
+<h2>第一次華山論劍（射鵰的上一代）[S03]</h2>
+<table>
+<thead>
+<tr>
+<th>方位</th>
+<th>稱號</th>
+<th>人物</th>
+<th>招牌武功</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>東</td>
+<td>東邪</td>
+<td>黃藥師</td>
+<td>彈指神通</td>
+</tr>
+<tr>
+<td>西</td>
+<td>西毒</td>
+<td>歐陽鋒</td>
+<td>蛤蟆功</td>
+</tr>
+<tr>
+<td>南</td>
+<td>南帝</td>
+<td>段智興（一燈）</td>
+<td>一陽指</td>
+</tr>
+<tr>
+<td>北</td>
+<td>北丐</td>
+<td>洪七公</td>
+<td>降龍十八掌</td>
+</tr>
+<tr>
+<td>中</td>
+<td>中神通</td>
+<td>王重陽</td>
+<td>先天功</td>
+</tr>
+</tbody>
+</table>
+<h2>第三次華山論劍（神鵰結尾）[S03]</h2>
+<table>
+<thead>
+<tr>
+<th>方位</th>
+<th>稱號</th>
+<th>人物</th>
+<th>招牌武功</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>東</td>
+<td>東邪</td>
+<td>黃藥師</td>
+<td>彈指神通</td>
+</tr>
+<tr>
+<td>西</td>
+<td>西狂</td>
+<td>楊過</td>
+<td>黯然銷魂掌</td>
+</tr>
+<tr>
+<td>南</td>
+<td>南僧</td>
+<td>一燈大師</td>
+<td>一陽指</td>
+</tr>
+<tr>
+<td>北</td>
+<td>北俠</td>
+<td>郭靖</td>
+<td>降龍十八掌</td>
+</tr>
+<tr>
+<td>中</td>
+<td>中頑童</td>
+<td>周伯通</td>
+<td>空明拳</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第二次華山論劍沒有排出五絕 [S03]。</li>
+<li>換代的看點：「西毒」換成楊過，「北丐」換成郭靖——上一部的主角成了新一代的五絕 [S03][S05]。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-shediao">concepts/shediao</a> · <a href="#concepts-shendiao">concepts/shendiao</a></p></article>
+<article id='concepts-glossary' class='page'><div class='path'>wiki/concepts/glossary.md</div><dl class='fm'><dt>title</dt><dd>名詞表（簡報用的一句話解釋）</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S01, S02, S03, S04, S05, S06, S07, S10</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>名詞表</h1>
+<p><strong>一句話</strong>：簡報裡每個武俠名詞的解釋都從這頁複製，不在寫投影片時臨時編。</p>
+<table>
+<thead>
+<tr>
+<th>名詞</th>
+<th>一句話解釋</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>襄陽</td>
+<td>南宋抵抗蒙古的重鎮，郭靖夫婦鎮守於此</td>
+<td>[S04][S05]</td>
+</tr>
+<tr>
+<td>明教</td>
+<td>源自波斯的教派，在倚天裡帶領義軍反元</td>
+<td>[S06]</td>
+</tr>
+<tr>
+<td>降龍十八掌</td>
+<td>洪七公傳給郭靖的招牌掌法</td>
+<td>[S04]</td>
+</tr>
+<tr>
+<td>九陰真經</td>
+<td>射鵰裡人人想搶的武學秘笈</td>
+<td>[S04]</td>
+</tr>
+<tr>
+<td>華山論劍</td>
+<td>頂尖高手在華山比武，排出天下前五</td>
+<td>[S03]</td>
+</tr>
+<tr>
+<td>五絕</td>
+<td>依東、西、南、北、中分配稱號的五大高手</td>
+<td>[S03]</td>
+</tr>
+<tr>
+<td>古墓派</td>
+<td>小龍女所屬的門派，她是第三代傳人</td>
+<td>[S05]</td>
+</tr>
+<tr>
+<td>玄鐵重劍</td>
+<td>獨孤求敗留下、後來歸楊過的重劍</td>
+<td>[S05]</td>
+</tr>
+<tr>
+<td>峨嵋派</td>
+<td>郭襄創立的門派，到倚天時由周芷若當掌門</td>
+<td>[S02][S06]</td>
+</tr>
+<tr>
+<td>九陽真經</td>
+<td>一部內功經書，在神鵰結尾分成三份流傳</td>
+<td>[S02][S06]</td>
+</tr>
+<tr>
+<td>武當派</td>
+<td>張三丰創立的門派</td>
+<td>[S02][S06]</td>
+</tr>
+<tr>
+<td>武穆遺書</td>
+<td>岳飛留下的兵法書；射鵰裡金人想奪，倚天裡藏在屠龍刀中</td>
+<td>[S07][S10]</td>
+</tr>
+<tr>
+<td>世紀新修版</td>
+<td>金庸 1999 年起再次修改的版本</td>
+<td>[S01][S02]</td>
+</tr>
+</tbody>
+</table></article>
+<article id='concepts-jin-yong' class='page'><div class='path'>wiki/concepts/jin-yong.md</div><dl class='fm'><dt>title</dt><dd>金庸</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S01</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>金庸</h1>
+<p><strong>一句話</strong>：本名查良鏞的香港報人兼小說家，寫了 15 部武俠小說，射鵰三部曲是其中最有名的一組 [S01]。</p>
+<ul>
+<li>1924年生於浙江海寧，2018年逝於香港 [S01]。</li>
+<li>1959年創辦《明報》，邊辦報邊連載小說 [S01]。</li>
+<li>15部武俠小說都在1955年至1972年間寫成，之後就封筆，只做修訂 [S01]。</li>
+</ul>
+<h2>對聯：用一句話記住 14 部作品</h2>
+<p>「<strong>飛雪連天射白鹿，笑書神俠倚碧鴛</strong>」——每個字是一部書的第一個字 [S01]：
+| 字 | 作品 | 字 | 作品 |
+|---|---|---|---|
+| 飛 | 飛狐外傳 | 笑 | 笑傲江湖 |
+| 雪 | 雪山飛狐 | 書 | 書劍恩仇錄 |
+| 連 | 連城訣 | 神 | <strong>神鵰俠侶</strong> |
+| 天 | 天龍八部 | 俠 | 俠客行 |
+| 射 | <strong>射鵰英雄傳</strong> | 倚 | <strong>倚天屠龍記</strong> |
+| 白 | 白馬嘯西風 | 碧 | 碧血劍 |
+| 鹿 | 鹿鼎記 | 鴛 | 鴛鴦刀 |
+第15部《越女劍》是短篇，不在對聯裡 [S01]。</p>
+<h2>相關</h2>
+<p><a href="#concepts-trilogy">concepts/trilogy</a> · <a href="#concepts-editions">concepts/editions</a></p></article>
+<article id='concepts-jiuyang' class='page'><div class='path'>wiki/concepts/jiuyang.md</div><dl class='fm'><dt>title</dt><dd>九陽真經：一部經書，三個門派</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S06</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>九陽真經</h1>
+<p><strong>一句話</strong>：少林僧人覺遠臨終背出九陽真經，三個聽眾各記住一部分，日後各自開出少林、峨嵋、武當三大派的九陽功。</p>
+<table>
+<thead>
+<tr>
+<th>聽到的人</th>
+<th>後來</th>
+<th>門派</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>無色禪師</td>
+<td>少林九陽功</td>
+<td>少林</td>
+</tr>
+<tr>
+<td>郭襄</td>
+<td>創立峨嵋派</td>
+<td>峨嵋</td>
+</tr>
+<tr>
+<td>張君寶</td>
+<td>成為張三丰，創立武當派</td>
+<td>武當</td>
+</tr>
+<tr>
+<td>來源：[S02][S06]</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>一百年後，張無忌在猿猴腹中找到<strong>完整</strong>的九陽真經 [S06]。</li>
+<li>這是三部曲裡「上一代埋下伏筆、下一代收成」最清楚的例子。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-yitian">concepts/yitian</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='concepts-people-shediao' class='page'><div class='path'>wiki/concepts/people-shediao.md</div><dl class='fm'><dt>title</dt><dd>射鵰人物檔案</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S03, S04, S07, S08</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>射鵰人物檔案</h1>
+<p><strong>一句話</strong>：射鵰的七個關鍵人物，每人分成身世、經歷、武功、結局四段。</p>
+<h2>郭靖（主角）</h2>
+<ul>
+<li>身世：郭嘯天與李萍之子，生在蒙古大漠 [S07]。</li>
+<li>經歷：先後師承江南七怪、哲別、馬鈺、洪七公和周伯通；天資魯鈍但極重忠義，多次被結義兄弟楊康背叛，仍希望他回頭；不願隨蒙古攻宋 [S07]。</li>
+<li>武功：降龍十八掌、空明拳、雙手互搏，練成九陰真經 [S07]。</li>
+<li>結局：射鵰結尾娶黃蓉，定居桃花島；神鵰裡鎮守襄陽，第三次華山論劍成為「北俠」；1273年襄陽城破時殉國 [S07][S08]。</li>
+<li>出場的島：射鵰 ①②③④⑤⑨⑩。</li>
+</ul>
+<h2>黃蓉（主角）</h2>
+<ul>
+<li>身世：「東邪」黃藥師的獨生女 [S07]。</li>
+<li>經歷：在張家口女扮男裝結識郭靖；拜洪七公為師；在荒島上接下丐幫幫主，成為丐幫第19任、也是第一位女幫主；在鐵槍廟揭穿歐陽鋒與楊康的陰謀 [S07]。</li>
+<li>武功：奇門遁甲、落英神劍掌、打狗棒法 [S07]。</li>
+<li>結局：嫁給郭靖；神鵰裡與郭靖守襄陽，城破時一同殉國 [S07][S08]。</li>
+<li>出場的島：射鵰 ③④⑥⑦⑧⑨⑩。</li>
+</ul>
+<h2>楊康（對照組）</h2>
+<ul>
+<li>身世：楊鐵心與包惜弱之子，以「完顏康」之名在金國王府長大，認完顏洪烈為父 [S07]。</li>
+<li>經歷：比武招親時愛上穆念慈；知道身世後仍幫金人奪武穆遺書；先拜丘處機，後拜梅超風、歐陽鋒為師；和歐陽鋒在桃花島殺害江南七怪，嫁禍黃藥師 [S07]。</li>
+<li>武功：九陰白骨爪、摧心掌 [S07]。</li>
+<li>結局：誤觸黃蓉軟蝟甲上歐陽鋒的蛇毒，死在嘉興鐵槍廟；遺腹子是楊過 [S07]。</li>
+<li>出場的島：射鵰 ③④⑦⑧。</li>
+</ul>
+<h2>洪七公（北丐）</h2>
+<ul>
+<li>身世：丐幫幫主，天下五絕的「北丐」[S03][S07]。</li>
+<li>經歷：喜歡郭靖樸實、黃蓉聰明，收兩人為徒；被歐陽鋒暗算重傷，把幫主之位傳給黃蓉 [S07]。</li>
+<li>武功：降龍十八掌、打狗棒法 [S07][S08]。</li>
+<li>結局：神鵰裡在華山和歐陽鋒相鬥而亡，楊過在旁目睹 [S08]。</li>
+<li>出場的島：射鵰 ④⑥⑩；神鵰 ④。</li>
+</ul>
+<h2>黃藥師（東邪）</h2>
+<ul>
+<li>身世：桃花島島主，天下五絕的「東邪」，黃蓉的父親 [S03][S07]。</li>
+<li>經歷：弟子梅超風夫婦偷走九陰真經下卷，他把所有弟子逐出師門；江南五怪命案被嫁禍給他 [S07]。</li>
+<li>武功：彈指神通、玉簫劍法 [S03][S08]。</li>
+<li>結局：神鵰裡傳楊過武功，在襄陽命宋軍布下二十八宿大陣；第三次華山論劍仍是「東邪」[S08]。</li>
+<li>出場的島：射鵰 ⑤⑩；神鵰 ⑫。</li>
+</ul>
+<h2>歐陽鋒（西毒）</h2>
+<ul>
+<li>身世：天下五絕的「西毒」，歐陽克的叔叔 [S03][S07]。</li>
+<li>經歷：上桃花島提親；暗算洪七公；逼郭靖寫九陰真經，拿到的是假經；和楊康殺害江南五怪 [S07]。</li>
+<li>武功：蛤蟆功；逆練九陰真經而瘋癲 [S07][S08]。</li>
+<li>結局：第二次華山論劍奪得「天下第一」；神鵰裡收楊過為義子，最後和洪七公在華山相鬥而亡 [S07][S08]。</li>
+<li>出場的島：射鵰 ⑤⑥⑧⑨⑩；神鵰 ①④。</li>
+</ul>
+<h2>周伯通（老頑童）</h2>
+<ul>
+<li>身世：全真教創始人王重陽的師弟 [S07]。</li>
+<li>經歷：在桃花島和郭靖結拜，讓郭靖在不知情下背熟九陰真經；和歐陽鋒打賭輸了跳海，騎著鯊魚活了下來 [S07]。</li>
+<li>武功：雙手互搏、空明拳 [S03][S07]。</li>
+<li>結局：第三次華山論劍成為「中頑童」[S08]。</li>
+<li>出場的島：射鵰 ⑤；神鵰 ⑫。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-shediao-islands">concepts/shediao-islands</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='concepts-people-shendiao' class='page'><div class='path'>wiki/concepts/people-shendiao.md</div><dl class='fm'><dt>title</dt><dd>神鵰人物檔案</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S03, S05, S08, S09</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>神鵰人物檔案</h1>
+<p><strong>一句話</strong>：神鵰的七個關鍵人物，每人分成身世、經歷、武功、結局四段。</p>
+<h2>楊過（主角）</h2>
+<ul>
+<li>身世：楊康與穆念慈之子，出身貧寒，性格自卑偏激、衝動，嫉惡如仇 [S08]。</li>
+<li>經歷：被歐陽鋒收為義子；在全真教受欺負，逃進古墓拜小龍女為師；被郭芙斬斷右臂後，在神鵰幫助下練成獨孤求敗的武功；十六年間行俠，人稱「神鵰大俠」[S08]。</li>
+<li>武功：玉女心經、打狗棒法、玉簫劍法、彈指神通、蛤蟆功，自創黯然銷魂掌 [S08]。</li>
+<li>結局：擊殺蒙哥，成為新天下五絕的「西狂」，與小龍女隱居 [S08]。</li>
+<li>出場的島：神鵰全部十二座。</li>
+</ul>
+<h2>小龍女（主角）</h2>
+<ul>
+<li>身世：古墓派第三代傳人，清麗脫俗、個性封閉 [S08]。</li>
+<li>經歷：收少年楊過為徒，日久生情；兩度因誤會離開楊過；被郭芙誤傷中毒，留下十六年之約後跳崖，意外解毒存活 [S08]。</li>
+<li>武功：玉女心經、雙手互搏（跟周伯通學）、白綢金鈴 [S08]。</li>
+<li>結局：十六年後在絕情谷底與楊過重逢，一起救出郭襄，之後與楊過絕跡江湖 [S08]。</li>
+<li>出場的島：神鵰 ③④⑤⑥⑦⑨⑪⑫。</li>
+</ul>
+<h2>郭芙（郭家長女）</h2>
+<ul>
+<li>身世：郭靖、黃蓉的長女 [S08]。</li>
+<li>經歷：小時候和武氏兄弟欺負楊過；誤會楊過，用淑女劍斬斷他的右臂；又誤用冰魄銀針傷了小龍女 [S08]。</li>
+<li>結局：嫁給耶律齊；最後求楊過救丈夫時，才明白自己對楊過的怨恨其實是忌妒 [S08]。</li>
+<li>出場的島：神鵰 ②⑦⑨⑫。</li>
+</ul>
+<h2>郭襄（郭家次女）</h2>
+<ul>
+<li>身世：郭靖、黃蓉的次女，和弟弟郭破虜是龍鳳胎 [S05][S08]。</li>
+<li>經歷：剛出生就被李莫愁擄走，楊過把她帶回古墓；十六歲前在風陵渡遇見神鵰俠，得到三枚金針；第三個心願是要楊過不能尋死 [S08]。</li>
+<li>武功：記下覺遠背誦的一部分九陽真經 [S09]。</li>
+<li>結局：襄陽城破時身在西川，後來出家，創立峨嵋派 [S08]。</li>
+<li>出場的島：神鵰 ⑦⑧⑩⑪⑫；倚天 ①。</li>
+</ul>
+<h2>李莫愁（反派）</h2>
+<ul>
+<li>身世：外號「赤練仙子」，小龍女的師姊 [S08]。</li>
+<li>經歷：因愛生恨殺害陸立鼎夫婦；闖古墓逼交玉女心經；擄走嬰兒郭襄 [S08]。</li>
+<li>武功：冰魄銀針 [S08]。</li>
+<li>結局：中了情花毒，自焚身亡 [S08]。</li>
+<li>出場的島：神鵰 ①③⑧。</li>
+</ul>
+<h2>金輪國師（蒙古高手）</h2>
+<ul>
+<li>身世：蒙古帝國的高手，忽必烈旗下 [S08]。</li>
+<li>經歷：在英雄大會挑戰中原群雄，被楊過與小龍女的玉女素心劍打敗；收郭襄為徒，又在陣前要燒死她逼郭靖投降 [S08]。</li>
+<li>結局：被楊過殺死 [S08]。</li>
+<li>出場的島：神鵰 ⑤⑨⑫。</li>
+</ul>
+<blockquote>
+<p>📖 版本差異：舊版叫金輪法王 [S08]。</p>
+</blockquote>
+<h2>張君寶（伏筆）</h2>
+<ul>
+<li>身世：少林寺覺遠的弟子 [S08][S09]。</li>
+<li>經歷：在華山和覺遠追討被盜的九陽真經，楊過傳他三招打敗瀟湘子；後來記下覺遠背誦的一部分九陽真經 [S08][S09]。</li>
+<li>武功：九陽功，後來自創內家拳 [S09]。</li>
+<li>結局：上武當山，改名張三丰，創立武當派——倚天屠龍記裡的武林泰斗 [S09]。</li>
+<li>出場的島：神鵰 ⑫；倚天 ①。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-shendiao-islands">concepts/shendiao-islands</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='concepts-people-yitian' class='page'><div class='path'>wiki/concepts/people-yitian.md</div><dl class='fm'><dt>title</dt><dd>倚天人物檔案</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S06, S09, S10, S11</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>倚天人物檔案</h1>
+<p><strong>一句話</strong>：倚天的八個關鍵人物，每人分成身世、經歷、武功、結局四段。</p>
+<h2>張無忌（主角）</h2>
+<ul>
+<li>身世：武當派張翠山與天鷹教殷素素之子，生在冰火島，金毛獅王謝遜的義子 [S09]。</li>
+<li>經歷：十歲回中原後父母雙亡，身中玄冥神掌；跟胡青牛學醫；在猿猴腹中得到九陽真經；光明頂一戰後成為明教第三十四代教主 [S09]。</li>
+<li>武功：九陽神功、乾坤大挪移、太極拳與太極劍；醫術也很高明 [S09]。</li>
+<li>結局：個性仁厚但感情上優柔寡斷；把武穆遺書交給徐達，辭去教主，與趙敏歸隱蒙古 [S09]。</li>
+<li>出場的島：倚天 ④⑤⑥⑦⑧⑨⑩⑪。</li>
+</ul>
+<h2>趙敏（女主角）</h2>
+<ul>
+<li>身世：蒙古紹敏郡主，汝陽王之女，趙敏是她自取的漢名 [S09]。</li>
+<li>經歷：一開始與張無忌為敵，在萬安寺奪得倚天劍；後來與張無忌相愛，為他和父親決裂；在荒島上被周芷若嫁禍 [S09]。</li>
+<li>專長：機智多謀、心思敏捷、敢愛敢恨 [S09]。</li>
+<li>結局：在張無忌與周芷若的婚禮上現身，最後和張無忌一同歸隱 [S09]。</li>
+<li>出場的島：倚天 ⑧⑨⑩⑪。</li>
+</ul>
+<h2>周芷若（峨嵋掌門）</h2>
+<ul>
+<li>身世：孤女，被張三丰救下送進峨嵋派，拜滅絕師太為師 [S09]。</li>
+<li>經歷：在光明頂用倚天劍刺傷張無忌；繼任峨嵋掌門後，照師父遺命在荒島取出刀劍裡的秘笈，並嫁禍趙敏 [S09][S10]。</li>
+<li>武功：照九陰真經的速成法門練出九陰白骨爪、白蟒鞭法，不是正宗的九陰武功 [S10]。</li>
+<li>結局：在少室山被黃衫女子制服、真相揭穿；確認張無忌愛的是趙敏後，回到峨嵋派 [S09][S10]。</li>
+<li>出場的島：倚天 ⑤⑦⑧⑨⑩⑪。</li>
+</ul>
+<h2>謝遜（金毛獅王）</h2>
+<ul>
+<li>身世：明教四大法王之一「金毛獅王」，妻兒被他的師父成崑所殺 [S09]。</li>
+<li>經歷：在王盤山奪走屠龍刀，帶張翠山夫婦漂到冰火島；在島上住了十年，苦思屠龍刀的秘密 [S09]。</li>
+<li>武功：獅吼功、七傷拳 [S09]。</li>
+<li>結局：被成崑擒住，成了屠獅大會的誘餌；最後用七傷拳廢了成崑 [S09]。</li>
+<li>出場的島：倚天 ③④⑨⑩。</li>
+</ul>
+<h2>張三丰（武當祖師）</h2>
+<ul>
+<li>身世：就是神鵰結尾的少年張君寶 [S06][S09]。</li>
+<li>經歷：在武當山自創內家拳，創立武當派；帶張無忌到少林求醫被拒；救下常遇春與周芷若 [S09]。</li>
+<li>武功：九陽功、內家拳、太極拳 [S09]。</li>
+<li>結局：武當派成為內家之宗，與少林齊名 [S09]。</li>
+<li>出場的島：倚天 ①⑤。</li>
+</ul>
+<h2>滅絕師太（峨嵋掌門）</h2>
+<ul>
+<li>身世：峨嵋派第三代掌門，郭襄的傳人 [S10]。</li>
+<li>經歷：師兄孤鴻子借倚天劍和楊逍比武落敗，劍被官府取走；她後來盜回寶劍；一心要奪回屠龍刀，完成郭靖夫婦和祖師郭襄的遺志 [S10][S11]。</li>
+<li>武功：倚天劍 [S10]。</li>
+<li>結局：在萬安寺自盡前，把刀劍的秘密傳給周芷若 [S10]。</li>
+<li>出場的島：倚天 ⑧。</li>
+</ul>
+<h2>小昭（波斯少女）</h2>
+<ul>
+<li>身世：紫衫龍王黛綺絲之女，有波斯血統 [S09]。</li>
+<li>經歷：被母親派到明教找乾坤大挪移，成為張無忌的貼身丫鬟並暗戀他，卻沒有出賣他 [S09]。</li>
+<li>專長：知道乾坤大挪移秘笈的下落，卻一直替張無忌守密 [S09]。</li>
+<li>結局：在靈蛇島為救眾人，被迫成為波斯總教教主，隨母親回波斯 [S09]。</li>
+<li>出場的島：倚天 ⑨。</li>
+</ul>
+<h2>殷離（表妹）</h2>
+<ul>
+<li>身世：又名蛛兒，張無忌的表妹 [S09]。</li>
+<li>經歷：小時候想帶走張無忌，被他咬傷手掌，從此念念不忘；跟著金花婆婆住在靈蛇島 [S09]。</li>
+<li>結局：在靈蛇島被周芷若用倚天劍砍傷，眾人以為她死了，最後卻活著出現 [S09]。</li>
+<li>出場的島：倚天 ⑨。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-yitian-islands">concepts/yitian-islands</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='concepts-relations' class='page'><div class='path'>wiki/concepts/relations.md</div><dl class='fm'><dt>title</dt><dd>三部曲人物關係</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S03, S04, S05, S06, S07, S08, S09, S10</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>三部曲人物關係</h1>
+<p><strong>一句話</strong>：三本書的主角彼此是長輩、晚輩或師承，郭靖一家是串起三本書的軸心。</p>
+<table>
+<thead>
+<tr>
+<th>關係</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>郭靖 — 黃蓉</td>
+<td>夫妻 [S04]</td>
+</tr>
+<tr>
+<td>黃藥師 → 黃蓉</td>
+<td>父女 [S04]</td>
+</tr>
+<tr>
+<td>洪七公 → 郭靖、黃蓉</td>
+<td>師徒 [S04]</td>
+</tr>
+<tr>
+<td>周伯通 — 郭靖</td>
+<td>結拜兄弟，傳他雙手互搏與九陰真經 [S07]</td>
+</tr>
+<tr>
+<td>歐陽鋒 — 洪七公</td>
+<td>宿敵，最後在華山相鬥而亡 [S08]</td>
+</tr>
+<tr>
+<td>歐陽鋒 → 楊康</td>
+<td>師徒，一起殺害江南五怪 [S07]</td>
+</tr>
+<tr>
+<td>楊康 — 穆念慈</td>
+<td>比武招親結識的戀人 [S07]</td>
+</tr>
+<tr>
+<td>楊康、穆念慈 → 楊過</td>
+<td>父母與兒子 [S05]</td>
+</tr>
+<tr>
+<td>郭靖 — 楊康</td>
+<td>結義兄弟，一正一邪 [S07]</td>
+</tr>
+<tr>
+<td>歐陽鋒 → 楊過</td>
+<td>義父，傳他蛤蟆功 [S08]</td>
+</tr>
+<tr>
+<td>郭靖 → 楊過</td>
+<td>父親的結義兄弟，楊過一度想殺他報仇，最後救了他 [S08]</td>
+</tr>
+<tr>
+<td>小龍女 — 楊過</td>
+<td>師徒、夫妻 [S05]</td>
+</tr>
+<tr>
+<td>李莫愁 — 小龍女</td>
+<td>師姊妹，李莫愁想奪玉女心經 [S08]</td>
+</tr>
+<tr>
+<td>郭靖、黃蓉 → 郭芙、郭襄</td>
+<td>父母與女兒 [S05]</td>
+</tr>
+<tr>
+<td>郭芙 — 楊過</td>
+<td>斬斷楊過右臂 [S05]</td>
+</tr>
+<tr>
+<td>楊過 — 郭襄</td>
+<td>三枚金針、三個心願 [S08]</td>
+</tr>
+<tr>
+<td>金輪國師 — 楊過</td>
+<td>死敵，被楊過所殺 [S08]</td>
+</tr>
+<tr>
+<td>郭襄 → 峨嵋派 → 滅絕師太 → 周芷若</td>
+<td>創派祖師與後代掌門 [S02][S06][S10]</td>
+</tr>
+<tr>
+<td>楊過 → 張君寶</td>
+<td>傳授三招 [S05]</td>
+</tr>
+<tr>
+<td>郭襄 — 張君寶</td>
+<td>一起逃下少室山，各記一部分九陽真經 [S09]</td>
+</tr>
+<tr>
+<td>張君寶 = 張三丰 → 張翠山 → 張無忌</td>
+<td>師父、徒弟、徒孫 [S06]</td>
+</tr>
+<tr>
+<td>張翠山 — 殷素素</td>
+<td>夫妻，張無忌的父母 [S09]</td>
+</tr>
+<tr>
+<td>謝遜 → 張無忌</td>
+<td>義父 [S06]</td>
+</tr>
+<tr>
+<td>張三丰 → 周芷若</td>
+<td>救下孤女周芷若，送入峨嵋派 [S09]</td>
+</tr>
+<tr>
+<td>周芷若 — 張無忌</td>
+<td>曾有婚約；光明頂用倚天劍刺傷他 [S09]</td>
+</tr>
+<tr>
+<td>趙敏 — 張無忌</td>
+<td>由敵人變戀人，結局一同歸隱 [S06][S09]</td>
+</tr>
+<tr>
+<td>周芷若 — 趙敏</td>
+<td>情敵，荒島上嫁禍趙敏 [S09]</td>
+</tr>
+<tr>
+<td>小昭 — 張無忌</td>
+<td>貼身丫鬟，暗戀張無忌 [S09]</td>
+</tr>
+<tr>
+<td>殷離 — 張無忌</td>
+<td>表妹，念念不忘張無忌 [S09]</td>
+</tr>
+</tbody>
+</table>
+<h2>相關</h2>
+<p><a href="#concepts-trilogy">concepts/trilogy</a> · <a href="#concepts-jiuyang">concepts/jiuyang</a> · <a href="#concepts-people-shediao">concepts/people-shediao</a> · <a href="#concepts-people-shendiao">concepts/people-shendiao</a> · <a href="#concepts-people-yitian">concepts/people-yitian</a></p></article>
+<article id='concepts-shediao-islands' class='page'><div class='path'>wiki/concepts/shediao-islands.md</div><dl class='fm'><dt>title</dt><dd>射鵰英雄傳・十座島（主線故事）</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S04, S07</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>射鵰英雄傳・十座島</h1>
+<p><strong>一句話</strong>：把射鵰的主線切成十個地點，照順序走一遍，就是郭靖從出生到成為大俠的完整故事。</p>
+<blockquote>
+<p>三本書共用同一個框架：每座島 = 地點 ＋ 章節名 ＋ 故事 ＋ 登場人物 ＋ 關鍵 ＋ 下一站。最後一座島連到下一本書的第一座島。</p>
+</blockquote>
+<h2>① 牛家村｜兩個孩子的名字</h2>
+<ul>
+<li>1199年歲末，全真教道士丘處機在臨安郊外的牛家村結識郭嘯天、楊鐵心，替兩家還沒出生的孩子取名郭靖、楊康，要他們不忘靖康之恥 [S07]。</li>
+<li>金國六王爺完顏洪烈看上楊鐵心的妻子包惜弱，勾結官府迫害兩家：郭嘯天被殺，李萍流落蒙古大漠生下郭靖；包惜弱被騙改嫁完顏洪烈，楊康在金國王府長大 [S07]。</li>
+<li>丘處機與江南七怪約定：各自找到一個孩子教養成人，十八年後在嘉興比武 [S07]。</li>
+<li>關鍵：一正一邪兩個孩子的起點。登場：丘處機、郭嘯天、楊鐵心、完顏洪烈、江南七怪。</li>
+</ul>
+<h2>② 蒙古大漠｜草原長大的笨小孩</h2>
+<ul>
+<li>郭靖六歲時捨命保護神射手哲別，被鐵木真帶回軍營，又和鐵木真的幼子拖雷結為「安答」（兄弟）[S07]。</li>
+<li>江南七怪找到郭靖，嚴格傳授武功；他天資魯鈍卻肯苦練，後來又得全真教馬鈺傳授內功 [S07]。</li>
+<li>鐵木真統一大漠，被尊為成吉思汗，招郭靖為「金刀駙馬」，把華箏公主許配給他 [S07]。</li>
+<li>關鍵：這門婚約是後面的大麻煩。登場：郭靖、成吉思汗、江南七怪。</li>
+</ul>
+<h2>③ 張家口・中都｜遇見黃蓉</h2>
+<ul>
+<li>十八年之約將到，郭靖南下，在張家口遇見女扮男裝的小叫化子黃蓉，一見如故 [S07]。</li>
+<li>在金國中都，金國小王爺完顏康（楊康）在比武招親打敗穆念慈，卻不肯娶她 [S07]。</li>
+<li>賣藝的「穆易」其實就是楊鐵心。他與包惜弱相認後逃不出王府，夫妻雙雙自殺；楊康仍不肯認生父 [S07]。</li>
+<li>關鍵：楊康選了富貴。登場：郭靖、黃蓉、楊康、穆念慈、楊鐵心。</li>
+</ul>
+<h2>④ 長江・歸雲莊｜拜師洪七公</h2>
+<ul>
+<li>郭靖、黃蓉在長江邊遇到丐幫幫主「北丐」洪七公。洪七公喜歡郭靖樸實、黃蓉聰明，收兩人為徒，把降龍十八掌傳給郭靖 [S07]。</li>
+<li>在太湖歸雲莊，楊康得知身世，答應和完顏洪烈決裂，並和郭靖結義 [S07]。</li>
+<li>但楊康捨不得金國的榮華富貴，把郭靖北上行刺完顏洪烈的計畫洩漏出去 [S07]。</li>
+<li>關鍵：降龍十八掌；結義之後的第一次背叛。登場：郭靖、黃蓉、洪七公、楊康。</li>
+</ul>
+<h2>⑤ 桃花島｜老頑童與九陰真經</h2>
+<ul>
+<li>郭靖到黃藥師的桃花島，遇見王重陽的師弟「老頑童」周伯通，兩人結拜，郭靖學會雙手互搏 [S07]。</li>
+<li>周伯通在郭靖不知情的情況下，讓他背熟了九陰真經 [S07]。</li>
+<li>「西毒」歐陽鋒帶歐陽克來向黃藥師提親，郭靖在比試中勝過歐陽克 [S07]。</li>
+<li>歐陽鋒逼郭靖寫出九陰真經，郭靖照洪七公指示寫了一份「九陰假經」[S07]。</li>
+<li>關鍵：郭靖得到九陰真經；歐陽鋒拿到假經。登場：郭靖、周伯通、黃藥師、歐陽鋒。</li>
+</ul>
+<h2>⑥ 荒島・臨安｜女幫主</h2>
+<ul>
+<li>洪七公被歐陽鋒暗算重傷，黃蓉等人流落荒島。黃蓉臨危接下洪七公的位置，成為丐幫第19任幫主 [S07]。</li>
+<li>回到臨安京城，他們阻止完顏洪烈奪取岳飛留下的武穆遺書，郭靖卻被投靠完顏洪烈的歐陽鋒打成重傷，靠九陰真經療傷 [S07]。</li>
+<li>郭靖向黃蓉父女坦承金刀駙馬的婚約，決定守信娶華箏；黃蓉傷心，但知道郭靖愛的是她 [S07]。</li>
+<li>關鍵：黃蓉成為丐幫幫主。登場：黃蓉、洪七公、歐陽鋒、郭靖。</li>
+</ul>
+<h2>⑦ 岳州・鐵掌峰｜打狗棒與一燈</h2>
+<ul>
+<li>丐幫大會上，楊康拿著偷來的打狗棒冒充新幫主，想帶丐幫投降金國 [S07]。</li>
+<li>黃蓉用真正的打狗棒法打敗楊康，被幫眾承認是洪七公欽點的繼任人 [S07]。</li>
+<li>兩人追查武穆遺書到鐵掌幫禁地，黃蓉被幫主裘千仞打成重傷；郭靖找到已出家的「南帝」一燈大師，以一陽指救回黃蓉 [S07]。</li>
+<li>關鍵：打狗棒法；南帝一燈。登場：黃蓉、楊康、郭靖、一燈。</li>
+</ul>
+<h2>⑧ 嘉興鐵槍廟｜真相</h2>
+<ul>
+<li>歐陽鋒和楊康在桃花島殺害江南七怪中的五人，嫁禍給黃藥師，郭靖因此遷怒黃蓉 [S07]。</li>
+<li>黃蓉在嘉興鐵槍廟揭穿陰謀，讓躲在石像後的柯鎮惡聽見，替父親洗清罪名 [S07]。</li>
+<li>楊康誤觸黃蓉軟蝟甲上歐陽鋒的蛇毒，死在鐵槍廟；黃蓉卻被歐陽鋒擄走，兩人失散半年 [S07]。</li>
+<li>關鍵：楊康之死。登場：黃蓉、楊康、歐陽鋒、江南七怪。</li>
+</ul>
+<h2>⑨ 西域｜西征與訣別</h2>
+<ul>
+<li>郭靖隨成吉思汗西征花剌子模，任右軍統帥，在禿木峰與黃蓉重逢，兩人三次擒住歐陽鋒 [S07]。</li>
+<li>郭靖攻下撒馬爾罕立大功，殺了完顏洪烈，報了殺父之仇 [S07]。</li>
+<li>成吉思汗想南下攻宋，郭靖不願攻打父母之邦；母親李萍被擒後為保兒子忠義而自殺，郭靖在哲別、拖雷幫助下逃離蒙古 [S07]。</li>
+<li>關鍵：郭靖選擇了南宋。登場：郭靖、黃蓉、成吉思汗、完顏洪烈。</li>
+</ul>
+<h2>⑩ 華山｜第二次華山論劍</h2>
+<ul>
+<li>東邪、西毒、北丐和郭靖在華山比武，逆練九陰真經而瘋癲的歐陽鋒奪得「武功天下第一」[S07]。</li>
+<li>郭靖與黃蓉解開誤會，在黃藥師和洪七公面前訂下婚約 [S07]。</li>
+<li>郭靖去見臨終的成吉思汗，向他講什麼才是英雄 [S07]。</li>
+<li>兩人成親，定居桃花島十多年；蒙古正式侵宋後，舉家遷到襄陽禦敵 [S07]。</li>
+<li>關鍵：郭靖成為大俠。下一站 → 神鵰俠侶 ① 嘉興。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-shediao">concepts/shediao</a> · <a href="#concepts-people-shediao">concepts/people-shediao</a> · <a href="#concepts-shendiao-islands">concepts/shendiao-islands</a></p></article>
+<article id='concepts-shediao' class='page'><div class='path'>wiki/concepts/shediao.md</div><dl class='fm'><dt>title</dt><dd>射鵰英雄傳</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S04</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>射鵰英雄傳</h1>
+<p><strong>一句話</strong>：笨拙但正直的郭靖，在聰明的黃蓉幫助下，從蒙古草原的少年長成守護襄陽的大俠。</p>
+<h2>背景</h2>
+<p>1199年到1227年，南宋、金國、蒙古三方角力，成吉思汗崛起 [S04]。1957年起在《香港商報》連載 [S02]。</p>
+<h2>四個關鍵轉折 [S04]</h2>
+<ol>
+<li><strong>兩家約定</strong>：丘處機在牛家村結識郭嘯天、楊鐵心；兩家的孩子郭靖、楊康命運從此對照。</li>
+<li><strong>遇見黃蓉</strong>：郭靖在張家口遇到黃蓉；黃蓉帶他拜洪七公為師，學會降龍十八掌。</li>
+<li><strong>武學與仇恨</strong>：周伯通傳郭靖九陰真經；郭靖寫假經騙過歐陽鋒；江南七怪在桃花島遇害。</li>
+<li><strong>成為大俠</strong>：郭靖西征、殺完顏洪烈報仇；之後與黃蓉成婚，蒙古攻宋時移居襄陽。</li>
+</ol>
+<h2>主要人物 [S04]</h2>
+<table>
+<thead>
+<tr>
+<th>人物</th>
+<th>身分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>郭靖</td>
+<td>主角，郭嘯天之子，生在蒙古</td>
+</tr>
+<tr>
+<td>黃蓉</td>
+<td>東邪黃藥師之女、洪七公的徒弟</td>
+</tr>
+<tr>
+<td>楊康</td>
+<td>楊鐵心之子，認金國完顏洪烈為父，走上歧路</td>
+</tr>
+<tr>
+<td>洪七公</td>
+<td>北丐，丐幫幫主，教郭靖降龍十八掌</td>
+</tr>
+<tr>
+<td>黃藥師</td>
+<td>東邪，桃花島主</td>
+</tr>
+<tr>
+<td>周伯通</td>
+<td>老頑童，教郭靖九陰真經與雙手互搏</td>
+</tr>
+<tr>
+<td>歐陽鋒</td>
+<td>西毒，一心想得到九陰真經</td>
+</tr>
+</tbody>
+</table>
+<h2>相關</h2>
+<p><a href="#concepts-five-greats">concepts/five-greats</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='concepts-shendiao-islands' class='page'><div class='path'>wiki/concepts/shendiao-islands.md</div><dl class='fm'><dt>title</dt><dd>神鵰俠侶・十二座島（主線故事）</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S05, S08</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>神鵰俠侶・十二座島</h1>
+<p><strong>一句話</strong>：楊康的遺孤楊過，從沒人要的孩子，變成和師父小龍女相守的「神鵰大俠」；十二個地點走完他的一生。</p>
+<h2>① 嘉興｜中毒的少年</h2>
+<ul>
+<li>南宋理宗年間，「赤練仙子」李莫愁殺害陸立鼎夫婦、擄走他們的女兒陸無雙 [S08]。</li>
+<li>流浪少年楊過撿起李莫愁的冰魄銀針而中毒；歐陽鋒收他為義子，傳他蛤蟆功 [S08]。</li>
+<li>郭靖、黃蓉找到並救了楊過，才知道他是楊康與穆念慈的兒子；母親已病逝，他孤苦無依 [S08]。</li>
+<li>關鍵：楊過登場。登場：楊過、李莫愁、歐陽鋒、郭靖、黃蓉。</li>
+</ul>
+<h2>② 桃花島・全真教｜沒人要的徒弟</h2>
+<ul>
+<li>黃蓉想起楊康生前的所作所為，只教楊過讀書、不教武功 [S08]。</li>
+<li>楊過被郭芙和武氏兄弟欺負，用蛤蟆功打傷武修文，被郭靖送到全真教 [S08]。</li>
+<li>師父趙志敬不傳武功還處處刁難，楊過忍無可忍，逃進終南山 [S08]。</li>
+<li>關鍵：楊過和名門正派結下心結。登場：楊過、黃蓉、郭芙、郭靖。</li>
+</ul>
+<h2>③ 古墓｜師父小龍女</h2>
+<ul>
+<li>楊過誤闖活死人墓，被古墓派傳人小龍女收為徒弟 [S08]。</li>
+<li>兩人在墓中一起練武、一起長大，修練《玉女心經》，漸生情意 [S08]。</li>
+<li>小龍女的師姊李莫愁闖進古墓逼交秘笈，小龍女啟動機關，帶楊過逃出 [S08]。</li>
+<li>關鍵：師徒之情。登場：楊過、小龍女、李莫愁。</li>
+</ul>
+<h2>④ 終南山・華山｜誤會</h2>
+<ul>
+<li>歐陽鋒點了小龍女的穴道，全真教道士甄志丙趁機侵犯她，小龍女誤以為是楊過 [S08]。</li>
+<li>小龍女向楊過表白，楊過卻答得不明不白，她傷心離開；楊過四處尋找，才明白她的心意 [S08]。</li>
+<li>在華山，楊過目睹洪七公與歐陽鋒兩大高手相鬥而亡 [S08]。</li>
+<li>關鍵：小龍女第一次離開。登場：楊過、小龍女、歐陽鋒、洪七公。</li>
+</ul>
+<h2>⑤ 陸家莊｜英雄大會</h2>
+<ul>
+<li>中原群雄在大散關陸家莊召開抗蒙英雄大會，楊過與小龍女在這裡重逢 [S08]。</li>
+<li>蒙古高手金輪國師帶徒弟來挑戰，兩人合使玉女素心劍，助郭靖打敗金輪國師 [S08]。</li>
+<li>郭靖想把郭芙許配給楊過，楊過堅持要娶小龍女；師徒相戀違背當時禮教 [S08]。</li>
+<li>小龍女受黃蓉勸說，希望楊過被眾人接受，黯然離去 [S08]。</li>
+<li>關鍵：師徒戀不被世俗接受。登場：楊過、小龍女、金輪國師、郭靖、黃蓉。</li>
+</ul>
+<h2>⑥ 絕情谷｜情花</h2>
+<ul>
+<li>楊過懷疑郭靖、黃蓉是殺父仇人，投靠蒙古親王忽必烈 [S08]。</li>
+<li>他誤入絕情谷，發現小龍女竟要嫁給谷主公孫止；兩人被情花刺傷，一動情就毒發 [S08]。</li>
+<li>谷主之妻裘千尺要他們拿郭靖、黃蓉的人頭來換解藥，楊過答應了 [S08]。</li>
+<li>關鍵：情花毒；殺郭靖的承諾。登場：楊過、小龍女、公孫止、裘千尺。</li>
+</ul>
+<h2>⑦ 襄陽｜下不了手</h2>
+<ul>
+<li>楊過潛入襄陽想殺郭靖，卻被郭靖的仁義打動，反而在蒙古軍營救郭靖脫險 [S08]。</li>
+<li>黃蓉生下龍鳳胎，楊過與小龍女拚命保護女嬰郭襄 [S08]。</li>
+<li>郭芙誤會楊過，盛怒之下抓起淑女劍斬斷楊過的右臂 [S08]。</li>
+<li>關鍵：斷臂。登場：楊過、郭靖、黃蓉、郭襄、郭芙。</li>
+</ul>
+<h2>⑧ 劍塚｜神鵰與玄鐵重劍</h2>
+<ul>
+<li>重傷的楊過被一隻大鵰所救，帶到前輩高手獨孤求敗的石墳 [S08]。</li>
+<li>他在神鵰幫助下練成獨孤求敗的武功，以玄鐵重劍練成劍法 [S08]。</li>
+<li>傷癒後，他從李莫愁手中抱走郭襄，帶回終南山古墓 [S08]。</li>
+<li>關鍵：玄鐵重劍到了楊過手上。登場：楊過、獨孤求敗、郭襄。</li>
+</ul>
+<h2>⑨ 重陽宮・絕情谷｜十六年之約</h2>
+<ul>
+<li>楊過用玄鐵重劍打敗金輪國師，與小龍女在王重陽畫像前拜堂成親 [S08]。</li>
+<li>郭芙誤用冰魄銀針傷了正在療傷的小龍女，毒入臟腑 [S08]。</li>
+<li>小龍女在絕情谷石崖刻下「十六年後，在此相會，夫妻情深，勿失信約」，不辭而別 [S08]。</li>
+<li>黃蓉騙楊過說小龍女被南海神尼收為徒弟；楊過服下斷腸草，解了情花毒，開始等待 [S08]。</li>
+<li>關鍵：十六年之約。登場：楊過、小龍女、郭芙、黃蓉。</li>
+</ul>
+<h2>⑩ 風陵渡・襄陽｜神鵰俠與郭襄</h2>
+<ul>
+<li>十六年間，楊過帶著神鵰行俠仗義，成了人人知道的「神鵰俠」[S08]。</li>
+<li>少女郭襄在風陵渡聽到神鵰俠的故事，跟去相見，得到三枚金針，可許三個心願 [S08]。</li>
+<li>郭襄十六歲生日，楊過發動江湖朋友殲滅蒙古先頭部隊、燒掉糧倉和火藥庫，當作賀禮 [S08]。</li>
+<li>關鍵：郭襄的三個心願。登場：楊過、郭襄。</li>
+</ul>
+<h2>⑪ 絕情谷底｜重逢</h2>
+<ul>
+<li>約定那天不見小龍女，楊過以為她早已死去，從懸崖跳下；郭襄也跟著跳下 [S08]。</li>
+<li>楊過發現谷底寒潭另有洞天：小龍女當年墜潭不死，靠玉蜂蜜和潭中白魚解了劇毒 [S08]。</li>
+<li>關鍵：十六年後重逢。登場：楊過、小龍女、郭襄。</li>
+</ul>
+<h2>⑫ 襄陽・華山｜新天下五絕</h2>
+<ul>
+<li>金輪國師在陣前要燒死郭襄逼郭靖投降；楊過與小龍女趕到，楊過殺死金輪國師 [S08]。</li>
+<li>楊過用石頭擊殺領軍親征的蒙古大汗蒙哥，襄陽解圍 [S08]。</li>
+<li>華山上重訂天下五絕，楊過成為「西狂」，郭靖成為「北俠」[S08]。</li>
+<li>下山時遇到少林覺遠與弟子張君寶追討被盜的《九陽真經》，楊過傳張君寶三招，之後與小龍女隱居 [S08]。</li>
+<li>後來 1273年襄陽城破，郭靖、黃蓉與兒子郭破虜殉國；郭襄城破時在西川，後來出家，創立峨嵋派 [S08]。</li>
+<li>關鍵：新五絕；張君寶登場。下一站 → 倚天屠龍記 ① 少林寺。</li>
+</ul>
+<blockquote>
+<p>📖 版本差異：金輪國師舊版叫金輪法王；甄志丙舊版叫尹志平 [S08]。</p>
+</blockquote>
+<h2>相關</h2>
+<p><a href="#concepts-shendiao">concepts/shendiao</a> · <a href="#concepts-people-shendiao">concepts/people-shendiao</a> · <a href="#concepts-yitian-islands">concepts/yitian-islands</a></p></article>
+<article id='concepts-shendiao' class='page'><div class='path'>wiki/concepts/shendiao.md</div><dl class='fm'><dt>title</dt><dd>神鵰俠侶</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S05</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>神鵰俠侶</h1>
+<p><strong>一句話</strong>：楊康的兒子楊過愛上自己的師父小龍女，不顧世俗眼光，最後成了守護襄陽的「西狂」。</p>
+<h2>背景</h2>
+<p>1236至1259年，蒙古大汗蒙哥親征，襄陽是主戰場 [S05]。1959年5月20日起在《明報》創刊號連載 [S02]。</p>
+<h2>四個關鍵轉折 [S05]</h2>
+<ol>
+<li><strong>古墓師徒</strong>：孤兒楊過拜古墓派的小龍女為師，兩人相戀，卻被江湖視為違反禮教。</li>
+<li><strong>斷臂</strong>：郭芙用淑女劍斬斷楊過右臂；楊過得到獨孤求敗遺留的玄鐵重劍，武功大進。</li>
+<li><strong>十六年之約</strong>：小龍女在絕情谷墜崖，留下十六年後相會的約定。</li>
+<li><strong>襄陽之戰</strong>：楊過以石頭擊殺蒙哥，解襄陽之圍。</li>
+</ol>
+<h2>主要人物 [S05]</h2>
+<table>
+<thead>
+<tr>
+<th>人物</th>
+<th>身分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>楊過</td>
+<td>楊康與穆念慈之子</td>
+</tr>
+<tr>
+<td>小龍女</td>
+<td>古墓派第三代傳人</td>
+</tr>
+<tr>
+<td>郭芙</td>
+<td>郭靖黃蓉的長女，斬斷楊過右臂</td>
+</tr>
+<tr>
+<td>郭襄</td>
+<td>郭靖黃蓉的次女，之後創立峨嵋派 [S02]</td>
+</tr>
+<tr>
+<td>李莫愁</td>
+<td>小龍女的師姐，冰魄銀針的主人</td>
+</tr>
+<tr>
+<td>金輪國師</td>
+<td>蒙古高手，率眾攻襄陽</td>
+</tr>
+<tr>
+<td>張君寶</td>
+<td>少年，楊過傳他三招，日後成為張三丰</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📖 版本差異：舊版楊過之母是秦南琴；金輪國師舊稱金輪法王 [S05]。簡報用新修版名稱。</p>
+</blockquote>
+<h2>相關</h2>
+<p><a href="#concepts-five-greats">concepts/five-greats</a> · <a href="#concepts-treasures">concepts/treasures</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='concepts-timeline' class='page'><div class='path'>wiki/concepts/timeline.md</div><dl class='fm'><dt>title</dt><dd>三部曲時間軸</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S04, S05, S06</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>三部曲時間軸</h1>
+<p><strong>一句話</strong>：把三本書放在同一條歷史線上，就會看到「郭靖出生 → 襄陽失守 → 明朝建立」這一百多年。</p>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>事件</th>
+<th>書</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1199年</td>
+<td>故事開始（南宋寧宗慶元五年），主角郭靖 [S04]</td>
+<td>射鵰</td>
+</tr>
+<tr>
+<td>1227年</td>
+<td>成吉思汗逝世，射鵰結束 [S04]</td>
+<td>射鵰</td>
+</tr>
+<tr>
+<td>1236年</td>
+<td>神鵰故事開始，主角楊過 [S05]</td>
+<td>神鵰</td>
+</tr>
+<tr>
+<td>1259年</td>
+<td>楊過擊殺蒙哥，襄陽解圍 [S05]</td>
+<td>神鵰</td>
+</tr>
+<tr>
+<td>1273年</td>
+<td>襄陽城破，郭靖黃蓉殉國（書中後續）[S05]</td>
+<td>神鵰之後</td>
+</tr>
+<tr>
+<td>1336年</td>
+<td>倚天正式情節開始（元順帝至元二年），主角張無忌 [S06]</td>
+<td>倚天</td>
+</tr>
+<tr>
+<td>元末</td>
+<td>明教義軍起事，朱元璋建立明朝 [S06]</td>
+<td>倚天</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ 衝突：第三次華山論劍的年份，舊版在1259年，世紀新修版延到襄陽大戰翌年的1260年 [S05]。簡報只說「神鵰結尾」，不寫年份。</p>
+</blockquote>
+<h2>相關</h2>
+<p><a href="#concepts-trilogy">concepts/trilogy</a></p></article>
+<article id='concepts-treasures' class='page'><div class='path'>wiki/concepts/treasures.md</div><dl class='fm'><dt>title</dt><dd>倚天劍與屠龍刀：神兵百年</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S05, S06, S08, S09, S10, S11</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>倚天劍與屠龍刀：神兵百年</h1>
+<p><strong>一句話</strong>：兩把神兵的材料來自神鵰裡楊過的劍，郭靖黃蓉把兵書和秘笈藏在裡面，留給一百年後的人；跟著它們的持有者走，就能把三本書串成一條線。</p>
+<h2>口訣 [S06]</h2>
+<p>「武林至尊，寶刀屠龍。號令天下，莫敢不從。倚天不出，誰與爭鋒。」</p>
+<h2>一站一站（持有者追蹤）</h2>
+<table>
+<thead>
+<tr>
+<th>站</th>
+<th>書</th>
+<th>發生什麼</th>
+<th>倚天劍／前身</th>
+<th>屠龍刀／前身</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 劍塚</td>
+<td>神鵰</td>
+<td>楊過在獨孤求敗的石墳練劍，得到玄鐵重劍 [S05][S08]</td>
+<td>—</td>
+<td>玄鐵重劍：楊過</td>
+</tr>
+<tr>
+<td>2 絕情谷</td>
+<td>神鵰</td>
+<td>淑女劍是楊過從絕情谷帶出的寶劍，郭芙用它斬斷楊過右臂；君子劍、淑女劍後來是楊過、小龍女夫婦的佩劍 [S08][S10]</td>
+<td>君子劍、淑女劍：楊過夫婦</td>
+<td>玄鐵重劍：楊過</td>
+</tr>
+<tr>
+<td>3 襄陽・熔鑄</td>
+<td>神鵰→倚天</td>
+<td>襄陽城破前，郭靖、黃蓉命匠人把楊過夫婦所贈的劍熔鑄成倚天劍與屠龍刀，把兵書與秘笈藏在裡面 [S02][S10]</td>
+<td>郭襄</td>
+<td>郭破虜</td>
+</tr>
+<tr>
+<td>4 襄陽城破</td>
+<td>倚天</td>
+<td>1273年郭破虜與父母殉國，屠龍刀流入江湖；倚天劍隨郭襄，成為峨嵋派鎮派之寶，秘密只傳掌門 [S08][S10][S11]</td>
+<td>峨嵋派掌門</td>
+<td>下落不明</td>
+</tr>
+<tr>
+<td>5 王盤山</td>
+<td>倚天</td>
+<td>1336年俞岱巖得刀被奪；王盤山島上謝遜奪得屠龍刀 [S09][S11]</td>
+<td>峨嵋派</td>
+<td>謝遜</td>
+</tr>
+<tr>
+<td>6 冰火島</td>
+<td>倚天</td>
+<td>謝遜帶刀在冰火島住了十年，苦思「號令天下」的秘密 [S09]</td>
+<td>峨嵋派</td>
+<td>謝遜</td>
+</tr>
+<tr>
+<td>7 倚天劍的流浪</td>
+<td>倚天</td>
+<td>滅絕師太的師兄孤鴻子借劍與楊逍比武落敗，劍被官府獻給朝廷、轉賜汝陽王；滅絕師太盜回；光明頂上周芷若用它刺傷張無忌 [S09][S10]</td>
+<td>滅絕師太 → 周芷若</td>
+<td>謝遜</td>
+</tr>
+<tr>
+<td>8 萬安寺</td>
+<td>倚天</td>
+<td>倚天劍落入趙敏手中；滅絕師太自盡前把秘密告訴周芷若 [S09][S10]</td>
+<td>趙敏</td>
+<td>謝遜</td>
+</tr>
+<tr>
+<td>9 靈蛇島・荒島</td>
+<td>倚天</td>
+<td>周芷若從謝遜、趙敏手上奪得刀劍，以刀劍相斬取出秘笈，刀劍各斷成兩截 [S10][S11]</td>
+<td>周芷若</td>
+<td>周芷若</td>
+</tr>
+<tr>
+<td>10 少室山</td>
+<td>倚天</td>
+<td>黃衫女子揭穿周芷若；兵書與秘笈後來被趙敏取走，最後到了張無忌手上 [S10][S11]</td>
+<td>張無忌</td>
+<td>張無忌</td>
+</tr>
+<tr>
+<td>11 尾聲</td>
+<td>倚天</td>
+<td>明教吳勁草重鑄屠龍刀，倚天劍仍是斷成兩截；張無忌把武穆遺書交給徐達，義軍推翻元朝 [S10][S11]</td>
+<td>斷劍：張無忌</td>
+<td>重鑄：張無忌</td>
+</tr>
+</tbody>
+</table>
+<h2>裡面藏了什麼（修訂版）[S10][S11]</h2>
+<ul>
+<li>屠龍刀：岳飛的兵書<strong>武穆遺書</strong>——給打天下、驅逐元朝的人。</li>
+<li>倚天劍：<strong>九陰真經</strong>、<strong>降龍十八掌精義</strong>——郭靖夫婦擔心得天下的人作威作福，倚天劍裡的武功就是用來教訓暴君的。</li>
+<li>黃蓉在九陰真經裡加了幾章速成法門，周芷若練的就是這一段 [S10]。</li>
+</ul>
+<blockquote>
+<p>📖 版本差異：世紀新修版只有屠龍刀用玄鐵重劍熔鑄，倚天劍改由君子劍、淑女劍合鑄；刀劍裡藏的改成刻著桃花島地形與方位的玄鐵片，要到桃花島才取得到書；速成法門的作者改成黃藥師 [S10][S11]。</p>
+</blockquote>
+<h2>「武林至尊」的真正意思 [S10][S11]</h2>
+<ul>
+<li>不在寶刀本身，而在刀中所藏的兵書：用它帶兵，戰必勝、攻必克，所以「號令天下，莫敢不從」。</li>
+<li>如果得天下的人作威作福，終會有英雄拿著倚天劍來取暴君首級——這是「倚天不出，誰與爭鋒」。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-yitian-islands">concepts/yitian-islands</a> · <a href="#concepts-shendiao-islands">concepts/shendiao-islands</a> · <a href="#concepts-yitian">concepts/yitian</a> · <a href="#concepts-shendiao">concepts/shendiao</a></p></article>
+<article id='concepts-trilogy' class='page'><div class='path'>wiki/concepts/trilogy.md</div><dl class='fm'><dt>title</dt><dd>射鵰三部曲總覽</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S04, S05, S06</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>射鵰三部曲總覽</h1>
+<p><strong>一句話</strong>：三本書寫的是同一個江湖的三代人，從南宋一路寫到元朝滅亡，前後跨越一百多年。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>射鵰英雄傳</th>
+<th>神鵰俠侶</th>
+<th>倚天屠龍記</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主角</td>
+<td>郭靖、黃蓉</td>
+<td>楊過、小龍女</td>
+<td>張無忌</td>
+</tr>
+<tr>
+<td>時代</td>
+<td>南宋寧宗</td>
+<td>南宋理宗</td>
+<td>元末順帝</td>
+</tr>
+<tr>
+<td>故事年份</td>
+<td>1199年–1227年 [S04]</td>
+<td>1236年–1259年 [S05]</td>
+<td>1336年起 [S06]</td>
+</tr>
+<tr>
+<td>首次連載</td>
+<td>1957年1月1日《香港商報》[S02]</td>
+<td>1959年5月20日《明報》創刊號 [S02]</td>
+<td>1961年7月6日《明報》[S02]</td>
+</tr>
+<tr>
+<td>一句話主題</td>
+<td>憨厚少年成為大俠</td>
+<td>叛逆少年與師父的愛情</td>
+<td>心軟的少主統一江湖</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>射鵰連載共862日 [S02]。</li>
+<li>倚天的故事發生在神鵰結尾約一百年後 [S02]。</li>
+<li>有論者把更早的《天龍八部》也算進來稱「四部曲」，本 Wiki 不採用 [S02]。</li>
+</ul>
+<h2>三本書怎麼串起來</h2>
+<ul>
+<li><strong>人</strong>：楊過是射鵰反派楊康的兒子；郭襄（郭靖之女）創峨嵋派；張君寶在神鵰結尾出場，就是倚天裡的張三丰 [S02]。→ <a href="#concepts-relations">concepts/relations</a></li>
+<li><strong>物</strong>：楊過的玄鐵重劍被郭靖黃蓉熔鑄成倚天劍與屠龍刀 [S02]。→ <a href="#concepts-treasures">concepts/treasures</a></li>
+<li><strong>武功</strong>：九陰真經從射鵰傳到倚天；九陽真經在神鵰結尾一分為三 [S02]。→ <a href="#concepts-jiuyang">concepts/jiuyang</a></li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-timeline">concepts/timeline</a> · <a href="#concepts-shediao">concepts/shediao</a> · <a href="#concepts-shendiao">concepts/shendiao</a> · <a href="#concepts-yitian">concepts/yitian</a></p></article>
+<article id='concepts-yitian-islands' class='page'><div class='path'>wiki/concepts/yitian-islands.md</div><dl class='fm'><dt>title</dt><dd>倚天屠龍記・十一座島（主線故事）</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S06, S08, S09, S10, S11</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>倚天屠龍記・十一座島</h1>
+<p><strong>一句話</strong>：神鵰結束近百年後，一把屠龍刀讓江湖大亂；心軟的張無忌從孤兒變成明教教主，最後把刀裡的兵書交給推翻元朝的義軍。</p>
+<h2>① 少林寺｜郭襄與張君寶</h2>
+<ul>
+<li>1260年第三次華山論劍後，郭襄騎著青驢走遍天下尋找楊過和小龍女 [S09]。</li>
+<li>三年後她到少林寺，遇見覺遠與弟子張君寶。覺遠坐化前背誦《九陽真經》，無色禪師、郭襄、張君寶各記住一部分 [S09]。</li>
+<li>這三份內容後來成為少林、峨嵋、武當的九陽功 [S09]。</li>
+<li>張君寶沒去襄陽，上了武當山，改名張三丰，自創內家拳，創立武當派 [S09]。</li>
+<li>關鍵：九陽真經一分為三。登場：郭襄、張君寶、無色。</li>
+</ul>
+<h2>② 襄陽｜城破之後</h2>
+<ul>
+<li>1273年襄陽城破，郭靖、黃蓉與兒子郭破虜殉國 [S08]。</li>
+<li>屠龍刀原本交給郭破虜，城破後流入江湖；倚天劍留在郭襄手上，後來成為峨嵋派的鎮派之寶 [S10][S11]。</li>
+<li>南宋滅亡後數十年，江湖流傳一句話：「武林至尊，寶刀屠龍。號令天下，莫敢不從。倚天不出，誰與爭鋒。」人人爭奪屠龍刀 [S09]。</li>
+<li>關鍵：刀劍分開，傳言開始。</li>
+</ul>
+<h2>③ 王盤山島｜屠龍刀現世</h2>
+<ul>
+<li>1336年，武當弟子俞岱巖意外得到屠龍刀，卻遭暗算重傷癱瘓，寶刀被奪 [S09]。</li>
+<li>他的師弟張翠山下山調查，結識天鷹教教主之女殷素素 [S09]。</li>
+<li>王盤山島的英雄宴上展示屠龍刀，明教「金毛獅王」謝遜突然現身奪刀，用獅吼功震倒眾人，逼張翠山、殷素素隨他出海 [S09]。</li>
+<li>關鍵：屠龍刀落入謝遜手中。登場：張翠山、殷素素、謝遜。</li>
+</ul>
+<h2>④ 冰火島｜十年</h2>
+<ul>
+<li>三人在海上遇難，漂流到冰火島，一住就是十年 [S09]。</li>
+<li>張翠山與殷素素成親，生下張無忌；謝遜收張無忌為義子 [S09]。</li>
+<li>張無忌十歲時隨父母回中原，謝遜留在島上，苦思屠龍刀「號令天下」的秘密，想向殺他妻兒的師父報仇 [S09]。</li>
+<li>關鍵：張無忌出生；謝遜成為義父。登場：張無忌、謝遜、張翠山、殷素素。</li>
+</ul>
+<h2>⑤ 武當山｜家破人亡</h2>
+<ul>
+<li>各派逼問謝遜和屠龍刀的下落。張翠山不肯說，又得知妻子正是當年傷害俞岱巖的兇手，羞憤自殺，殷素素隨之殉夫 [S09]。</li>
+<li>張無忌中了玄冥神掌，寒毒纏身；張三丰帶他到少林求醫，被拒絕 [S09]。</li>
+<li>回程時張三丰救下明教的常遇春和孤女周芷若，把周芷若送進峨嵋派，拜滅絕師太為師 [S09]。</li>
+<li>關鍵：張無忌成了孤兒。登場：張無忌、張三丰、周芷若。</li>
+</ul>
+<h2>⑥ 蝴蝶谷・崑崙山｜九陽神功</h2>
+<ul>
+<li>張無忌跟「蝶谷醫仙」胡青牛學會高明醫術，卻治不好自己的寒毒 [S09]。</li>
+<li>他把孤女楊不悔送到崑崙山交給父親楊逍，又被朱長齡設計騙取謝遜下落 [S09]。</li>
+<li>逃跑時墜崖，在山谷中一隻猿猴的腹中找到完整的《九陽真經》；練成九陽神功後寒毒盡除 [S09]。</li>
+<li>關鍵：九陽真經回到一個人身上。登場：張無忌。</li>
+</ul>
+<h2>⑦ 光明頂｜少年教主</h2>
+<ul>
+<li>張無忌又學會波斯明教的護教神功「乾坤大挪移」[S09]。</li>
+<li>謝遜的仇人成崑挑動六大派圍攻明教總壇光明頂；化名曾阿牛的張無忌出手化解 [S09]。</li>
+<li>周芷若用倚天劍刺中他的右胸，他只受傷沒死，也察覺周芷若對他有情 [S09]。</li>
+<li>他不願正邪互相殘殺，救下明教，當上新任明教教主 [S09]。</li>
+<li>關鍵：張無忌成為教主。登場：張無忌、周芷若。</li>
+</ul>
+<h2>⑧ 萬安寺｜趙敏</h2>
+<ul>
+<li>六大派回程被元朝高手擒住，囚禁在大都萬安寺 [S09]。</li>
+<li>峨嵋派的倚天劍落入汝陽王之女「紹敏郡主」趙敏手中 [S09]。</li>
+<li>張無忌帶明教高手救回六大派 [S09]。</li>
+<li>滅絕師太在萬安寺自盡前，把倚天劍和屠龍刀的由來告訴周芷若，要她奪得刀劍 [S10]。</li>
+<li>關鍵：周芷若接下師父遺命。登場：張無忌、趙敏、周芷若、滅絕師太。</li>
+</ul>
+<h2>⑨ 靈蛇島・荒島｜刀劍裡的秘密</h2>
+<ul>
+<li>為找謝遜，張無忌一行到了靈蛇島；島主金花婆婆（紫衫龍王黛綺絲）想借屠龍刀，雪當年敗給倚天劍的恥辱 [S09]。</li>
+<li>小昭為救眾人，被迫成為波斯總教教主，隨母親回波斯 [S09]。</li>
+<li>眾人流落荒島；周芷若迷倒大家，盜走倚天劍與屠龍刀，以刀劍相斬取出《九陰真經》與《武穆遺書》，再把趙敏放上小船漂走、嫁禍給她 [S09]。</li>
+<li>關鍵：刀劍的秘密被取出。登場：張無忌、周芷若、趙敏、謝遜、小昭。</li>
+</ul>
+<blockquote>
+<p>📖 版本差異：世紀新修版改成刀劍裡藏著刻有桃花島地形與方位的玄鐵片，周芷若照著到桃花島取出兵書與秘笈 [S09][S10]。</p>
+</blockquote>
+<h2>⑩ 少室山｜屠獅大會</h2>
+<ul>
+<li>成崑擒住謝遜囚在少室山，挑動少林舉行屠獅英雄大會，想讓各派自相殘殺 [S09]。</li>
+<li>張無忌、趙敏和楊過的後人黃衫女子出手，成崑的詭計失敗，被謝遜廢去武功 [S09]。</li>
+<li>周芷若想殺謝遜滅口，被黃衫女子用正宗九陰真經武功制服，荒島上的事也被揭穿 [S09]。</li>
+<li>關鍵：真相大白。登場：張無忌、趙敏、周芷若、謝遜。</li>
+</ul>
+<h2>⑪ 濠州・大都｜結局</h2>
+<ul>
+<li>張無忌與周芷若在濠州成婚當天，趙敏現身，張無忌跟她離去 [S09]。</li>
+<li>張無忌從周芷若處取得《武穆遺書》，送給義軍將領徐達；義軍連敗元兵，攻陷大都 [S09]。</li>
+<li>張無忌把教主之位交給楊逍，與趙敏歸隱蒙古；朱元璋奪得明教兵權，建立明朝，三部曲結束 [S09]。</li>
+<li>關鍵：郭靖黃蓉的遺願完成。登場：張無忌、趙敏、徐達、朱元璋。</li>
+</ul>
+<h2>相關</h2>
+<p><a href="#concepts-yitian">concepts/yitian</a> · <a href="#concepts-people-yitian">concepts/people-yitian</a> · <a href="#concepts-treasures">concepts/treasures</a></p></article>
+<article id='concepts-yitian' class='page'><div class='path'>wiki/concepts/yitian.md</div><dl class='fm'><dt>title</dt><dd>倚天屠龍記</dd><dt>type</dt><dd>concept</dd><dt>sources</dt><dd>S02, S06</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>倚天屠龍記</h1>
+<p><strong>一句話</strong>：心軟又猶豫的張無忌，意外練成絕世武功、當上明教教主，化解了正邪兩派百年的仇恨。</p>
+<h2>背景</h2>
+<p>元末，正式情節始於1336年 [S06]；1961年7月6日起在《明報》連載 [S02]。衝突有兩條：明教與少林、武當等「六大派」，以及明教義軍與元朝 [S06]。</p>
+<h2>四個關鍵轉折 [S06]</h2>
+<ol>
+<li><strong>身世</strong>：張無忌是武當張翠山與天鷹教殷素素之子，金毛獅王謝遜是他義父。</li>
+<li><strong>奇遇</strong>：他在猿猴腹中找到完整的九陽真經，又學會明教的乾坤大挪移。</li>
+<li><strong>教主</strong>：他當上明教教主，在光明頂化解六大派的圍攻。</li>
+<li><strong>結局</strong>：他把武穆遺書交給徐達，元軍失去大都；他和趙敏歸隱，朱元璋奪得明教兵權，建立明朝。</li>
+</ol>
+<h2>主要人物 [S06]</h2>
+<table>
+<thead>
+<tr>
+<th>人物</th>
+<th>身分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>張無忌</td>
+<td>主角，明教教主</td>
+</tr>
+<tr>
+<td>趙敏</td>
+<td>蒙古汝陽王之女</td>
+</tr>
+<tr>
+<td>周芷若</td>
+<td>峨嵋派掌門</td>
+</tr>
+<tr>
+<td>小昭</td>
+<td>紫衫龍王黛綺絲之女</td>
+</tr>
+<tr>
+<td>殷離</td>
+<td>張無忌的表妹</td>
+</tr>
+<tr>
+<td>謝遜</td>
+<td>金毛獅王，張無忌義父</td>
+</tr>
+<tr>
+<td>張三丰</td>
+<td>武當派開山祖師，即張君寶</td>
+</tr>
+</tbody>
+</table>
+<h2>相關</h2>
+<p><a href="#concepts-treasures">concepts/treasures</a> · <a href="#concepts-jiuyang">concepts/jiuyang</a> · <a href="#concepts-relations">concepts/relations</a></p></article>
+<article id='sources-S01-jinyong' class='page'><div class='path'>wiki/sources/S01-jinyong.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈金庸〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S01</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S01 金庸</h1>
+<ul>
+<li>本名查良鏞，1924年生於浙江海寧，2018年逝於香港 [S01]。</li>
+<li>1959年創辦《明報》[S01]。</li>
+<li>共15部武俠小說，1955年至1972年間創作 [S01]。</li>
+<li>對聯「飛雪連天射白鹿，笑書神俠倚碧鴛」每字代表一部作品，越女劍不在其中 [S01]。</li>
+<li>→ <a href="#concepts-jin-yong">concepts/jin-yong</a> · <a href="#concepts-editions">concepts/editions</a></li>
+</ul>
+<blockquote>
+<p>可信度：頁面過長，後段為摘要擷取；對聯對應關係與修訂年份來自摘要段。</p>
+</blockquote></article>
+<article id='sources-S02-trilogy' class='page'><div class='path'>wiki/sources/S02-trilogy.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈射鵰三部曲〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S02</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S02 射鵰三部曲</h1>
+<ul>
+<li>三本書依歷史順序：射鵰英雄傳（南宋寧宗）、神鵰俠侶（南宋理宗）、倚天屠龍記（元末順帝）[S02]。</li>
+<li>射鵰1957年1月1日起在《香港商報》連載，共862日 [S02]；神鵰1959年5月20日起在《明報》創刊號連載 [S02]；倚天1961年7月6日起在《明報》連載 [S02]。</li>
+<li>倚天劍與屠龍刀由郭靖黃蓉鑄造，藏有秘笈 [S02]；九陽真經一分為三 [S02]。</li>
+<li>→ <a href="#concepts-trilogy">concepts/trilogy</a> · <a href="#concepts-treasures">concepts/treasures</a> · <a href="#concepts-jiuyang">concepts/jiuyang</a></li>
+</ul></article>
+<article id='sources-S03-five-greats' class='page'><div class='path'>wiki/sources/S03-five-greats.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈天下五絕〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S03</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S03 天下五絕</h1>
+<ul>
+<li>第一次華山論劍：東邪、西毒、南帝、北丐、中神通。</li>
+<li>第三次華山論劍：東邪、西狂、南僧、北俠、中頑童。</li>
+<li>→ <a href="#concepts-five-greats">concepts/five-greats</a></li>
+</ul>
+<blockquote>
+<p>可信度：此頁本身沒有列參考來源。只採用與 S04、S05 一致的人名；武功清單只取主角最知名的一兩項。</p>
+</blockquote></article>
+<article id='sources-S04-shediao' class='page'><div class='path'>wiki/sources/S04-shediao.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈射鵰英雄傳〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S04</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S04 射鵰英雄傳</h1>
+<ul>
+<li>背景：1199年至1227年，南宋、金國、蒙古三方 [S04]。</li>
+<li>主角郭靖（生於蒙古）、黃蓉（黃藥師之女）；對照組楊康（認金國完顏洪烈為父）[S04]。</li>
+<li>郭靖從洪七公學降龍十八掌、從周伯通學九陰真經 [S04]。</li>
+<li>→ <a href="#concepts-shediao">concepts/shediao</a></li>
+</ul></article>
+<article id='sources-S05-shendiao' class='page'><div class='path'>wiki/sources/S05-shendiao.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈神鵰俠侶〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S05</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S05 神鵰俠侶</h1>
+<ul>
+<li>背景：1236至1259年，蒙古攻宋，襄陽是主戰場 [S05]。</li>
+<li>楊過是楊康之子；小龍女是古墓派傳人；兩人十六年之約 [S05]。</li>
+<li>楊過以石頭擊殺蒙哥 [S05]；1273年襄陽城破，郭靖黃蓉殉國 [S05]。</li>
+<li>→ <a href="#concepts-shendiao">concepts/shendiao</a></li>
+</ul>
+<blockquote>
+<p>📖 版本差異：舊版楊過之母為秦南琴、金輪國師舊稱金輪法王 [S05]。</p>
+</blockquote></article>
+<article id='sources-S06-yitian' class='page'><div class='path'>wiki/sources/S06-yitian.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈倚天屠龍記〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S06</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S06 倚天屠龍記</h1>
+<ul>
+<li>背景：元末，正式情節始於1336年 [S06]。</li>
+<li>張無忌：張翠山與殷素素之子、謝遜義子；捲入明教與六大派、明教與元朝的衝突 [S06]。</li>
+<li>倚天劍屠龍刀的秘密、九陽真經、乾坤大挪移 [S06]。</li>
+<li>→ <a href="#concepts-yitian">concepts/yitian</a> · <a href="#concepts-treasures">concepts/treasures</a></li>
+</ul></article>
+<article id='sources-S07-shediao-plot' class='page'><div class='path'>wiki/sources/S07-shediao-plot.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈射鵰英雄傳 §故事梗概、主要人物〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S07</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S07 射鵰英雄傳 §故事梗概、主要人物</h1>
+<ul>
+<li>內容：射鵰的完整主線（1199 牛家村→第二次華山論劍→成吉思汗之死）與主要人物小傳 [S07]。</li>
+<li>性質：維基百科（二手、可編輯），整段原文擷取於 raw/，未改寫。</li>
+<li>→ <a href="#concepts-shediao-islands">concepts/shediao-islands</a> · <a href="#concepts-people-shediao">concepts/people-shediao</a></li>
+</ul></article>
+<article id='sources-S08-shendiao-plot' class='page'><div class='path'>wiki/sources/S08-shendiao-plot.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈神鵰俠侶 §情節、後續發展、主要人物〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S08</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S08 神鵰俠侶 §情節、後續發展、主要人物</h1>
+<ul>
+<li>內容：神鵰的完整主線（楊過中毒→古墓→絕情谷→斷臂→十六年之約→第三次華山論劍）、襄陽城破後各人結局、楊過與小龍女小傳 [S08]。</li>
+<li>性質：維基百科（二手、可編輯），整段原文擷取於 raw/，未改寫。</li>
+<li>→ <a href="#concepts-shendiao-islands">concepts/shendiao-islands</a> · <a href="#concepts-people-shendiao">concepts/people-shendiao</a></li>
+</ul></article>
+<article id='sources-S09-yitian-plot' class='page'><div class='path'>wiki/sources/S09-yitian-plot.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈倚天屠龍記 §背景設定、情節、登場人物〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S09</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S09 倚天屠龍記 §背景設定、情節、登場人物</h1>
+<ul>
+<li>內容：倚天的完整主線（郭襄訪少林→王盤山→冰火島→光明頂→靈蛇島→少室山→建立明朝）與主要人物小傳 [S09]。</li>
+<li>性質：維基百科（二手、可編輯），整段原文擷取於 raw/，未改寫。</li>
+<li>→ <a href="#concepts-yitian-islands">concepts/yitian-islands</a> · <a href="#concepts-people-yitian">concepts/people-yitian</a></li>
+</ul></article>
+<article id='sources-S10-yitian-sword' class='page'><div class='path'>wiki/sources/S10-yitian-sword.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈倚天劍 §《倚天屠龍記》〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S10</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S10 倚天劍 §《倚天屠龍記》</h1>
+<ul>
+<li>內容：倚天劍的來歷、版本差異、在峨嵋派與汝陽王府之間的流轉、斷劍結局 [S10]。</li>
+<li>性質：維基百科（二手、可編輯），整段原文擷取於 raw/，未改寫。</li>
+<li>→ <a href="#concepts-treasures">concepts/treasures</a></li>
+</ul></article>
+<article id='sources-S11-tulong-saber' class='page'><div class='path'>wiki/sources/S11-tulong-saber.md</div><dl class='fm'><dt>title</dt><dd>維基百科〈屠龍刀〉</dd><dt>type</dt><dd>source</dd><dt>sources</dt><dd>S11</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>S11 屠龍刀</h1>
+<ul>
+<li>內容：屠龍刀的來歷、版本差異、襄陽城破後流入江湖、王盤山、重鑄 [S11]。</li>
+<li>性質：維基百科（二手、可編輯），整段原文擷取於 raw/，未改寫。</li>
+<li>→ <a href="#concepts-treasures">concepts/treasures</a></li>
+</ul></article>
+<article id='queries-q01-slide-outline' class='page'><div class='path'>wiki/queries/q01-slide-outline.md</div><dl class='fm'><dt>title</dt><dd>查詢回存 q01：射鵰三部曲教學簡報大綱（v3 島嶼地圖版）</dd><dt>type</dt><dd>query</dd><dt>sources</dt><dd>S01, S02, S04, S05, S06, S07, S08, S09, S10</dd><dt>updated</dt><dd>2026-11-21</dd></dl><h1>q01：射鵰三部曲教學簡報大綱（v3）</h1>
+<p><strong>查詢</strong>：「根據本 Wiki，替沒讀過金庸的大學生設計互動式簡報；看完要知道三本書的完整主線。故事用島嶼地圖呈現，三本書同一個框架；人物要有完整檔案；倚天劍與屠龍刀做成跨三本書的歷史。畫面乾淨、不放附註；每頁對應的 Wiki 頁放隱藏欄位。」
+<strong>查詢路徑</strong>：index → trilogy → timeline → 三個 islands 頁（主線）→ 三個 people 頁 → treasures（神兵百年）→ relations。
+<strong>前一版</strong>：16 頁版存於 <code>run_logs/q01_v2_snapshot.md</code>。</p>
+<h2>教學順序</h2>
+<p>作者 → 三部曲是什麼 → 時間軸 → 地圖怎麼看 → 每本書（島嶼地圖 + 人物檔案）→ 串起三本書的東西（五絕、神兵百年、九陽、關係圖）→ 測驗 → 怎麼開始讀。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>投影片</th>
+<th>互動</th>
+<th>Wiki 頁</th>
+<th>首次定義的名詞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>封面：一百年的江湖</td>
+<td>三季入口</td>
+<td><a href="#concepts-trilogy">concepts/trilogy</a></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>金庸是誰</td>
+<td>數字卡</td>
+<td><a href="#concepts-jin-yong">concepts/jin-yong</a></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>一副對聯記住 14 部書 [S01]</td>
+<td>點字翻開書名</td>
+<td><a href="#concepts-jin-yong">concepts/jin-yong</a></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>三部曲是哪三本</td>
+<td>海報牆，點進地圖</td>
+<td><a href="#concepts-trilogy">concepts/trilogy</a></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>一百年時間軸</td>
+<td>拖拉年份</td>
+<td><a href="#concepts-timeline">concepts/timeline</a></td>
+<td>襄陽, 明教</td>
+</tr>
+<tr>
+<td>6</td>
+<td>江湖航海圖：三片群島</td>
+<td>點群島看航線、登島</td>
+<td><a href="#concepts-trilogy">concepts/trilogy</a> · 三個 islands 頁</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>射鵰十座島</td>
+<td>點島／下一站，船沿航線移動</td>
+<td><a href="#concepts-shediao-islands">concepts/shediao-islands</a></td>
+<td>降龍十八掌, 九陰真經, 武穆遺書, 華山論劍</td>
+</tr>
+<tr>
+<td>8</td>
+<td>射鵰人物檔案</td>
+<td>演員卡 → 檔案（四段）→ 跳到出場的島</td>
+<td><a href="#concepts-people-shediao">concepts/people-shediao</a></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>天下五絕</td>
+<td>羅盤＋切換第一次/第三次</td>
+<td><a href="#concepts-five-greats">concepts/five-greats</a></td>
+<td>五絕</td>
+</tr>
+<tr>
+<td>10</td>
+<td>神鵰十二座島</td>
+<td>同第 7 頁</td>
+<td><a href="#concepts-shendiao-islands">concepts/shendiao-islands</a></td>
+<td>古墓派, 玄鐵重劍, 九陽真經</td>
+</tr>
+<tr>
+<td>11</td>
+<td>神鵰人物檔案</td>
+<td>同第 8 頁</td>
+<td><a href="#concepts-people-shendiao">concepts/people-shendiao</a></td>
+<td>峨嵋派</td>
+</tr>
+<tr>
+<td>12</td>
+<td>倚天十一座島</td>
+<td>同第 7 頁</td>
+<td><a href="#concepts-yitian-islands">concepts/yitian-islands</a></td>
+<td>武當派</td>
+</tr>
+<tr>
+<td>13</td>
+<td>倚天人物檔案</td>
+<td>同第 8 頁</td>
+<td><a href="#concepts-people-yitian">concepts/people-yitian</a></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>神兵百年：刀劍裡藏著什麼</td>
+<td>一站一站追持有者；透視刀劍；版本切換</td>
+<td><a href="#concepts-treasures">concepts/treasures</a></td>
+<td>世紀新修版</td>
+</tr>
+<tr>
+<td>15</td>
+<td>九陽真經一分為三</td>
+<td>點選分支</td>
+<td><a href="#concepts-jiuyang">concepts/jiuyang</a></td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>三代人物關係圖</td>
+<td>點人物、依書篩選</td>
+<td><a href="#concepts-relations">concepts/relations</a></td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>小測驗</td>
+<td>8 題</td>
+<td>三個 islands 頁 · <a href="#concepts-treasures">concepts/treasures</a> · <a href="#concepts-five-greats">concepts/five-greats</a></td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>從哪裡開始讀</td>
+<td>版本分頁</td>
+<td><a href="#concepts-editions">concepts/editions</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>簡報可以用的數字（都已在 Wiki 標來源）</h2>
+<ul>
+<li>1924年、2018年、1959年、15部、1955年至1972年 [S01]</li>
+<li>1957年、1959年5月20日、1961年7月6日 [S02]</li>
+<li>1199年、1227年 [S04]；1236年、1259年、1273年 [S05]；1336年 [S06]</li>
+<li>1199年 [S07]；1273年 [S08]；1336年 [S09]</li>
+</ul>
+<h2>不放進簡報的內容</h2>
+<ul>
+<li>第三次華山論劍的具體年份（1259 / 1260 版本衝突；S09 也寫 1260）</li>
+<li>修訂版、新修版的完成年份（來源衝突）→ 只寫「1970 年代」「1999 年起」[S01][S02]</li>
+<li>天龍八部「四部曲」說法（避免混淆）</li>
+<li>支線人物（陸無雙、程英、公孫綠萼、楊不悔……）只在故事裡帶過，不另做檔案</li>
+</ul></article>
+<article id='raw-S01-jinyong' class='page'><div class='path'>wiki/raw/S01-jinyong.md</div><h1>RAW S01 — 維基百科〈金庸〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/金庸 ；擷取 2026-11-21（頁面過長，前約 4 萬字逐字讀取，其餘為摘要）</li>
+<li>本名查良鏞，1924年3月10日生於浙江海寧袁花鎮；2018年10月30日逝於香港養和醫院，享年94歲。</li>
+<li>1959年與沈寶新合資創辦《明報》。</li>
+<li>共15部武俠小說，全球發行量超過1億冊；1955年至1972年間創作。代表作年表由《書劍恩仇錄》（1955）至《鹿鼎記》（1969）。</li>
+<li>對聯「飛雪連天射白鹿，笑書神俠倚碧鴛」：飛狐外傳、雪山飛狐、連城訣、天龍八部、射鵰英雄傳、白馬嘯西風、鹿鼎記；笑傲江湖、書劍恩仇錄、神鵰俠侶、俠客行、倚天屠龍記、碧血劍、鴛鴦刀。越女劍不在對聯中。（對應關係來自摘要段）</li>
+<li>版本（摘要段）：修訂版自1970年起修訂、1980年完成（明河社）；新修版自1999年起。</li>
+</ul></article>
+<article id='raw-S02-trilogy' class='page'><div class='path'>wiki/raw/S02-trilogy.md</div><h1>RAW S02 — 維基百科〈射鵰三部曲〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/射鵰三部曲 ；擷取 2026-11-21</li>
+<li>依歷史順序：射鵰英雄傳（南宋寧宗年間）、神鵰俠侶（南宋理宗年間）、倚天屠龍記（元末順帝年間）。有論者加入天龍八部稱「四部曲」。</li>
+<li>射鵰英雄傳：1957年1月1日至1959年5月19日於《香港商報》連載，共862日；背景1199年至1227年。</li>
+<li>神鵰俠侶：1959年5月20日起在《明報》創刊號連載，約三年。</li>
+<li>倚天屠龍記：1961年7月6日起在《明報》連載；故事在神鵰結尾近百年後。</li>
+<li>楊過是楊康與穆念慈之子；郭靖、黃蓉、楊過、小龍女、郭襄、張三丰（原名張君寶）貫穿三書。</li>
+<li>屠龍刀、倚天劍由郭靖黃蓉命匠人以楊過小龍女所贈玄鐵重劍、君子劍、淑女劍鑄造，內藏九陰真經、降龍十八掌精義、武穆遺書。</li>
+<li>九陽真經由覺遠傳出，郭襄、張君寶、無色禪師各記一部分，後成峨嵋、武當、少林的九陽功；郭襄為峨嵋派創派祖師；張君寶即張三丰，開創武當派。</li>
+<li>版本：1974年底《金庸作品集》單行本問世；1999年至2007年出版世紀新修版。</li>
+</ul></article>
+<article id='raw-S03-five-greats' class='page'><div class='path'>wiki/raw/S03-five-greats.md</div><h1>RAW S03 — 維基百科〈天下五絕〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/天下五絕 ；擷取 2026-11-21；<strong>頁面標註「沒有列出任何參考或來源」</strong></li>
+<li>第一次華山論劍：東邪黃藥師（彈指神通、桃華落英掌、玉簫劍法）、西毒歐陽鋒（蛤蟆功）、南帝段智興（一陽指，出家後號一燈）、北丐洪七公（降龍十八掌、打狗棒法）、中神通王重陽（先天功）。</li>
+<li>第三次華山論劍：東邪黃藥師、西狂楊過（黯然銷魂掌）、南僧一燈、北俠郭靖（降龍十八掌、空明拳、雙手互搏）、中頑童周伯通（空明拳、雙手互搏）。</li>
+<li>第二次華山論劍未產生五絕。</li>
+</ul></article>
+<article id='raw-S04-shediao' class='page'><div class='path'>wiki/raw/S04-shediao.md</div><h1>RAW S04 — 維基百科〈射鵰英雄傳〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/射雕英雄傳 ；擷取 2026-11-21</li>
+<li>出版1957年，英屬香港；連載版有《香港商報》報紙版。</li>
+<li>背景：南宋寧宗慶元五年（1199年）至成吉思汗逝世（1227年），南宋對抗金國與蒙古。</li>
+<li>郭靖：郭嘯天與李萍之子，生於蒙古。黃蓉：東邪黃藥師之女，北丐洪七公之徒。</li>
+<li>楊康：楊鐵心與包惜弱之子，認金國完顏洪烈為父；最後死於嘉興鐵槍廟。</li>
+<li>情節：丘處機在牛家村結識郭嘯天、楊鐵心；郭靖在張家口遇黃蓉；洪七公收郭靖為徒，授降龍十八掌；江南七怪在桃花島遇害；郭靖西征並殺完顏洪烈；郭靖黃蓉成婚，蒙古攻宋時遷往襄陽。</li>
+<li>武功：降龍十八掌（洪七公→郭靖）、九陰真經（周伯通傳郭靖；郭靖寫「九陰假經」騙歐陽鋒）、雙手互搏、打狗棒法（黃蓉）。</li>
+</ul></article>
+<article id='raw-S05-shendiao' class='page'><div class='path'>wiki/raw/S05-shendiao.md</div><h1>RAW S05 — 維基百科〈神鵰俠侶〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/神鵰俠侶 ；擷取 2026-11-21</li>
+<li>1959年5月20日於《明報》創刊號發表，連載約三年；定本40回。2003年遠流出版世紀新修版。</li>
+<li>背景：南宋理宗端平三年至開慶元年（1236至1259年）；新修版將華山論劍延到襄陽大戰翌年（1260年）。蒙古大汗蒙哥親征，襄陽為主戰場。</li>
+<li>楊過：楊康與穆念慈之子（舊版為楊康與秦南琴）。小龍女：古墓派第三代傳人。</li>
+<li>郭芙用淑女劍斬斷楊過右臂。郭襄：郭靖黃蓉之女，與郭破虜為龍鳳胎。</li>
+<li>李莫愁的冰魄銀針誤傷小龍女。金輪國師（舊版「金輪法王」）率眾攻襄陽。</li>
+<li>小龍女在絕情谷墜崖，兩人約定十六年後在絕情谷相會。</li>
+<li>楊過用獨孤求敗遺下的玄鐵重劍，在重陽宮打敗金輪國師等人。</li>
+<li>結局：楊過以石頭擊殺蒙哥。後續發展：1273年襄陽城破，郭靖黃蓉殉國。</li>
+<li>張君寶與師父覺遠在華山遇瀟湘子，楊過傳他三招掌法；張君寶即後來的張三丰。</li>
+</ul></article>
+<article id='raw-S06-yitian' class='page'><div class='path'>wiki/raw/S06-yitian.md</div><h1>RAW S06 — 維基百科〈倚天屠龍記〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/倚天屠龍記 ；擷取 2026-11-21</li>
+<li>1961年開始於《明報》連載，定本40回。</li>
+<li>背景：元末；正式情節始於元順帝至元二年三月廿四日（1336年5月5日）。主要衝突：明教與少林、武當等正派；明教義軍與元朝。</li>
+<li>張無忌：武當張翠山與天鷹教殷素素之子，謝遜義子。趙敏：蒙古汝陽王之女。周芷若：峨嵋派掌門。小昭：紫衫龍王黛綺絲之女。殷離：張無忌表妹。謝遜：金毛獅王。張三丰：即張君寶，創武當派。</li>
+<li>口訣：「武林至尊，寶刀屠龍。號令天下，莫敢不從。倚天不出，誰與爭鋒。」</li>
+<li>秘密：郭靖黃蓉以玄鐵重劍、君子劍、淑女劍熔鑄倚天劍與屠龍刀，藏九陰真經、降龍十八掌掌法精義、武穆遺書；周芷若在荒島互砍刀劍取出。新修版改為刀劍內藏玄鐵片，指向桃花島取書。</li>
+<li>九陽真經：覺遠圓寂前背誦，無色、郭襄、張君寶各記一部分；張無忌在猿猴腹中找到完整經書。</li>
+<li>乾坤大挪移：波斯明教護教神功。太極拳、太極劍：武當武學。</li>
+<li>結局：張無忌把武穆遺書交給徐達；元軍失大都；張無忌與趙敏歸隱；朱元璋奪得明教兵權，建立明朝。</li>
+</ul></article>
+<article id='raw-S07-shediao-plot' class='page'><div class='path'>wiki/raw/S07-shediao-plot.md</div><h1>RAW S07 — 維基百科〈射鵰英雄傳〉§故事梗概、主要人物</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/射雕英雄傳 ；擷取 2026-11-21（MediaWiki API 純文字，整段原文，未改寫）</li>
+</ul>
+<h2>故事梗概</h2>
+<p>南宋寧宗慶元五年（公元1199年）歲末，全真教道士丘處機刺殺私通金人的大宋奸臣王道乾後，路過臨安郊外的牛家村，結識隱居當地的忠良之後郭嘯天及楊鐵心，剛巧郭夫人李萍、楊夫人包惜弱均懷有身孕，丘處機為兩個未出世的孩子分別取名郭靖及楊康，希望二人不忘靖康之恥。此時金國六王爺完顏洪烈領金國殺手追捕丘處機至牛家村，結果一一被丘處機擊殺，惟完顏洪烈身受重傷倒在楊家柴房，為包惜弱一時不忍所救，得以全身而退。完顏洪烈難忘包惜弱美色，數月後勾結南宋官府在完顏洪烈指示下迫害郭楊兩家，結果郭嘯天被殺，而楊鐵心、包惜弱及李萍亦不知所蹤。噩耗傳來，郭、楊的好友丘處機怒不可遏，決心要對殺害郭、楊的兇手進行報復。他惦念郭、楊兩家的家眷，在臨安一帶四處奔走打探未果；接著又因受奸人段天德矇騙在嘉興與江南七怪發生衝突，兩敗俱傷。事後，丘處機與江南七怪識破奸人陰謀，釋兵言和，但比武未分勝負，丘處機相約江南七怪一同尋人，由自己去救助楊鐵心妻子包惜弱，江南七怪去救助郭嘯天妻子李萍，並各自將兩家的孩子教養成人，十八年後重會嘉興，由郭楊後人代為比武再分勝負。江南七怪義薄雲天，慨然應諾。原來李萍在丈夫遇難後，先受到南宋軍官段天德挾持，之後段天德為逃避江南七怪追捕，脅李萍北上金國中都，二人又為金兵所俘前往塞外當苦工，李萍一路漂流到了蒙古大漠被棄，在野外產下一子，最後為蒙古牧民所救，在蒙古居住。李萍依丈夫遺言為孩子取名郭靖。而完顏洪烈假裝從宋兵手上救出包惜弱，並向她訛稱其夫楊鐵心已死，無依無靠又被蒙騙的包惜弱惟有投靠完顏洪烈，後來下嫁他成為金國王妃，其子楊康亦在完顏洪烈王府中出生，被他視為己出。
+光陰飛轉，轉眼郭靖已經六歲，這一年他因捨命保護草原英雄哲別受到蒙古大汗鐵木真賞識，被鐵木真帶回軍營，不久又與鐵木真的幼子拖雷結為「安答」（兄弟）。此時江南七怪也尋訪郭靖母子到了蒙古，並終於在一次偶然機會中找到了郭靖，六年辛苦於一日之間得到報酬，七怪喜上眉梢，當即便對郭靖啟蒙，開始傳習各門武功。十年後，郭靖已長成為一個粗壯少年，他雖天資魯鈍，但由於六怪嚴督緊促，再加上自己勤奮努力，後又因得全真教掌教馬鈺傳授玄門內功，武功已經初成。而中途遇上江南七怪仇人梅超風和丈夫陳玄風，陳玄風被郭靖無意中殺害，梅超風則雙目失明。而江南七怪的張阿生殞命。這十年鐵木真東征西討，終於統一大漠，被尊為「成吉思汗」。郭靖因頗具戰功，被成吉思汗招為「金刀駙馬」，決定把女兒華箏公主許配給郭靖。
+十八年之約將至，江南六怪帶郭靖南歸，為了讓郭靖歷練江湖經驗，六怪命郭靖先行，自己尾隨其後。郭靖趕到張家口，與女扮男裝的小叫化子黃蓉相遇，兩人一見如故，彼此傾心,但郭靖不知黃蓉乃女兒之身。郭靖一路南行至金國中都，在城中見到江湖賣藝者穆易為他的女兒穆念慈進行比武招親，結果金國王子完顏康上台打敗穆念慈，但事後不願迎娶她，並打傷穆易。郭靖不滿完顏康欺負穆易父女，與之發生惡戰，後得全真教道士王處一及王妃介入，才暫化解紛爭。後來郭靖得知穆易真正身份乃是生父郭嘯天的結拜兄弟楊鐵心，原來楊鐵心當年大難不死，更收養孤女穆念慈，之後化名穆易，以賣武為生，一直尋找失散妻兒下落。後來完顏康帶楊鐵心及穆念慈到王府，楊鐵心發現王妃就是自己妻子包惜弱，而王子完顏康正是郭靖未曾見過面的義弟，亦即是自己與包惜弱之親生兒子楊康。楊鐵心與包惜弱相認，包惜弱得知丈夫尚在人間，及被完顏洪烈欺瞞多年後，決心隨楊鐵心逃離王府，並得郭靖、黃蓉、丘處機及江南七怪等人協助逃走，但被完顏洪烈的親兵及高手追捕，最後楊鐵心與包惜弱見逃走不成，雙雙自殺，包惜弱死前向楊康說明他的身世秘密，但楊康不願接受事實，更拒絕承認楊鐵心為生父。
+楊鐵心夫妻死後，郭靖知道了黃蓉乃桃花島島主及武學宗師「東邪」黃藥師之女（東邪黃藥師、西毒歐陽鋒、南帝段智興及北丐洪七公四人齊名、而第五人中神通是全真教創始人王重陽、武功最高。）而丘處機及江南七怪打算許配穆念慈予郭靖為妻，黃蓉不滿，拉走郭靖離開。郭靖、黃蓉相伴而行，在長江邊他們與一個舉止奇異的老乞丐相識，這個老乞丐便是與黃蓉之父——桃花島島主「東邪」黃藥師——齊名的武學宗師丐幫幫主「北丐」洪七公，洪七公喜歡郭靖樸實忠厚，更喜黃蓉伶俐聰敏，遂將兩人收入門牆，並把平生傑作剛猛絕倫的降龍十八掌授予郭靖。靖、蓉辭別洪七公，繼續南行，在太湖歸雲莊兩人不期與被太湖群雄截獲的金國欽差楊康和殺害郭嘯天的南宋軍官段天德相遇。楊康殺死段天德，並從中得知郭楊兩家淵源和自己的身世，楊康答應與完顏洪烈決裂，並與郭靖結義。而歸雲莊陸莊主與梅超風同為黃蓉之父一代宗師黃藥師之弟子，因梅超風及其丈夫盜取師父九陰真經下卷而全部弟子皆被逐出門外。黃藥師十分後悔而後重收他們為弟子。而黃藥師認為郭靖不該殺了陳玄風而發生爭鬥，由郭靖定下三個月後到黃藥師的桃花島做了斷而結束。
+但楊康終究難捨金國王子的榮華富貴，將郭靖北上行刺完顏洪烈的計劃洩漏出去。郭靖行刺不成，遂與黃蓉僱舟入海，趕往桃花島，在島上他巧遇武林奇人全真派高手，王重陽師弟周伯通，與這位嗜武成狂為老不尊的「老頑童」義結金蘭，並得周伯通傳授「雙手互搏之術」。「西毒」歐陽鋒的私生子歐陽克垂涎黃蓉美色，叔姪二人到桃花島向黃藥師提親，但在黃蓉要求下歐陽克要與郭靖比試，結果郭靖在洪七公相助下打敗歐陽克，卻因周伯通在郭靖不知情傳了他九陰真經而壞了事，與西毒和周伯通他們一起離開。但之後周伯通因與歐陽鋒的一個賭賽被迫跳海自盡（但周伯通跳海後在海上騎鯊魚反而保住性命）。歐陽鋒迫郭靖寫下九陰真經，郭靖卻在洪七公指示下寫出九陰假經。後來洪七公遭歐陽鋒暗算重傷，歐陽鋒及郭靖不知所蹤，與黃蓉及歐陽克流落一荒島（此島後被洪七公命名為壓鬼、吃尿島）。黃蓉臨危受命，接替了洪七公的丐幫幫主之位，成為丐幫第19任幫主。郭靖和歐陽鋒後與三人重逢。郭靖和黃蓉靠九陰真經逃離歐陽鋒魔掌。後來郭靖、黃蓉、洪七公和原來未死的周伯通到京城阻止完顏洪烈等人奪得岳飛遺下的武穆遺書，卻只取得一卷軸，郭靖也被已投靠完顏洪烈的歐陽鋒打得重傷。郭靖和黃蓉靠九陰真經療傷，留重傷未癒的洪七公和周伯通在京城。卻遇上黃藥師和華箏。郭靖只好向黃蓉父女坦承金刀駙馬一事，並為了遵守承諾，決定和華箏結婚。黃蓉雖然心傷，但知道郭靖始終愛她，二人也沒有分離。郭靖和黃蓉一同趕往岳州參加丐幫大會。與此同時楊康也來到岳州的軒轅台，他先勾結丐幫中的「淨衣派」捉拿郭靖與黃蓉，之後利用盜取得來的丐幫打狗棒，企圖假冒丐幫新任幫主，驅使幫眾投降金國，要統領丐幫以助金國統一天下。幸靖、蓉及時揭穿了楊康密謀奪取丐幫幫主之位的陰謀詭計；後來郭靖助黃蓉從楊康手中奪回打狗棒，而黃蓉則使出真正的「打狗棒法」大敗楊康，最終令黃蓉真正被丐幫眾人承認為洪七公親自欽點的繼任人——丐幫第19任幫主。數日後，靖、蓉據在京城裏的卷軸尋找岳飛的《武穆遺書》來到滬溪鐵掌幫禁地，結果行蹤暴露，黃蓉被鐵掌幫幫主裘千仞以鐵掌打成重傷瀕死，幸最後郭靖尋得已經退位出家的「南帝」一燈大師以一陽指拯救。
+此間，歐陽鋒夥同楊康潛入桃花島，將在島上做客的江南七怪中的朱聰等五人殺害，並趁機嫁禍給黃藥師，及使郭靖遷怒於黃蓉遂情海翻波，意圖挑起江湖紛爭希望能從中得利。事後黃蓉機智地在嘉興鐵槍廟中揭穿了歐陽鋒及楊康的陰謀給躲藏在「鐵槍」王彥章石像後的柯鎮惡聽到，最終替黃藥師洗脫了殺人罪名，並將作惡多端的楊康除掉，但她自己卻落入了歐陽鋒的魔爪。後來郭靖從柯鎮惡口中得知江南五怪被殺之真相，知道黃蓉為揭此事真相以身犯險最後更被「西毒」歐陽鋒捉走，便悔恨自己在此事上傷透了黃蓉的心，心中對她愧疚萬分，於是四處奔走尋訪她的下落，結果卻是音信皆無，靖、蓉兩人失散達半年之久。
+郭靖尋訪到了蒙古大漠，正趕上成吉思汗西征花剌子模帝國，為了擒殺殺父仇人完顏洪烈，郭靖請命出征，被成吉思汗任命為右軍統帥。不久黃蓉及歐陽鋒也先後來到西征軍中，郭靖更得丐幫長老魯有腳與一眾丐幫弟子幫助下在西域初冬時節於禿木峰頂與黃蓉重逢，他為讓歐陽鋒不傷害黃蓉，答應抓到他三次饒他不死。後靖、蓉聯手與歐陽鋒展開惡鬥，三次將他擒獲。接著郭靖又依黃蓉之計，在攻打花剌子模都城撒馬爾罕的戰鬥中立下大功，還殺了完顏洪烈，終報殺父之仇，但隨後郭靖、黃蓉二人再度因誤會而分開，之後郭靖更被歐陽鋒所欺騙，以為黃蓉已死於蒙古大漠的流沙中因而心灰意冷。另一方面，成吉思汗在西征成功後產生了南下攻宋的野心，郭靖因不願與自己的父母之邦作戰，決心與母親李萍連夜逃離蒙古，不料卻被成吉思汗察覺，母親被擒，李萍為保兒子忠義，當場自殺身亡，而郭靖因得哲別及拖雷相助才得以逃離蒙古，此事亦間接地導致他和華箏的婚約終止。郭靖慘遭巨變後，心灰意冷，逃回中原後因身穿蒙古服飾被宋人認定為蒙古韃子，與蒙古兵一樣殘暴而被痛打一頓，郭靖被打而不還手，幸得丘處機相救。
+在第二次華山論劍中，東邪、西毒、北丐以及被洪七公開導的郭靖紛紛出手，最後「武功天下第一」被逆練九陰真經而瘋瘋癲癲的歐陽鋒奪得。期間郭靖再度重遇因誤會而出走的黃蓉，兩人解開一切誤會，和好如初，並在第二次華山論劍後在黃藥師和洪七公面前訂下婚約。
+在本故事的結尾，郭靖受邀前去見成吉思汗最後一面，並向成吉思汗講述自己認為對英雄的定義。成吉思汗年老力衰，病重垂死，崩於金帳時口中仍念念不忘郭靖對他說的「英雄」定義。此後郭靖與蒙古恩斷義絕，返回中原後與黃蓉成親並定居桃花島十多年，直至蒙古正式侵宋，才舉家遷至襄陽城禦敵。（郭靖和黃蓉的事跡在《神鵰俠侶》中續有敘述。）</p>
+<h2>主要人物</h2>
+<p>郭靖：郭嘯天與李萍之子，生於蒙古，後南下中原並於張家口邂逅黃蓉與其成為情侶，一起闖蕩江湖，本書結尾時迎娶黃蓉為妻，定居桃花島十餘載。師承江南七怪、蒙古神射手哲別、丹陽子馬鈺、「北丐」洪七公和「老頑童」周伯通。雖然魯鈍但極為忠義，多次被結拜兄弟楊康背叛，但看在郭楊兩家是世交的份上，不忍痛下殺手，希望楊康能迷途知返。擅長降龍十八掌、空明拳、雙手互搏，練成《九陰真經》，成為絕頂高手，後在《神鵰俠侶》中的第三次華山論劍繼承師父洪七公的「五絕」地位，號為「北俠」。
+黃蓉：「東邪」黃藥師與馮氏之獨生女、「北丐」洪七公之徒，於張家口邂逅郭靖後與其成為情侶，一起闖蕩江湖，本書結尾時嫁給郭靖。在明霞島上臨危受命，接替了洪七公的丐幫幫主之位，成為丐幫第19任幫主和首名女性幫主。機智聰明，精通奇門遁甲、滿天花雨擲金針、落英神劍掌和打狗棒法。
+楊康：楊鐵心與包惜弱之子，認金國六王爺完顏洪烈為父，以「完顏康」之名在金國王府長大，得知身世後仍協助金人奪得《武穆遺書》，宋人斥其認賊作父、通敵賣國。因比武招親邂逅穆念慈並墮入愛河。原為長春子丘處機之徒，後拜黑風雙煞之梅超風為師，習得九陰白骨爪和摧心掌。因歐陽克覬覦穆念慈的美色而殺害他，嫁媧給自己的結拜兄弟郭靖，並順水推舟拜「西毒」歐陽鋒為師。後又在桃花島上與歐陽鋒合作殺害江南七怪，嫁媧給黃藥師，意圖使武林混亂，惟柯鎮惡倖存。最後因誤觸黃蓉軟蝟甲上歐陽鋒的蛇毒而慘死在嘉興鐵槍廟。遺腹子為楊過，父子面貌十分相似。</p></article>
+<article id='raw-S08-shendiao-plot' class='page'><div class='path'>wiki/raw/S08-shendiao-plot.md</div><h1>RAW S08 — 維基百科〈神鵰俠侶〉§情節、後續發展、主要人物</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/神鵰俠侶 ；擷取 2026-11-21（MediaWiki API 純文字，整段原文，未改寫）</li>
+</ul>
+<h2>情節</h2>
+<p>南宋理宗年間，外號「赤練仙子」的李莫愁因心儀男子陸展元與何沅君相戀，遷怒於陸展元弟陸立鼎，將陸立鼎夫婦殺害，並擄去他們的女兒陸無雙。四處流浪的江南少年楊過剛巧路過，因拾起李莫愁獨門暗器「冰魄銀針」而中毒。武林五絕高手之一「西毒」歐陽鋒與楊過相遇，收他為義子並傳授楊過武功（蛤蟆功及逆練九陰真經），並教他迫出毒性的方法。
+不久後，楊過被亡父楊康生前的結義兄弟、江湖上有名的大俠郭靖及其妻子——丐幫幫主黃蓉尋獲，二人替楊過解毒，亦得悉他就是故人楊康與穆念慈之子。楊過十一歲時生母穆念慈染病身亡，孤苦無依。郭靖打算帶楊過往桃花島以傳他武功，但黃蓉念及楊過生父楊康生前的所作所為，只教楊過讀書而不教武功，望其受儒家經典陶冶。但楊過則以為黃蓉偏心，加上被郭靖與黃蓉之女郭芙及同年的武氏兄弟挑釁辱罵，結果他與武氏兄弟發生打鬥，並以歐陽修所傳的蛤蟆功把武修文弄至重傷，因而被郭靖送到全真教學武以及修心養性。然而楊過師父趙志敬得不到楊過的奉承，心中不忿，不但不傳武功，還要他在教中吃盡苦頭。一次趙志敬迫未獲傳授武功的楊過與師兄鹿清篤比​​武，楊過捱打，忍無可忍，最後逃出全真教，誤闖終南山後活死人墓，被墓中的古墓派傳人小龍女收留為徒。師徒二人在墓中一起練武、一起長大，漸生情愫。
+數年後，楊過與小龍女在終南山後山修練《玉女心經》，被趙志敬和另外一個全真教道士甄志丙（舊版為尹志平）撞破，小龍女被騷擾下受內傷，甄志丙則迷戀小龍女美色。小龍女師姊李莫愁突現身古墓，迫小龍女交出古墓派武功秘笈《玉女心經》，小龍女啟動古墓內的機關與楊過逃離古墓。楊過小龍女逃離古墓後，在終南山山谷居住，卻遇上歐陽鋒。歐陽鋒不欲小龍女得知教授楊過的武功，將小龍女點穴。怎料甄志丙剛巧來到，將不能動彈的小龍女玷污，小龍女誤為楊過所為。對返回的楊過表達願結連理，然而楊過的回答不知所云，小龍女憤而離開終南山。楊過懵然無知，四處尋找小龍女，在尋找的過程中恍然明白小龍女對自己的愛意。楊過尋找小龍女期間認識了逃避李莫愁的陸無雙，耶律楚材之子耶律齊及意圖行刺耶律齊的金國皇族後裔完顏萍。後來楊過在華山遇上「北丐」洪七公，歐陽鋒亦在華山出現，楊過目睹兩大高手相鬥而亡。
+後來中原群雄在大散關陸家莊召開聯合對抗蒙古侵略的英雄大會，楊過前往陸家莊希望取得小龍女的消息，卻與郭靖黃蓉及一群全真教道士相遇，郭靖黃蓉始知楊過已離開全真教多年。小龍女亦在此時來到陸家莊，與楊過相聚。蒙古帝國高手金輪國師（舊版為金輪法王）帶領霍都及達爾巴兩徒兒前來英雄大會挑戰。雙方三局兩勝的比試中，霍都用奸計打敗朱子柳，關鍵時刻，小龍女和楊過偶然捲入紛爭，二人合力使用玉女素心劍助郭靖打敗金輪國師。郭靖佩服及感謝小龍女、楊過二人，並打算將女兒郭芙許配給楊過。楊過不肯，堅持娶小龍女為妻。但師徒通婚違背當時禮教，二人的愛情不能為世俗所容。二人離開陸家莊後，又與擄走郭芙的金輪國師，以及前來拯救郭芙的黃蓉及武氏兄弟相遇，楊過及小龍女再打敗金輪國師救出郭芙。之後小龍女卻受黃蓉所勸，希望楊過能夠被郭靖等人接受，黯然離去。小龍女離開後，楊過、黃蓉、郭芙與武氏兄弟再遇見金輪國師，黃蓉及楊過智勝金輪國師，更得「東邪」黃藥師關門弟子、陸無雙的表姐程英相助，得以脫險。
+楊過被程英所救後，得悉陸無雙逃避李莫愁，與程英一起，之後楊過認識了黃藥師及黃藥師弟子曲靈風之女曲傻姑，楊過與黃藥師一見如故，李莫愁追蹤陸無雙至此，黃藥師教授楊過武功破解李莫愁的招數，楊過之後聯同黃藥師徒弟馮默風，將李莫愁擊退。後來楊過從傻姑口中得知，郭靖黃蓉夫婦與他父親楊康的死，有莫大關係，更懷疑他們是殺父仇人。楊過一怒之下前往投靠金輪國師的主子——蒙古親王忽必烈。楊過在忽必烈軍旅中，除了見到金輪國師等六個蒙古旗下高手，亦碰上誤入軍營的周伯通。周伯通在軍營搗亂後，卻在營外被一群綠衣人佈下的漁網陣所捕，楊過與忽必烈旗下眾高手跟隨綠衣人進入一山谷中，並認識谷主的女兒公孫綠萼。原來此山谷名為絕情谷，谷主公孫止的祖先早在唐代安史之亂時避亂遷入此谷隱居，因周伯通早前入谷搗亂，才派人將他捕捉以追究其劣行。
+後來周伯通再次逃逸，但楊過卻在絕情谷中見到小龍女，但小龍女否認身份，只道她是公孫止谷主的未過門的妻子。原來小龍女離開楊過後，一次練功時走火入魔，幸得公孫止所救。公孫止帶小龍女入絕情谷中，打算娶她為妻。楊過不斷追問小龍女的身份，惹怒了公孫止。公孫止命屬下佈下漁網陣將楊過捉住，小龍女始向楊過承認其身份，並決心與楊過同死，也不會下嫁給公孫止。公孫止施生平絕技攻擊楊過，小龍女與楊過以玉女素心劍迎擊，但原來早前二人不慎被絕情谷內獨有的情花刺傷，此時動情毒發，結果被公孫止打敗被擒。公孫止以娶小龍女為妻作救治楊過的條件。後來公孫綠萼卻救出楊過，但偷取情花毒解藥絕情丹失敗，公孫止欲按谷規殺死公孫綠萼，楊過出手相救，與公孫綠萼墜地底深潭中。
+楊過與公孫綠萼在深潭中的石窟發現一手腳俱廢的老婦，原來是公孫止的妻子，亦是公孫綠萼的母親裘千尺。當年裘千尺悉破公孫止與婢女的私情，迫公孫止殺害婢女，公孫止之後報復，將裘千尺手腳筋挑斷後困她在地底石窟中，裘千尺十多年靠石窟中棗樹的果子維生，亦練到以內力吐出棗核的功夫。楊過及公孫綠萼後來帶同裘千尺返回地面，並協助她打敗公孫止。但裘千尺得知兄長裘千丈被郭靖黃蓉害死，要求楊過小龍女二人取郭黃二人人頭回絕情谷，才肯給予楊過絕情丹解情花之毒。楊過稱郭靖黃蓉本是他殺父仇人，欣然答應裘千尺的要求。
+楊過、小龍女，以及一眾蒙古旗下高手離開絕情谷返回忽必烈軍營，得悉郭靖黃蓉夫婦率領中原武林群雄助宋軍守衛襄陽城，楊過答應忽必烈會潛入襄陽城暗殺郭靖，並為蒙古的內應。楊過與小龍女來到襄陽城，郭靖不計前嫌歡迎二人前來協助抗蒙，楊過多次想落手殺害郭靖，但卻被郭靖的仁義行徑所動而無法落手。武氏兄弟被忽必烈所俘，楊過陪同郭靖前往忽必烈軍旅中談判，忽必烈旗下高手圍攻郭靖，楊過在危急關頭決定協助郭靖逃走，二人雖逃回襄陽，郭靖已身受重傷。金輪國師等高手見郭靖身受重傷，而楊過已反悔不殺郭靖，故潛入襄陽城欲殺害郭靖。此時，身懷六甲的黃蓉作動生產，楊過、小龍女合力保護郭靖夫婦。黃蓉產下龍鳳胎，金輪國師欲搶走剛出生的女嬰郭襄作人質，楊過小龍女拚命保護郭襄。混亂中，女嬰郭襄落入剛來到襄陽的李莫愁手中，李莫愁誤以為郭襄是楊過與小龍女所生的女兒，一方面不肯交回郭襄予楊過，另方面卻與楊過聯手對付欲搶走郭襄的金輪國師等蒙古高手。混亂中，小龍女與楊過走散了，楊過緊隨擄走了郭襄的李莫愁，遇上因郭芙而大動干戈的武氏兄弟，及他們父親武三通。楊過為平息武氏兄弟衝突，向他們訛稱郭靖黃蓉已許配郭芙給他，令他們對郭芙死心，武氏兄弟最終和解，並與楊過及父親武三通合力擊退李莫愁，但李莫愁仍擄郭襄而去，而楊過認為自己身中情花毒命不久矣，替身中李莫愁冰魄銀針的武氏兄弟吸走毒血，毒發昏迷，被武三通及朱子柳救回襄陽。武三通師叔天竺神僧為楊過診斷後，認為楊過吸取毒血反而出現以毒攻毒的效果，令楊過延遲毒發。天竺神僧決定親自去絕情谷了解情花毒性，再找治療楊過之法。
+郭芙見楊過等返回襄陽後，得知妹妹郭襄被李莫愁所擄，又從武氏兄弟得知楊過聲稱父母已將自己許配給他，使武氏兄弟決定與她疏遠。郭芙憤然走去找楊過對質，二人言語衝突以致動手，郭芙憤怒中抓起楊過從絕情谷帶來的寶劍「淑女劍」，將楊過右臂斬斷。受了重傷的楊過逃離郭府，後得一大鵰所救。神鵰帶楊過到武林前輩高手獨孤求敗的石墳處，楊過在那裡一面養傷，一面在神鵰幫助下練成獨孤求敗的武功。數日後楊過傷癒，潛回襄陽，見郭靖欲斬下郭芙右臂作為對楊過的補償，黃蓉救走郭芙，並護送她離開襄陽前往桃花島，途中卻遇上攜著郭襄的李莫愁。黃蓉得知李莫愁不知手上女嬰是自己的女兒，於是用計令李莫愁離開郭襄，豈料郭襄被一直跟蹤黃蓉的楊過抱走，並帶往終南山古墓。
+小龍女與楊過走散後，最終找到楊過蹤影，卻剛巧偷聽到楊過向武氏兄弟訛稱郭靖黃蓉已許配郭芙給他，小龍女信以為真，失望地離開。之後小龍女偷聽到趙志敬以污辱小龍女的事，威脅甄志丙交出全真掌門之位，始知當日被甄志丙污辱。絕望的小龍女拋下楊過，獨自追殺趙志敬及甄志丙。趙甄二人逃避小龍女途中遇見金輪國師率領的一隊蒙古軍。原來蒙古派兵去對付全真教。趙志敬希望借蒙古人之力登上全真教掌門，與金輪國師勾結，並設局毒害周伯通，周伯通反被小龍女所救。小龍女更從周伯通處學會左右互搏之技。
+小龍女救出周伯通後，繼續追蹤甄志丙及趙志敬至終南山。全真五子正在閉關練功，趙志敬成功迫甄志丙讓出掌門予他，但趙志敬接受蒙古人敕封，引起全真教內鬨，金輪國師領眾高手及蒙古兵攻入重陽宮，將甄志丙擒下並打算殺死，但一直在旁不干涉的小龍女欲親手殺死甄志丙，故出手阻止眾蒙古高手，與金輪國師等眾高手激戰，在旁的甄志丙為救小龍女殺入戰團，被小龍女的配劍誤傷。剛巧全真五子破關而出，以為小龍女傷害愛徒，攻擊小龍女，小龍女被蒙古高手及全真五子夾擊下身受重傷。而楊過返回終南山古墓時發覺重陽宮有變，將郭襄安置在古墓後前往重陽宮，將金輪國師等高手用獨孤求敗遺下的玄鐵重劍打敗，此時甄志丙向全真五子道明曾玷污小龍女之事，之後自盡。楊過與小龍女不顧全真教的顏面，於重陽宮王重陽的畫像前拜堂成親，之後返回古墓。楊過在古墓中與小龍女療傷，而黃蓉、郭芙及武三通父子等人來到終南山，藉助李莫愁引領下進入古墓，李莫愁進古墓後卻暗算眾人，郭芙拾起李莫愁遺下的冰魄銀針打算伏擊李莫愁，卻誤傷正在運功療傷的小龍女，冰魄銀針之毒因此進入小龍女五臟六腑，無藥可解。
+楊過一怒之下，帶同小龍女及郭襄離開古墓，卻遇上一燈大師及其徒弟慈恩。原來一燈收到弟子朱子柳的書信，得知楊過身中情花毒之事，而慈恩出家前為鐵掌幫幫主裘千仞，是絕情谷主裘千尺的兄長，慈恩希望能勸服裘千尺交出情花毒解藥。楊過夫婦與一燈師徒四人來到絕情谷，發現周伯通、黃蓉、郭芙、耶律齊、程英、陸無雙等人，以及李莫愁師徒亦先後來到絕情谷。楊過將郭襄交還黃蓉，黃蓉與慈恩則前去與裘千尺交涉，要求她交出絕情丹。另外，早前進入絕情谷了解情花毒性的天竺神僧，主動被情花刺傷後中毒昏迷。李莫愁亦誤墜情花陣，雖犧牲徒弟洪淩波性命而逃脫，但已身中情花毒。
+黃蓉與慈恩等面見裘千尺，裘千尺煽動慈恩向黃蓉報殺兄之仇，慈恩失去理智，搶去郭襄打算將她殺死，但黃蓉即時裝成憶子成狂的瑛姑，令慈恩憶起當年殺死瑛姑初生嬰兒的惡事，最後放棄報復。裘千尺之後要求黃蓉不許閃避下，硬接她吐出的三口棗釘，作為交出絕情丹的條件，黃蓉憑機智及武功，順利接下三口棗釘而毫無損傷。然而，被逐出絕情谷的公孫止竟與李莫愁勾結，並成功奪取絕情丹。雖然小龍女後來打敗公孫止奪回絕情丹，但楊過得知昏後醒來的天竺神僧已被李莫愁所殺，世間已沒有人能治好小龍女，他不願獨自偷生，將絕情丹拋下絕情谷底。李莫愁被眾人所擒，之後不能忍受情花毒發而自焚身亡，公孫止與裘千尺最後亦同歸於盡。
+黃蓉推論天竺神僧死前已認為斷腸草是情花毒的解藥，她不知小龍女之毒無人可解，故道出此事，希望小龍女勸楊過服用。小龍女用劍在石崖上刻上「十六年後，在此相會，夫妻情深，勿失信約」十六字，之後不辭而別。黃蓉此時始知小龍女命不久矣之事，只能向楊過訛稱，小龍女被神人南海神尼收為徒弟，她身上的毒定能解除，但南海神尼逢十六年才來中土一次，故小龍女必須十六年後才能與楊過相見。楊過半信半疑下，決定服下斷腸草，結果成功解除情花毒，並等待十六年後與小龍女相見。
+十六年間，楊過帶著神鵰到處行俠仗義，成為人所共知的「神鵰俠」，而郭襄亦長成亭亭玉立的少女。十六年後，郭襄與姊郭芙及弟郭破虜北上晉陽邀請丘處機出席襄陽英雄大會，回程時途經風陵渡口，郭襄在客店聽到眾客人談及「神鵰俠」的事跡，十分嚮往，不顧家人與風雪，跟隨西山一窟鬼去見神鵰俠，目睹楊過化解西山一窟鬼及萬獸山莊史氏兄弟的糾紛，後來更跟隨他前往瑛姑隱居的黑龍潭，捕捉能治癒史家老三的九尾靈狐，卻在黑龍潭見到瑛姑與一燈、慈恩，以及周伯通數十年的恩怨情仇得到化解。楊過得到瑛姑送贈靈狐，治癒史家老三的病，之後與郭襄出席史氏兄弟的感謝筵席，此時郭芙硬闖萬獸山莊要尋回郭襄，楊過始知郭襄的身份。臨別時，楊過給予郭襄三枚金針，表示會完成她三個心願。郭襄立即提出第一個心願，要一直帶上面具的楊過給她看真面目。楊過給他真面目郭襄看後，郭襄提出第二個心願，要楊過在今年她十六歲生日那天來襄陽與她見面，而郭襄尚未想到第三個心願。
+郭襄回到襄陽時，郭靖黃蓉夫婦正籌備抗蒙英雄大會，而英雄大會的日期正是郭襄十六歲生辰當日。丐幫幫主魯有腳被殺，郭襄在城郊拜祭魯有腳時，與郭芙一同被蒙古旗下高手尼摩星襲擊，一神秘高手將尼摩星殺死救回郭氏姊妹。此後，黃蓉發現一批隱世武林高手紛紛到郭襄房間向她賀壽，推斷是楊過所邀而來，一度擔心楊過會對郭襄不利。原來楊過以為郭襄祝壽為名，發動江湖友好殲滅蒙古南侵的先頭部隊，再毀蒙古軍前線的糧倉及火藥庫，還揭破金輪國師逆徒霍都殺死魯有腳以奪丐幫幫主之位的陰謀，最後楊過親自現身襄陽與郭靖等人見面，而黃藥師此時亦來到襄陽，楊過與黃藥師一老一少前去聚舊，而楊過亦從他口中得知，南海神尼的故事只是黃蓉杜撰出來。後來楊過來到父親楊康喪命之地鐵槍廟，從郭靖師父柯鎮惡口中得知父親楊康生前的惡行，及死亡原因。
+楊過與黃藥師離開後，黃蓉向郭襄講述郭楊兩家三代的恩怨，並表示南海神尼收小龍女為徒之事，只是自己為令楊過求生而杜撰出來的，現十六年之約將屆，黃蓉恐楊過等待不到小龍女，不知會作出什麼反應，故勸郭襄不要再接觸楊過。但郭襄卻恐怕楊過見不到小龍女會自尋短見，想起楊過尚未達成她第三個心願，便前去找楊過，說出她第三個心願是要楊過不能尋死。郭襄離開襄陽後，卻被金輪國師所擒獲。
+金輪國師賞識郭襄之聰慧及善良的性格，收郭襄為徒，傳授部分心法。郭襄卻揶揄金輪國師武功不及楊過，使金輪國師帶郭襄往絕情谷找楊過比試。楊過在約定之日在絕情谷見不到小龍女蹤影，認定小龍女十六年前已死，悲憤下從懸崖躍下谷底，此時郭襄與金輪國師來到絕情谷，郭襄目睹楊過跳崖，也跟著躍下懸崖。此時黃蓉、周伯通、瑛姑、程英、陸無雙以及黃藥師等人為尋找郭襄及楊過來到絕情谷，得知楊過及郭襄已墜谷底，眾人合力制服金輪國師。黃蓉的雌雄大鵰將郭襄從谷底運回崖上，始知郭襄和楊過無恙，原來谷底是深潭，楊過、郭襄墜入潭水中無恙。眾人合力爬入谷底卻不見楊過，而留在崖上的郭襄卻被金輪國師所騙，協助他解除被眾人封閉的穴道，郭襄再次被金輪國師擄去。
+蒙古兵久攻襄陽不下，金輪國師在陣前威脅燒死郭襄，欲迫使郭靖投降。郭靖拒降並誓死頑抗，此時楊過和小龍女現身營救郭襄。原來楊過發現絕情谷底的寒潭另有洞天，小龍女當年墜潭不死後，在寒潭另一面的山谷內生活，更藉服食玉蜂蜜及潭內白魚解除身上劇毒。楊過與小龍女重逢後返回崖上，得知郭襄被擄而前去營救，最後楊過殺死金輪國師救出郭襄。然後，郭芙丈夫耶律齊遭受蒙古軍圍攻，郭芙懇求楊過前去救援，而楊過要求郭芙下跪磕頭，並救出耶律齊，郭芙至此才深深感受到自己對楊過的種種怨恨原來是因為忌妒，並對楊過感到抱歉。後來黃藥師命宋軍佈下二十八宿大陣擊敗蒙軍，楊過更用石頭狙殺領軍親征的蒙古大汗蒙哥。
+楊過等人在擊退蒙古軍後，去到華山上見一群小嘍囉進行著「第三次華山論劍」，楊過嚇退他們，並與同伴談論新天下五絕，重訂天下五絕為：「東邪——黃藥師，西狂——楊過，南僧——一燈大師，北俠——郭靖，中頑童——周伯通。」下華山時，遇上少林派覺遠與弟子張君寶向二名蒙古旗下高手瀟湘子及尹克西追討《楞伽經》與《九陽真經》，楊過授予張君寶三招掌法打敗瀟湘子後，攜小龍女告別眾人離去（郭襄及張君寶(張三丰)的事跡在《倚天屠龍記》中續有敘述）。</p>
+<h2>後續發展</h2>
+<p>作為「射鵰三部曲」的第二部，雖然續作《倚天屠龍記》的主體故事年代已相隔甚遠（《神鵰俠侶》結束在公元1260年，而《倚天屠龍記》的主體故事開始於公元1335年)，但由於《倚天屠龍記》初段有講述郭襄事跡的兩回，而「百年後」的主體故事亦有倒敘提及一些往事，所以大致可得知或推測出一些重要角色的後續故事。
+當中兩部真正相隔在於《神鵰俠侶》結束（華山重議五絕之位），直至《倚天屠龍記》開始（郭襄訪少林）的3或4年間（二三版之間有所不同），這時最明顯提到的變故是「這時丘處機逝世已久」，而神鵰末段的襄陽大戰中只是提及他「年老有病，不能起床」而已。
+而一度被斷龍石阻隔的古墓也已重開（但不確定是楊過與小龍女分開的16年間，或是楊龍重逢之後發生），郭襄訪古墓時楊過小龍女夫婦外出未歸，但獲他們的侍女招待住宿三日。
+至於其他角色，雖然沒逐一明確提及，但由於在郭襄與無色過招展示各人武功時，作者也曾提及黃藥師、一燈、周伯通及瑛姑等名字，並沒刻意指出他們已離世，故推測即使他們年事已高（應已近百歲），但此時仍健在的可能性比較高。
+《神鵰俠侶》末段作者曾提及，由於蒙哥大汗戰死沙場，忽必烈因與阿里不哥爭奪汗位，直至多年後才再攻襄陽，而歷史上蒙古在公元1267年開始圍攻襄陽，至公元1273年襄陽失守（而根據《倚天屠龍記》倒敘描述，襄陽幾乎立即失守），所以《神鵰俠侶》結束的公元1260年，至襄陽失守的1273年，這十多年間可說是眾人最後的一段平安歲月。
+而根據後來的倒敘，1273年襄陽城破之戰中，各人有確實提及的結局如下：
+楊過、小龍女夫婦：後來出場的楊姓黃衫女子極可能是他們的後人；
+郭靖、黃蓉夫婦：殉國（終年約70餘歲）
+郭破虜：隨父母殉國，沒有傳人
+郭襄：城破時身在西川，後來出家，開創峨嵋一派
+耶律齊、郭芙夫婦：沒明確提及（報紙版後來的丐幫幫主耶律淵如應為其後人，但二版以後已刪除），但所領導的丐幫不似遭受毀滅性打擊
+武敦儒、耶律燕夫婦：沒明確提及
+武修文、完顏萍夫婦：《倚天屠龍記》中武烈父女為他們後人，並與朱子柳後人（朱長齡）鄰居</p>
+<h2>主要人物</h2>
+<p>楊過——小說男主人公，是《射鵰英雄傳》中楊康與穆念慈（舊版是楊康與秦南琴）之子，俊朗聰明，但出身貧寒，導致性格自卑偏激，時常因為激憤，而衝動行事。嫉惡如仇，年少時反抗名教桎梏，討厭禮教習俗，在愛情與恩義之間掙扎。精通《玉女心經》、全真教的武功、和部分《九陰真經》。後又得北丐洪七公及黃蓉分別傳授打狗棒法的招式及心法；又得東邪黃藥師傳授玉簫劍法和彈指神通；並得西毒歐陽鋒傳授少量蛤蟆功和逆轉經脈的心法，在第一代的天下五絕中，除南帝外可算得上兼習各家，而其本門古墓派的師祖女俠林朝英又是一位武學堪與五絕比肩的高手，楊過可謂盡集當代頂級絕學於一身。遭郭芙斷臂後，以玄鐵劍練成獨孤求敗的劍法，又自創黯然銷魂掌，終卓然成家而臻絕頂高手之境。其後行俠仗義，贏得「神鵰大俠」的名號，武林上下，無論正邪黑白，盡都服膺於其為人而或聽其號令，或視其為知己，或以其為馬首是瞻，「神鵰大俠」儼然為一另類的武林盟主。結尾時成為「新天下五絕」中的「西狂」，與小龍女相偕隱居。
+小龍女——小說女主人公，古墓派第三代傳人，外貌清麗脫俗、性格封閉矛盾。武功高強，不在天下五絕之下。精通《玉女心經》、雙手互搏和部分《九陰真經》。除長劍外亦慣用獨門軟兵器「白綢金鈴」。奉孫婆婆之命收容少年楊過並授其武藝，兩人日久生情，卻為此情流離江湖、受盡苦楚，後身體被甄志丙（舊版是尹志平）所染指。期間奇遇周伯通，從他學到《雙手互搏》心法能左右手同使玉女素心劍，能獨自一人應付金輪國師。由於經脈逆轉療傷之際被郭芙誤傷針毒，導致毒入臟腑難以驅除使壽命瀕終，為避免楊過與之殉死在大石上留字予楊過，並跳入谷底尋死卻意外解毒存活，十六年後在絕情谷與楊過再次相逢。之後與楊過義助郭靖、黃蓉守衛襄陽救出郭襄，成為名揚天下的「神鵰俠侶」。第三次華山論劍後，與楊過絕跡江湖。</p></article>
+<article id='raw-S09-yitian-plot' class='page'><div class='path'>wiki/raw/S09-yitian-plot.md</div><h1>RAW S09 — 維基百科〈倚天屠龍記〉§背景設定、情節、登場人物</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/倚天屠龍記 ；擷取 2026-11-21（MediaWiki API 純文字，整段原文，未改寫）</li>
+</ul>
+<h2>背景設定</h2>
+<p>時代背景為元朝末年，《神鵰俠侶》結尾的近百年後。故事圍繞兩樣兵器屠龍刀和倚天劍。出場的真實歷史人物包括張三丰、朱元璋、陳友諒、常遇春、徐達、汝陽王察罕帖木兒、王保保、韓林兒等等。設定中的當時社會之焦點主要是以明教為首的「邪派」和以少林、武當為首的正派之爭，以及明教起義軍和元朝蒙古朝廷的對抗。涉及的武林秘笈包括《九陽真經》、《九陰真經》、《七傷拳譜》等等。
+小說前兩章延續《神鵰俠侶》的結尾，描述南宋末年郭襄、張君寶的經歷以及武當派的起源。故事正式情節從第三章開始，時為元順帝至元二年三月廿四日（1336年5月5日）。</p>
+<h2>情節</h2>
+<p>宋理宗景定元年（1260年），第三次華山論劍後，郭靖之女郭襄一人騎著青驢，走遍天下，尋訪楊過和小龍女。三年後，郭襄來到河南少林寺，尋找楊過的好友、羅漢堂首座無色禪師詢問楊、龍二人的下落不果。
+郭襄在少室山腳遇上來自西域的「崑崙三聖」何足道，兩人互相切磋棋藝和琴藝。何足道精於劍術，欲向少林寺挑戰，卻被少林僧人覺遠及其弟子張君寶的「九陽神功」震退，悄然返回西域。覺遠、張君寶因無師自學少林武功犯了門規而被少林寺派人捉拿，郭襄遂同二人逃下少室山。覺遠坐化前背誦《九陽真經》，在旁伴著的無色禪師、郭襄、張君寶三人各自記住了一部分。最終這些內容分別成為了少林、峨嵋、武當派的九陽功。之後郭襄繼續尋找楊過蹤影，並提議不見容於少林的張君寶前往襄陽投靠她的父母，可是張君寶在前往襄陽途中改變主意，上了襄陽附近的武當山歸隱。後來張君寶改稱為張三丰，並根據九陽功及少林功法變通，且自創內家拳，自成一家，稱武當派。數十年後，武當派為內家之宗，在武林中與少林齊名。
+南宋滅亡後數十年間，江湖流傳一句話︰「武林至尊，寶刀屠龍。號令天下，莫敢不從。倚天不出，誰與爭鋒。」武林中人便因此而展開對「倚天劍」與「屠龍刀」（事實上，只是爭奪屠龍刀。因它被視為武林至尊，人人也想擁有並以此「號令天下」）兩把兵器的激烈爭逐。元順帝至元二年（1336年），武當派俞岱巖在江南偶然下得到屠龍刀，欲返回武當山將刀交給師父張三丰發落，途中卻遭暗算被擒，屠龍刀被奪去，俞岱巖亦身受重傷癱瘓。
+武當派弟子「銀鉤鐵劃」張翠山前往江南調查俞岱巖受襲之事，卻發現受託運送受傷的俞岱巖的龍門鏢局慘遭滅門，又認識了天鷹教教主殷天正女兒、紫微堂堂主殷素素，更得知龍門鏢局滅門慘案是殷素素易容為自己所為。張翠山與殷素素後來到王盤山島舉行的英雄宴，席間展示屠龍刀，明教「金毛獅王」謝遜於此時突然現身並將寶刀奪去。謝遜以「獅吼功」將眾人震至心智混亂後，攜屠龍刀並逼迫張翠山及殷素素乘船離島，並向東航到大海之中。後來三人在海上遇難，輾轉流落到冰火島，在島上一住便是十年，其間張翠山與殷素素成親，並生下一子張無忌，謝遜及殷素素因張無忌出生而化解戾氣，並收張無忌為義子。張無忌十歲時與父母返回中原，謝遜則繼續留在冰火島，苦思屠龍刀有關「號令天下」的秘密，好讓自己能報卻自己師父殺妻兒之仇。
+張翠山一家返回中土，即被各路武林人士追問謝遜及屠龍刀的下落。在武當山上，張翠山因不肯向武林人士道出謝遜及屠龍刀的下落，加上張翠山因為得知妻子殷素素便是當年使用蚊鬚針傷害俞岱巖的兇手，羞憤之下選擇自殺；而殷素素亦跟著自殺殉夫。此時張無忌亦身中玄冥二老的玄冥神掌，性命垂危；張三丰親往少林請求醫治張無忌，但少林因門戶之見拒絕相救。張三丰與張無忌從少林返回武當途中，救了被元兵追殺的明教常遇春，及孤女周芷若。常遇春為報救命之恩，帶張無忌往「蝶谷醫仙」胡青牛處求醫，而張三丰則引薦周芷若入峨嵋派，成為了滅絕師太的門徒。
+張無忌雖得胡青牛醫治而延續生命，卻仍無法治癒體內的寒毒，但張無忌卻從胡青牛處學會高超醫術。後來張無忌重遇前來蝴蝶谷求醫的峨嵋派弟子紀曉芙。紀曉芙因與明教「光明左使」楊逍發生關係，生下幼女楊不悔。胡青牛與妻子王難姑最後被前來尋仇的金花婆婆殺害，而紀曉芙因不願殺死楊逍，被師父滅絕師太所殺。紀曉芙臨終前委託張無忌將女兒楊不悔送到父親楊逍處，於是張無忌帶同楊不悔離開蝴蝶谷，前往西域崑崙山的明教總壇尋找楊逍，險遭崑崙派何太沖夫婦加害。最終張無忌成功將楊不悔交給楊逍，之後遇上居於崑崙山的朱子柳後人朱長齡和朱九真父女，他們假裝關心孤苦無依的張無忌，實為了從張無忌身上套取謝遜和屠龍刀的下落。張無忌悉破奸計後逃走，與追趕的朱長齡雙雙墜崖不死，但張無忌逃入一山洞後發覺洞後另有山谷，並在那裡一頭猴子的腹中發現完整的《九陽真經》，原來是當年尹克西與瀟湘子在少林盜經後，將經書裝在猴腹之中，他們死後這頭猴子流落崑崙山，竟碰巧被張無忌發現；張無忌修練其內之九陽神功，數年後，約已20歲的張無忌，不僅盡驅體內之寒毒，內力也更見深厚，並離開山谷。其後，張無忌意外獲得波斯明教的護教神功「乾坤大挪移」心法；因身負舉世無雙的內力而可在數個時辰內練至第六層。此時年紀輕輕的張無忌，武功已冠絕於除了張三丰外的六大派及明教所有高手。
+此時，謝遜的仇人成崑蓄意挑起武林爭端，教唆六大門派圍攻明教的總壇光明頂，臨近事成之際，卻給身負九陽神功和乾坤大挪移心法的少年、即當時化名為曾阿牛的張無忌弄砸，功虧一簣。其間，張無忌給周芷若用倚天劍刺中右胸，竟只受傷而不死，由此察覺到周芷若對自己已生情意，並且與武當各人以及其外公、明教「白眉鷹王」殷天正相認。張無忌天性淳厚，待人友善，不欲正、邪兩派互相殘殺，遂挺身介入光明頂一役使明教免卻滅頂之禍。張無忌在此役之後，名震天下，憑著蓋世武功，年紀輕輕便當上新任明教教主。
+六大門派於回程時遭元朝朝廷所派遣的高手伏擊後悉數被擒，並囚禁於大都萬安寺內。峨嵋派的鎮派之寶倚天劍，亦落入汝陽王府的「紹敏郡主」趙敏手中。張無忌帶明教高手救回六大派後，應趙敏借看屠龍刀之請求，欲到冰火島找義父謝遜去，卻因故船到靈蛇島重遇謝遜。原來靈蛇島的主人金花婆婆，曾敗在峨嵋派掌門人滅絕師太的倚天劍之下，遂接回昔日夥伴謝遜到島上來，欲向其借取屠龍刀，以雪當年一敗的恥辱。
+金花婆婆（真實身份為明教四大護法之一「紫衫龍王」黛綺絲）隨明教總教使者離開到波斯去後，張無忌、謝遜等人為避開中原武林人士趕來搶奪屠龍刀而離開靈蛇島，並流落到附近的荒島上。當時已為新任峨嵋派掌門的周芷若為了達成師父的遺願，在島上把眾人迷倒後將倚天劍和屠龍刀盜去，然後互砍刀劍，取得收藏在劍內的武功秘笈《九陰真經》和《武穆遺書》（新修版改為刀劍內藏有指示前往桃花島取書的玄鐵片，並親自到桃花島取兵書及秘笈），周芷若更把被迷暈的趙敏拋上一艘船上，藉此把自己在靈蛇島上所做一切惡行嫁禍給趙敏，並藉此練成「九陰白骨爪」和「白蟒鞭法」，成為一流高手。
+成崑在消滅明教、控制丐幫的陰謀相繼失敗後，便欲向少林派下手，先將重返中原的謝遜擒獲，並將之囚在少室山以作餌誘，再教唆少林空聞方丈舉行屠獅英雄大會，欲使各門各派自相殘殺，好讓自己坐收漁人之利。最終成崑的詭計在張無忌、趙敏、楊逍、「神鵰俠侶」之後人楊氏女等人的干預下再次功敗垂成，及後更被其徒弟謝遜的七傷拳打至筋脈盡斷及被挖出雙眼，成為廢人。
+在少室山上，周芷若欲殺人滅口把謝遜除掉之際，被楊過後人楊氏女及時出手阻止，又被其正大光明的《九陰真經》武功「摧堅神爪」（即九陰白骨爪）所制服，自己在荒島上的劣行跟著亦當眾被揭破。
+其後張無忌、趙敏二人從周芷若手上取得《九陰真經》、《武穆遺書》（新修版改為刀劍之內分別藏著刻有桃花島地形和所處方位的玄鐵片），由此得悉屠龍刀、倚天劍的秘密。原來，在南宋末年，在元軍侵入宋境、襄陽城快失陷時，大俠郭靖、黃蓉夫婦委託匠人把「神鵰俠侶」楊過、小龍女所贈的玄鐵重劍、君子劍、淑女劍分別熔鑄成倚天劍及屠龍刀，然後將《九陰真經》、《降龍十八掌掌法精義》和《武穆遺書》收藏於其中，寄望後人以此復國。
+後來張無忌把《武穆遺書》贈給義軍將領徐達，以助其率領義軍，連敗元兵，攻陷大都，將蒙古人逐回塞外，還我漢族河山，大俠郭靖、黃蓉夫婦當年的遺願亦得以達成。
+張無忌卸下明教教主職務後並給予楊逍後，與趙敏寄跡蒙古。而明教大權落於前線有戰功之人而非繼任教主楊逍，最後由朱元璋奪得明教兵權統領抗軍，驅逐韃虜，建立明朝。
+《倚天屠龍記》及 「射鵰三部曲」 結束。</p>
+<h2>登場人物</h2>
+<p>張無忌——書中男主角，武當派張翠山與天鷹教殷素素之子，明教四大法王之一「金毛獅王」謝遜的義子，性格單純良善、宅心仁厚，在感情上優柔寡斷。為三部曲裡面個性最為敦厚良實的主角，雖練習九陽神功，卻與性格固執堅毅的郭靖，火性剛烈的楊過修習九陰真經相映成趣。為明教第三十四代教主，身負「九陽神功」、「乾坤大挪移」、「武當太極拳、太極劍」及「聖火令神功」等頂尖武學。其武功之高、內力之深，在當世除張三丰之外無人能及，少年時期於蝴蝶谷與胡青牛學醫，醫術也十分了得，堪稱醫武雙絕。為金庸於1999年欽點「武功最強」的男主角。儘管身負不世神功，卻因為人過於仁慈，非到生死關頭絕不願下重手，因此雖然武功高強，實戰上卻很少傷人，連對付生死大仇的仇敵時都沒下殺手，至多僅扭斷手腳，故與其他作品的主角形成強烈對比。感情上，因優柔寡斷的個性而與趙敏 周芷若 小昭 殷離 等四位絕頂美人關係牽扯不清，曾立誓娶殷離為妻，與周芷若也曾立有婚約，但於兩人大婚當天與趙敏逃婚，而與趙敏最初為敵人，但後來漸漸相愛，在故事結局時送趙敏回蒙古，更與她一同歸隱蒙古。
+趙敏——書中女主角，蒙古紹敏郡主，蒙古名敏敏特穆爾 (特穆爾並非蒙古姓氏，而是蒙古男性名字帖木兒另一譯法，基本上不用於女性)，趙敏為她自取的漢名。汝陽王察罕特穆兒之女，王保保（即庫庫特穆爾）的妹妹。容貌嬌艷無倫，明艷不可方物，有蒙古第一美女之稱呼。機智多謀，心思敏捷，敢愛敢恨，為了張無忌與父親汝陽王決裂。與張無忌最初為敵對關係，後與張無忌相愛，而與周芷若因為二女均愛上張無忌的關係視對方為情敵，在周芷若與張無忌成婚時當眾搶婚，被周芷若以九陰百骨爪打成重傷，幸得醫術高明的張無忌所救，兩人感情大幅增溫。叛出蒙古後，陪在張無忌身邊幫助他。在本故事結局與張無忌一同歸隱蒙古。
+周芷若——自小由張三丰帶入峨嵋派，成為峨嵋派現任掌門滅絕師太的徒弟， 後來擔任峨嵋派第四任掌門人，外表清麗脫俗，容貌極美，出塵如仙，武學天資卓絕。於六大派圍攻光明頂時用倚天劍刺了張無忌一劍，兩人因此互生情愫。在滅絕師太死後繼承了峨嵋派掌門一職。為完成滅絕生前遺願，於靈蛇島上殺害殷離，放逐趙敏並嫁禍給她，讓張無忌誤以為趙敏是殺殷離的兇手。在靈蛇島上將倚天劍及屠龍刀互砍，獲得武穆遺書，九殷白骨爪等秘笈，之後潛心修練，武功大增，甚至能與武功天下無敵的張無忌過上幾招。之後與張無忌立有婚約，但在兩人於濠洲城成婚之際，趙敏突然出現並以謝遜毛髮威脅張無忌要求他不得與周芷若成親使得婚禮生變，最終張無忌跟隨趙敏逃婚，周芷若因愛成恨，除在婚禮當天用九殷百骨爪重傷趙敏外，也視趙敏為情敵並多次陷害對付趙敏，後來變得冷酷，但仍喜歡張無忌，故事最後確認張無忌最喜歡的人是趙敏後，返回峨嵋派。
+小昭——「紫衫龍王」黛綺絲與「銀葉先生」韓千葉之女，擁有波斯血統的混血兒，是張無忌的貼身丫鬟，內心一直暗戀張無忌，被母親金花婆婆(黛綺絲)派到中土明教內部找回乾坤大挪移神功，但對張無忌很忠心並沒有將神功秘笈所在地告知母親，直至在靈蛇島被困才不得已透露，在靈蛇島上為救張無忌等人脫離明教總教包圍，被迫成為波斯總教教主。在與張無忌道別後隨母親黛綺絲返回波斯。
+殷離——又名蛛兒，張無忌的表妹。父親為天鷹教殷野王，母親身份不詳。殺死後母而投靠了金花婆婆。與金花婆婆在靈蛇島上一起生活。小時候想把張無忌帶走卻遭張無忌用牙齒咬傷手掌並留下痕跡，因此喜歡上張無忌，對他念念不忘。雖一度在靈蛇島上被周芷若以倚天劍砍殺多刀，被張無忌親手埋葬並立墓碑。但最後不但沒死還出現在周芷若身邊，把周芷若嚇得魂飛魄散。</p></article>
+<article id='raw-S10-yitian-sword' class='page'><div class='path'>wiki/raw/S10-yitian-sword.md</div><h1>RAW S10 — 維基百科〈倚天劍〉§倚天屠龍記、《倚天屠龍記》</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/倚天劍 ；擷取 2026-11-21（MediaWiki API 純文字，整段原文，未改寫）</li>
+</ul>
+<h2>《倚天屠龍記》</h2>
+<p>武俠小說《倚天屠龍記》中有一傳說：「武林至尊，寶刀屠龍，號令天下，莫敢不從！倚天不出，誰與爭鋒？」「屠龍」指屠龍刀，「倚天」則指倚天劍。《倚天屠龍記》的第27回《百尺高塔任迴翔》裡（新修版則改為第38回《百君子可欺之以方》裏描述，並以插敘的形式來提及），峨嵋派掌門滅絕師太在萬安寺自盡前曾向弟子周芷若提及倚天劍及屠龍刀的由來。倚天劍及屠龍刀是南宋末年抗蒙大俠郭靖、丐幫先代幫主黃蓉兩夫婦在襄陽城破前決定以後死報國，為防止絕學失傳，又恐防絕學過去早出身而落入奸人手上，兩夫婦於是將義姪神鵰大俠楊過、小龍女夫婦送給女兒郭襄的玄鐵重劍加上西方精金熔鑄而成。刀劍完成後郭靖夫婦把抗金名將岳飛所著絕世頂級兵書《武穆遺書》藏在屠龍刀內夾層中的刀片，同時兩夫婦也把南宋年間最絕頂的武功秘籍《九陰真經》、當世武林絕學丐幫的《降龍十八掌精義》等武功典籍藏於倚天劍。然而，黃蓉想到誅殺韃子元兇巨惡，事勢甚急，早一日成事，天下蒼生便早一日解了倒懸之苦，因之在倚天劍的秘笈之中，寫下了幾章速成的法門；即當年「黑風雙煞」所錯練的武功，經黃蓉略為改良，使其傷害有限，至少不會像梅超風一樣走火入魔。然後把屠龍刀交給幼子（郭襄弟弟）郭破虜，而倚天劍則交給女兒（峨嵋派祖師）郭襄，其望後人在適當時機把刀劍互砍，取出刀劍內的兵書、秘笈，以此驅逐元室，恢復漢人江山。郭靖夫婦寄望得屠龍刀的人以刀內的兵書手仞韃子皇帝，同時又擔心那耶得屠龍刀的人在得天下後不務正業、作威作福，因此倚天劍還有一個作用，就是以劍內的秘笈教訓那得天下的人。
+第三版以玄鐵重劍熔鑄成的只有屠龍刀，倚天劍改為以楊過、小龍女夫婦佩劍君子劍、淑女劍合鑄而成；同時三版亦修正成刀劍內藏有指示前往桃花島取書的玄鐵片，因舊版及第二版小說提到刀曾被猛火所燒亦無恙，但若其內有紙不可能不燒毀，為犯駁之處，因此新修版改為刀劍之內分別藏著刻有桃花島地形和所處方位的玄鐵片。而《九陰真經》附有的速成法門仍是當年「黑風雙煞」所錯練的武功，不過速成法門撰寫者已改為黃藥師，因其心痛梅超風之死設法予以糾正，經由黃藥師加以改良，使其後患亦屬有限，至少不會像梅超風一樣走火入魔。
+屠龍刀原屬郭靖、黃蓉之子郭破虜所有，但襄陽城破之日，郭破虜與父母同時殉難，屠龍刀遂流入江湖，而倚天劍則仍在郭襄手上，後來郭襄開創峨嵋派，倚天劍從此成為峨嵋派的鎮派之寶和掌門象徵。峨嵋掌門臨死前會把刀劍秘密向下任掌門言明，以確保此秘代代相傳，刀劍秘密只有掌門才有資格知道，因此亦是江湖上唯一（可能還有少數人）得知刀劍奧秘的人和「武林至尊，寶刀屠龍，號令天下，莫敢不從！倚天不出，誰與爭鋒？」這句的真正意思。峨嵋掌門滅絕師太的師兄兼戀人孤鴻子和明教光明左使楊逍結下了樑子，約定比武，孤鴻子便向掌門師妺借劍。不料孤鴻子飲恨敗北，悲憤成疾、鬱鬱而終，倚天劍也給官府取去，獻給朝廷，朝廷轉賜汝陽王。及後，滅絕師太盜回寶劍，但六大派中毒被困萬安寺後又被汝陽王之女「紹敏郡主」趙敏得去。
+峨眉派掌門第三代掌門滅絕師太全心要奪回屠龍刀，且比任何人士更渴望和更積極搶奪寶刀，打算以祖師父母大俠郭靖和丐幫先代幫主女俠黃蓉兩夫婦所留下並分別藏在屠龍刀和倚天劍的兵書和武功典籍統領羣雄，成為中原武林中的第一門派，完成自己的心願，同時以此光復中原河山，完成郭靖夫婦和祖師郭襄的遺志。她認為倚天劍是郭靖夫婦傅給本派祖師的遺物，屠龍刀也是郭家之物，原擁有者郭破虜殉難後應歸郭襄，而她身為郭襄和郭家的傳人應理所當然擁有，並視兩者都是本派寶物，因此千方百計也要將兩者得到手上。滅絕師太臨死前要求徒弟周芷若以美色相誘張無忌以奪取屠龍刀和倚天劍，再把刀劍互砍取得刀劍內的秘籍，達成自己和郭靖夫婦及祖師郭襄的遺志，美其名曰「成大事者，不拘小節」。後來周芷若在靈蛇島略施奸計分別從明教「金毛師王」謝遜和蒙古汝陽王之女趙敏手上奪得刀劍，且透過刀劍互砍取得了《武穆遺書》、《九陰真經》、《降龍十八掌精義》，並順勢把刀劍失蹤嫁禍給趙敏，當然這一切在後來也被楊過後人黃衫女子揭發。
+由於九陰真經本身博大精深，非旦夕之間可練成，連郭靖當年也花了至少十年時間修練九陰真經才大成，故周芷若急於求成以光大峨嵋，只能按師父滅絕師太的吩咐先由黃蓉（新修版改成黃藥師）留下的九陰真經速成法門開始練起，事後才按部就班修練，只是周芷若修為本尚淺，又欠缺九陰真經的上卷道家內功基礎，便如同當年的黑風雙煞一樣錯練成陰毒狠辣的「九陰白骨爪」、「白莽鞭法」等武功，畢竟這些只是作者敵人所使的武功，並非九陰真經本身所載的光明正大武學，故周芷若所習的並非天下無敵的真正武學，不過，周芷若似乎在後來忽略這點。儘管如此，周芷若的武功還是大幅進步，勝過江湖上絕大部份好手，甚至超過滅絕師太當年，周芷若又把這兩門武功傳授給武當派叛徒宋青書，先後以「九陰白骨爪」打敗掌門競爭對手大師姐丁敏君，從而得以掌控峨嵋，又在少林屠獅大會中與宋青書先後以「九陰白骨爪」、「白莽鞭法」出奇不意地接連擊敗丐幫長老、俞蓮舟、殷梨亭等好手，甚至張無忌也被其爪傷，技壓群雄，與張無忌一舉獲得「武功天下第一」的稱號，又以「九陰白骨爪」、「白莽鞭法」聯合張無忌與少林高手渡難、渡厄、渡劫的「全剛伏魔圈」然而，周芷若的武功終非玄門正宗，而且欠缺內功基礎，在雙方大戰幾十回合，周芷若逐漸不支，露出敗象。張無忌遂出全力，與三僧比拼內力。最終，張無忌拼盡全力，牽制住了三渡，周芷若趁機攻入「金剛伏魔圈」，欲殺人滅口將「金毛獅王」謝遜擊斃之際，被楊過後人黃衫女子及時出手阻止，並以真經內載正統的「摧堅神爪」輕鬆制服周芷若，周芷若被迫離場。周芷若下山後再以「九陰白骨爪」、「白莽鞭法」亦與覬覦九陰真經的蒙古高手「玄冥二佬」大戰，然而周芷若所修習的武功只不過是速成武功，並非真正的上乘武學，故不敵「玄冥二老」，最後還是張無忌協助廢去二老武功。芷若身上的九陰內力在身受「玄冥神掌」之傷後，給張無忌以九陽神功醫治時化去大部份，而帶在身上的《九陰真經》和《武穆遺書》亦被蒙古郡主趙敏偷去，最終九陰真經和武穆遺書都落入張無忌手中。雖然張無忌知道九陰真經博大精深，但他武功本就幾近天下第一，故沒有修練《九陰真經》，亦無刻意傳承下去，故年代在倚天之後的作品再無人會使九陰真經，九陰真經終於徹底失傳。
+周芷若雖取得藏在劍內《降龍十八掌精義》，但由於周芷若身為女子不能修習，便把降龍十八掌置之不理，未有傳承或把精義交還丐幫，最後降龍十八掌精義雖輾轉由張無忌獲得，但張無忌並沒有修習，亦無刻意傳承下去，故年代在倚天之後的作品再無人會使降龍十八掌，降龍十八掌徹底失傳。
+周芷若為取藏在刀劍內的秘芨，把以倚天劍及屠龍刀互砍，分別斷成兩截。及後經黃衫女子指點，明教教主張無忌派人取回刀劍殘骸，刀劍最後落得入張無忌手中，明教銳金旗掌旗吳勁草借用聖火令，重新鑄造好屠龍刀，而倚天劍則因吳勁草認為滅絕師太等人殺害明教兄弟眾多而不願接續，因此倚天劍仍是斷劍兩截，但張無忌相信日後終能接上。
+小說最後張無忌亦知，「所謂『武林至尊』，不在寶刀本身，而在刀中所藏的遺書（《武穆遺書》），以此兵法臨敵，定能戰必勝，攻必克，最終自是『號令天下，莫敢不從』。但若有人一旦手掌大權，竟然作威作福，以暴易暴，世間百姓受其荼毒，那麼終有一位英雄手執倚天長劍，來取暴君首級，統領百萬雄兵之人縱然權傾天下，也未必便能當倚天劍之一擊。」</p></article>
+<article id='raw-S11-tulong-saber' class='page'><div class='path'>wiki/raw/S11-tulong-saber.md</div><h1>RAW S11 — 維基百科〈屠龍刀〉</h1>
+<ul>
+<li>URL：https://zh.wikipedia.org/zh-tw/屠龍刀 ；擷取 2026-11-21（MediaWiki API 純文字，整段原文，未改寫）</li>
+</ul>
+<p>屠龍刀是金庸武俠小說《倚天屠龍記》中的一把百餘斤重的寶刀，是小說中最重要的兵器以及核心部分，相傳得此刀可號令天下，因稱「武林至尊」而被武林中人視為寶物，引來各種爭奪，全書一直圍繞屠龍刀的爭奪。</p>
+<p>== 《倚天屠龍記》 ==
+《倚天屠龍記》中有一傳說：「武林至尊，寶刀屠龍，號令天下，莫敢不從！倚天不出，誰與爭鋒？」「屠龍」指屠龍刀，「倚天」則指一柄倚天劍。《倚天屠龍記》第27回〈百尺高塔任迴翔〉裏（新修版則改為第38回《百君子可欺之以方》裏描述，並以插敘的形式來提及），峨嵋派掌門滅絕師太在萬安寺自盡前曾向弟子周芷若提及倚天劍及屠龍刀的由來。倚天劍及屠龍刀是南宋末年抗蒙大俠郭靖、丐幫先代幫主黃蓉兩夫婦在襄陽城破前決定以死報國，為防止絕學失傳，又恐防絕學落入奸人手上，兩夫婦於是將義姪神鵰大俠楊過、小龍女夫婦送給女兒郭襄的玄鐵重劍加上西方精金熔鑄而成。刀劍完成後郭靖夫婦把抗金名將岳飛所著絕世頂級兵書《武穆遺書》藏在屠龍刀內夾層中的刀片，同時兩夫婦也把南宋年間最絕頂的武功秘籍《九陰真經》、當世武林絕學丐幫的《降龍十八掌精義》等武功典籍藏於倚天劍。然後把屠龍刀交給幼子（郭襄弟弟）郭破虜，而倚天劍則交給女兒（峨嵋派祖師）郭襄，寄望後人在適當時機把刀劍互砍，取出刀劍內的兵書、秘芨，以此驅逐元室，恢復漢人江山。郭靖夫婦寄望得屠龍刀的人以刀內的兵書手仞韃子皇帝，同時又擔心那耶得屠龍刀的人在得天下後不務正業、作威作福，因此倚天劍還有一個作用，就是以劍內的秘芨教訓那得天下的人。
+第三版以玄鐵重劍熔鑄成的只有屠龍刀，倚天劍改為以楊過、小龍女夫婦佩劍君子劍、淑女劍合鑄而成；同時三版亦修正成刀劍內藏有指示前往桃花島取書的玄鐵片，因舊版及第二版小說提到刀曾被猛火所燒亦無恙，但若如其內有紙不可能不燒毀，為犯駁之處，因此新修版改為刀劍之內分別藏著刻有桃花島地形和所處方位的玄鐵片，並補述屠龍刀因周身玄鐵難以損毀，遂特意留下一點軟鐵以便和倚天劍的劍身磨鋸取出地圖。
+屠龍刀原屬郭靖、黃蓉之子郭破虜所有，但襄陽城破之日，郭破虜與父母同時殉難，屠龍刀遂流入江湖，而倚天劍則仍在郭襄手上，後來郭襄開創峨嵋派，並積極發動峨嵋派人力物力尋找屠龍刀，但不果。峨嵋掌門臨死前會把刀劍秘密向下任掌門言明，以確保此秘代代相傳，刀劍秘密只有掌門才有資格知道，因此亦是江湖上唯一（可能還有少數人）得知刀劍奧秘的人和「武林至尊，寶刀屠龍，號令天下，莫敢不從！倚天不出，誰與爭鋒？」這句的真正意思。每任峨嵋掌門也會積極率領門下弟子尋找屠龍刀，但亦苦無下文。至小說開始時，屠龍刀落在長白三禽手中，但武當派俞岱巖遭殷野王所騙而落入天鷹教手中。之後在王盤山上，明教「金毛獅王」謝遜大敗海沙幫、神拳門、巨鯨幫的掌門人而奪得屠龍刀。
+峨眉派掌門第三代掌門滅絕師太全心要奪回屠龍刀，且比任何人士更渴望和更積極搶奪寶刀，打算以祖師父母大俠郭靖和丐幫先代幫主女俠黃蓉兩夫婦所留下並分別藏在屠龍刀和倚天劍的兵書和武功典籍統領羣雄，成為中原武林中的第一門派，完成自己的心願，同時以此光復中原河山，完成郭靖夫婦和祖師郭襄的遺志。她認為倚天劍是郭靖夫婦傅給本派祖師的遺物，屠龍刀也是郭家之物，原擁有者郭破虜殉難後應歸郭襄，而她身為郭襄和郭家的傳人應理所當然擁有，並視兩者都是本派寶物，因此千方百計也要將兩者得到手上。滅絕師太臨死前要求徒弟周芷若以美色相誘張無忌以奪取屠龍刀和倚天劍，再把刀劍互砍取得刀劍內的秘籍，達成自己和郭靖夫婦及祖師郭襄的遺志，美其名曰「成大事者，不拘小節。後來周芷若在靈蛇島略施奸計分別從明教「金毛師王」謝遜和蒙古汝陽王之女趙敏手上奪得刀劍，且透過刀劍互砍取得了《武穆遺書》、《九陰真經》、《降龍十八掌精義》，並順勢把刀劍失蹤嫁禍給趙敏，當然這一切在後來也被楊過後人黃衫女子揭發。
+周芷若為取藏在刀劍內的秘芨，把以倚天劍及屠龍刀互砍，分別斷成兩截。及後經黃衫女子指點，明教教主張無忌派人取回刀劍殘骸，刀劍最後落得入張無忌手中，明教銳金旗掌旗吳勁草借用聖火令，重新鑄造好屠龍刀，而倚天劍則因吳勁草認為滅絕師太等人殺害明教兄弟眾多而不願接續，因此倚天劍仍是斷劍兩截，但張無忌相信日後終能接上。
+最後，周芷若帶在身上的《九陰真經》和《武穆遺書》亦被蒙古郡主趙敏偷去，最終九陰真經和武穆遺書都落入張無忌手中張無忌把刀中的《武穆遺書》交給徐達、朱元璋等人，以此書成功帶領群豪和百姓驅遂元室，建立明朝，這時距離襄陽城破已接近百年，而在此時郭靖夫婦的遺志終於完成，並代表郭靖、黃蓉的光復大計成功實行。
+小說最後張無忌亦知，「所謂『武林至尊』，不在寶刀本身，而在刀中所藏的遺書（《武穆遺書》），以此兵法臨敵，定能戰必勝，攻必克，最終自是『號令天下，莫敢不從』。但若有人一旦手掌大權，竟然作威作福，以暴易暴，世間百姓受其荼毒，那麼終有一位英雄手執倚天長劍，來取暴君首級，統領百萬雄兵之人縱然權傾天下，也未必便能當倚天劍之一擊。」</p></article>
+</main>
+</div>
+</body>
+</html>

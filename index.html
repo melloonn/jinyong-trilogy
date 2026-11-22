@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>江湖劇場</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap">
+<style>
+/* 設計概念：串流平台（使用者選定的 A 版）。深色影廳、紅色強調；三本書是三季，故事是群島航線，人物是演員海報。 */
+:root{
+  --bg:#141414; --surface:#1F1F1F; --surface2:#2B2B2B; --fg:#FFFFFF; --muted:#A3A3A3; --line:#333333;
+  --accent:#E50914; --sd:#E8A33D; --sh:#3FC1A5; --yt:#9C8CFF; --book:var(--accent);
+  --sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif; --serif:"Noto Serif TC","Songti TC",serif;
+  --maxw:1180px; color-scheme:dark;
+}
+body{font-family:var(--sans);font-size:17px;line-height:1.6}
+.slide{background:radial-gradient(120% 80% at 85% 0%,color-mix(in srgb,var(--book) 22%,transparent),transparent 60%),var(--bg)}
+.eyebrow{color:var(--accent);font-weight:700;font-size:.82rem;letter-spacing:.14em}
+.slide[data-book] .eyebrow{color:var(--book)}
+.title{font-weight:900;font-size:clamp(1.9rem,4.2vw,3.2rem);line-height:1.15;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:1.12rem}
+.btn{border:0;border-radius:6px;padding:9px 20px;font-weight:700;background:var(--fg);color:#000;transition:background .15s}
+.btn:hover{background:#d9d9d9}
+.btn.ghost{background:rgba(109,109,110,.7);color:#fff} .btn.ghost:hover{background:rgba(109,109,110,.45)}
+.btn.small{padding:6px 14px;font-size:.88rem}
+:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.dfn{color:#fff;border-bottom-color:var(--accent)}
+.pop{background:#fff;color:#141414;border-radius:6px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.seg{background:var(--surface);border-radius:6px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border-radius:4px;padding:7px 14px;font-weight:700}
+.seg button[aria-pressed=true]{background:var(--fg);color:#000}
+
+/* nav：像影集的集數進度條 */
+.deck-nav{background:linear-gradient(transparent,rgba(0,0,0,.85) 40%)}
+.nav-btn{border:0;background:rgba(255,255,255,.12);width:40px;height:40px;border-radius:50%;font-size:1.4rem;line-height:1}
+.nav-btn:hover{background:rgba(255,255,255,.25)}
+.nav-dots{gap:4px}
+.nav-dots button{width:clamp(14px,3vw,34px);height:4px;border-radius:2px;background:#4d4d4d}
+.nav-dots button.is-past{background:#8c8c8c}
+.nav-dots button.is-on{background:var(--accent)}
+
+/* cover */
+.t-cover .inner{justify-content:center;gap:18px}
+.t-cover .title{font-size:clamp(3rem,9vw,7rem);font-family:var(--serif);font-weight:900;letter-spacing:.02em}
+.t-cover .eyebrow{color:var(--accent);font-size:.9rem}
+.t-cover .lead{font-size:1.3rem;color:#e5e5e5}
+.cover-art{display:flex;gap:12px;margin-bottom:8px}
+.cover-art span{width:clamp(64px,10vw,110px);aspect-ratio:2/3;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:900;font-size:clamp(2rem,4vw,3.2rem);color:#fff;background:linear-gradient(160deg,var(--book),color-mix(in srgb,var(--book) 30%,#000));box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.chip{border:0;border-radius:6px;padding:10px 20px;font-weight:700;background:rgba(109,109,110,.7)}
+.chip:first-child{background:#fff;color:#000}
+.chip-k{font-size:.75rem;opacity:.7}
+.chip-k::before{content:"第 "} .chip-k::after{content:" 季"}
+
+/* stats */
+.stat{background:var(--surface);border-radius:6px;padding:18px;border-bottom:3px solid var(--accent)}
+.stat-big{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:900}
+.stat-label{color:var(--muted);font-size:.92rem}
+
+/* couplet */
+.glyph{background:var(--surface);border:0;border-radius:6px;font-family:var(--serif);font-weight:900;transition:transform .2s,background .2s}
+.glyph:hover{transform:scale(1.06);background:var(--surface2)}
+.glyph.is-trilogy .glyph-c{color:var(--accent)}
+.glyph-b{font-family:var(--sans);font-weight:500;color:var(--muted)}
+.couplet-out-name{font-family:var(--serif);font-weight:900;font-size:clamp(1.4rem,3vw,2.2rem)}
+.couplet-out.is-trilogy .couplet-out-name{color:var(--accent)}
+
+/* books = 海報牆 */
+.book{background:var(--surface);border-radius:6px;transition:transform .25s,box-shadow .25s}
+.book:hover,.book:focus-within{transform:scale(1.03);box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.book-art{aspect-ratio:16/9;background:linear-gradient(160deg,var(--book),color-mix(in srgb,var(--book) 25%,#000))}
+.book-art span{font-family:var(--serif);font-weight:900;font-size:5rem;color:rgba(255,255,255,.92)}
+.book-art em{color:#fff;font-weight:700;font-size:.8rem;background:var(--accent);padding:2px 8px;border-radius:3px}
+.book-body h3{font-size:1.3rem;font-weight:900}
+.book-hero{color:var(--book);font-weight:700}
+.book-theme{color:#e5e5e5}
+.book dt{color:var(--muted);min-width:4.5em} .book dd{font-size:.92rem}
+
+/* timeline */
+.tl-year{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:900;font-variant-numeric:tabular-nums}
+.tl-book{font-weight:700;color:var(--book,var(--muted))}
+.tl-band{background:color-mix(in srgb,var(--book) 30%,transparent);border-left:3px solid var(--book);border-radius:3px;font-size:.8rem;font-weight:700;color:#fff}
+.tl-band.is-on{background:color-mix(in srgb,var(--book) 60%,transparent)}
+.tl-dot{border:2px solid var(--book);background:var(--bg)} .tl-dot.is-on{background:var(--book);transform:scale(1.3)}
+.tl-range{accent-color:var(--accent)}
+.tl-ticks span{color:var(--muted)}
+.tl-card{background:var(--surface);border-radius:6px;padding:16px 20px;border-left:4px solid var(--book)}
+.tl-card-y{font-weight:900;font-size:1.3rem;color:var(--book)}
+
+/* story = 劇集列表 */
+.story-pill{background:transparent;border:0;border-radius:6px;padding:12px 14px;color:var(--muted);font-weight:700}
+.story-pill span{font-size:1.6rem;font-weight:900;min-width:1.2em;color:#555}
+.story-pill[aria-pressed=true]{background:var(--surface2);color:#fff}
+.story-pill[aria-pressed=true] span{color:var(--book)}
+.story-panel{background:var(--surface);border-radius:6px;padding:24px;min-height:200px;border-top:3px solid var(--book)}
+.story-panel h3{font-size:1.5rem;font-weight:900} .story-panel p{font-size:1.1rem;color:#e5e5e5}
+
+/* cards = 演員卡 */
+.flip-front{background:linear-gradient(180deg,color-mix(in srgb,var(--book) 35%,#1f1f1f),#1f1f1f);border-radius:6px}
+.flip-back{background:var(--surface2);border-radius:6px}
+.flip-name{font-family:var(--serif);font-weight:900;font-size:1.7rem} .flip-name.small{font-size:1.1rem;color:var(--book)}
+.flip-tag{font-size:.75rem;font-weight:700;background:rgba(0,0,0,.5);padding:2px 10px;border-radius:3px}
+.flip-text{font-size:.92rem;color:#e5e5e5}
+
+/* compass */
+.cp{background:var(--surface);border:0;border-radius:6px;transition:.2s}
+.cp:hover{background:var(--surface2)}
+.cp[aria-pressed=true]{background:#fff;color:#000}
+.cp-title{font-size:.78rem;font-weight:700;color:var(--muted)} .cp[aria-pressed=true] .cp-title{color:#555}
+.cp-name{font-family:var(--serif);font-weight:900;font-size:clamp(1rem,2vw,1.35rem)}
+.cp.is-new{box-shadow:inset 0 0 0 2px var(--accent)}
+.cp-d-title{color:var(--accent);font-weight:700}
+.cp-detail strong{font-family:var(--serif);font-size:2.6rem;line-height:1.1}
+.cp-d-skill{color:#e5e5e5;font-size:1.1rem}
+.cp-d-new{color:var(--muted);font-size:.9rem}
+
+/* reveal */
+.verse span{font-family:var(--serif);font-weight:900;font-size:clamp(1.1rem,2.2vw,1.6rem)}
+.forge{color:var(--muted)} .mat-out{color:#fff;font-weight:700}
+.blade{background:linear-gradient(90deg,#3a3a3a,#bdbdbd 50%,#3a3a3a);border-radius:4px;color:#000;font-weight:900;font-family:var(--serif)}
+.blade-r{background:linear-gradient(90deg,#4a0c0c,var(--accent) 50%,#4a0c0c);color:#fff}
+.scroll{background:#f3e6c4;color:#3a2a10;border-radius:4px}
+.scroll span{font-size:.78rem}
+.ed-text{color:#e5e5e5}
+
+/* tree */
+.tree-root{background:#fff;color:#000;border-radius:6px} .tree-root span{font-size:.85rem;color:#555}
+.tree-lines path{stroke:#555;stroke-width:2}
+.branch{background:var(--surface);border:0;border-radius:6px;transition:.2s}
+.branch:hover{background:var(--surface2)}
+.branch[aria-pressed=true]{box-shadow:inset 0 -3px 0 var(--accent)}
+.branch-who{font-family:var(--serif);font-weight:900;font-size:1.3rem}
+.branch-sect{font-size:.8rem;color:var(--accent);font-weight:700}
+.tree-after{color:#e5e5e5;font-size:1.1rem}
+
+/* graph */
+.g-edge{stroke:#5a5a5a;stroke-width:2} .g-edge.is-on{stroke:#fff;stroke-width:3}
+.g-node circle{fill:var(--surface2);stroke:var(--book);stroke-width:3}
+.g-node text{fill:#fff;font-weight:700}
+.g-node.is-sel circle{fill:var(--book)}
+.graph-legend{color:var(--muted)}
+.graph-detail{background:var(--surface);border-radius:6px;padding:18px}
+.gd-book{color:var(--book);font-size:.8rem;font-weight:700}
+.graph-detail strong{font-family:var(--serif);font-size:1.8rem}
+.graph-detail li span{color:var(--muted);font-size:.9rem}
+.graph-detail li button{background:var(--surface2);border-radius:4px;padding:3px 10px;font-weight:700}
+
+/* quiz */
+.quiz-bar{background:#333;border-radius:2px} .quiz-bar i{background:var(--accent)}
+.quiz-count{color:var(--muted);font-weight:700}
+.quiz-q h3{font-size:1.5rem;font-weight:900}
+.opt{background:var(--surface);border:2px solid transparent;border-radius:6px;padding:14px 18px;font-weight:700}
+.opt:hover{background:var(--surface2)}
+.opt.is-right{border-color:#46d369;color:#46d369} .opt.is-wrong{border-color:var(--accent);color:#ff6b6b}
+.quiz-why{color:var(--muted)}
+.quiz-score{font-size:4rem;font-weight:900}
+
+/* tabs */
+.tab-items li{background:var(--surface);border-radius:6px;padding:12px 18px;font-weight:700}
+.tab-items li::before{content:counter(ti);color:var(--accent);font-weight:900}
+.tab-panel p{color:#e5e5e5;font-size:1.08rem}
+
+/* ===== v3：島嶼地圖 ===== */
+.sea{fill:#0d1720}
+.wave{fill:none;stroke:#1f3242;stroke-width:2;stroke-linecap:round}
+.rose circle{fill:none;stroke:#2c4152;stroke-width:1.5} .rose path{fill:#2c4152} .rose text{fill:#4b6273;font-size:13px;font-weight:700}
+.route{stroke:#34495a;stroke-width:3;stroke-dasharray:2 9;stroke-linecap:round}
+.route.is-done{stroke:var(--book);stroke-dasharray:none;stroke-width:3.5}
+.land-hi{stop-color:color-mix(in srgb,var(--book) 70%,#fff)} .land-lo{stop-color:color-mix(in srgb,var(--book) 75%,#000)}
+.shoal{fill:color-mix(in srgb,var(--book) 14%,transparent);stroke:color-mix(in srgb,var(--book) 35%,transparent);stroke-width:1.5;stroke-dasharray:3 5}
+.land{stroke:color-mix(in srgb,var(--book) 40%,#000);stroke-width:2}
+.isl-n{fill:#0d0d0d;font-weight:900;font-size:22px;pointer-events:none}
+.isl-label{fill:#cfd8dd;font-size:17px;font-weight:700;pointer-events:none;paint-order:stroke;stroke:#0d1720;stroke-width:5px}
+.isl.is-seen .land{filter:saturate(.45) brightness(.8)}
+.isl.is-cur .shoal{fill:color-mix(in srgb,var(--book) 32%,transparent);stroke:var(--book);stroke-dasharray:none;animation:shoal 2.4s ease-in-out infinite}
+.isl.is-cur .isl-label{fill:#fff}
+.isl:focus-visible .shoal{stroke:#fff;stroke-width:3}
+@keyframes shoal{50%{transform:scale(1.07)}}
+.flag path{stroke:#ddd;stroke-width:2;fill:none} .flag .flag-cloth{fill:var(--accent);stroke:none}
+.hull{fill:#f2f2f2} .sail{fill:var(--accent)} .sail2{fill:#ddd}
+.isl-map{border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.isl-panel{background:var(--surface);border-radius:8px;padding:22px 24px;border-top:3px solid var(--book)}
+.isl-no{color:var(--muted);font-weight:700;font-size:.85rem;letter-spacing:.06em}
+.isl-year{font-weight:900;color:var(--book);font-size:1.05rem}
+.isl-place{font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.15}
+.isl-h{color:var(--book);font-weight:700;font-size:1.08rem}
+.isl-text{color:#e5e5e5;font-size:1.04rem;line-height:1.75}
+.isl-k{font-size:.75rem;font-weight:700;color:var(--muted);margin-right:4px;letter-spacing:.08em}
+.cast{background:var(--surface2);border-radius:3px;padding:2px 9px;font-size:.88rem}
+.isl-gist{color:#fff;font-weight:700}
+
+/* ===== 人物檔案 = 演員海報 ===== */
+.poster{background:var(--surface);border-radius:6px;transition:transform .25s,box-shadow .25s}
+.poster:hover,.poster:focus-visible{transform:scale(1.05);box-shadow:0 18px 40px rgba(0,0,0,.6);z-index:1}
+.poster-art{background:linear-gradient(170deg,color-mix(in srgb,var(--book) 85%,#fff 0%),color-mix(in srgb,var(--book) 18%,#000) 85%)}
+.poster-glyph{font-family:var(--serif);font-weight:900;font-size:4.2rem;color:rgba(255,255,255,.93);text-shadow:0 6px 24px rgba(0,0,0,.4)}
+.poster-tag{font-size:.7rem;font-weight:700;background:var(--accent);color:#fff;border-radius:3px;padding:1px 7px !important;margin-left:12px}
+.poster-name{font-weight:900;font-size:1.2rem}
+.poster-line{color:var(--muted);font-size:.85rem;line-height:1.45}
+.sheet{background:rgba(0,0,0,.72);backdrop-filter:blur(3px)}
+.sheet-card{background:#181818;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.sheet-x{background:#181818;color:#fff} .sheet-x:hover{background:#333}
+.sheet-hero{background:linear-gradient(180deg,color-mix(in srgb,var(--book) 55%,#181818),#181818)}
+.sheet-glyph{font-family:var(--serif);font-weight:900;font-size:5.5rem;line-height:1;color:#fff;opacity:.95}
+.sheet-hero h3{font-family:var(--serif);font-weight:900;font-size:2.4rem;line-height:1.15;margin:6px 0 2px}
+.sheet-hero .poster-tag{margin-left:0}
+.sheet-hero p{color:#e5e5e5}
+.sheet-secs dt{color:var(--book);font-weight:900}
+.sheet-secs dd{color:#e5e5e5;line-height:1.7}
+.sheet-secs div{padding-bottom:12px;border-bottom:1px solid #2a2a2a}
+.sheet-isl-h{font-size:.8rem;color:var(--muted);font-weight:700;margin-right:4px}
+.isl-chip{background:var(--surface2);border-radius:4px;padding:5px 12px;font-weight:700;font-size:.9rem;color:#fff}
+.isl-chip:hover{background:var(--book);color:#000}
+
+/* ===== 神兵百年 ===== */
+.saga-verse{font-family:var(--serif);font-weight:900;color:var(--muted);font-size:clamp(1rem,1.8vw,1.25rem);letter-spacing:.06em}
+.saga-stage{background:radial-gradient(80% 90% at 50% 40%,#262626,#161616);border-radius:8px;padding:18px}
+.saga-svg text{fill:#e5e5e5;font-family:var(--serif);font-weight:900;font-size:16px}
+.saga-svg .wp-name{font-size:15px;fill:var(--muted)}
+.saga-svg .hilt{fill:#3b2a1a;stroke:#6b4a2a} .saga-svg .guard{fill:#b8902f}
+.saga-svg .xt text{fill:#bbb}
+.saga-svg .sparks circle{fill:#ffb347;animation:spark 1.2s ease-in-out infinite alternate}
+.saga-svg .sparks circle:nth-child(2n){animation-delay:.4s}
+@keyframes spark{to{opacity:.2;transform:translateY(-8px)}}
+.scroll-i rect{fill:#f3e6c4;stroke:#b39a5c} .scroll-i text{fill:#3a2a10 !important;font-family:var(--sans) !important;font-size:13px !important;font-weight:700}
+.saga-stage[data-ed="1"] .scroll-i rect{fill:#4a4f55;stroke:#9aa3ab} .saga-stage[data-ed="1"] .scroll-i text{fill:#fff !important}
+.saga-ed-text{color:#e5e5e5;font-size:.95rem}
+.saga-card{background:var(--surface);border-radius:8px;padding:22px 24px;border-top:3px solid var(--book)}
+.sc-book{font-size:.78rem;font-weight:700;color:#000;background:var(--book);border-radius:3px;padding:1px 8px}
+.holder{background:var(--surface2);border-radius:5px;border-left:3px solid #cfcfcf}
+.holder.sb{border-left-color:var(--accent)}
+.holder-k{font-size:.75rem;color:var(--muted);font-weight:700}
+.holder-v{font-weight:900;font-size:1.02rem}
+.saga-meaning{background:#000;border-radius:6px;padding:14px 16px;color:#fff;font-family:var(--serif);font-weight:700;line-height:1.7}
+.st-dot::before{background:#333}
+.st-dot.is-past::before{background:var(--book)}
+.st-dot i{background:var(--bg);border:3px solid var(--book);transition:transform .2s}
+.st-dot.is-past i,.st-dot.is-cur i{background:var(--book)}
+.st-dot.is-cur i{transform:scale(1.35);box-shadow:0 0 0 5px color-mix(in srgb,var(--book) 30%,transparent)}
+.st-dot span{color:var(--muted);font-weight:700} .st-dot.is-cur span{color:#fff}
+
+/* ===== 航海圖 ===== */
+.atlas-map{border-radius:8px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.mini{fill:color-mix(in srgb,var(--book) 80%,#000);stroke:color-mix(in srgb,var(--book) 60%,#fff);stroke-width:1}
+.halo{fill:color-mix(in srgb,var(--book) 8%,transparent);stroke:color-mix(in srgb,var(--book) 45%,transparent);stroke-width:1.5;stroke-dasharray:4 6}
+.cluster.is-on .halo{fill:color-mix(in srgb,var(--book) 20%,transparent);stroke:var(--book);stroke-dasharray:none}
+.cluster.is-on .mini{fill:var(--book)}
+.cl-name{fill:#fff;font-family:var(--serif);font-weight:900;font-size:22px}
+.lane{stroke:rgba(255,255,255,.45);stroke-width:2.5;stroke-dasharray:8 8;animation:lane 1.6s linear infinite}
+@keyframes lane{to{stroke-dashoffset:-16}}
+.atlas-lanes p{color:var(--muted);font-size:.95rem}
+.atlas-lanes span{color:var(--book);font-weight:700}
+.atlas-card{background:var(--surface);border-radius:6px;border-top:3px solid var(--book)}
+.atlas-card.is-on{background:var(--surface2);transform:translateY(-3px)}
+.atlas-card h3{font-family:var(--serif);font-weight:900;font-size:1.35rem}
+.ac-meta{color:var(--book);font-weight:700;font-size:.9rem}
+.atlas-card p:not(.ac-meta){color:#e5e5e5}
+.g-elabel{fill:#fff;font-size:13px;font-weight:700;paint-order:stroke;stroke:#141414;stroke-width:4px}
+.gd-count{color:var(--muted);font-size:.85rem}
+.graph-detail li button{color:#fff;border-left:3px solid var(--book)}
+@media (prefers-reduced-motion:reduce){.isl.is-cur .shoal,.lane,.saga-svg .sparks circle{animation:none}}
+.wiki-link{position:fixed;top:14px;right:max(16px,env(safe-area-inset-right,0px));z-index:25;font-size:.75rem;font-weight:700;color:var(--muted);text-decoration:none;letter-spacing:.06em;padding:4px 10px;border-radius:4px;background:rgba(0,0,0,.35)}
+.wiki-link:hover{color:#fff}
+@media (max-width:560px){body{font-size:16px}}
+</style>
+</head>
+<body>
+<div id="deck"></div>
+<a class="wiki-link" href="wiki.html">LLM Wiki</a>
+<script>
+window.DECK = {
+  "title": "射鵰三部曲",
+  "slides": [
+    {
+      "id": "s1", "wiki": ["concepts/trilogy"], "type": "cover",
+      "eyebrow": "金庸 · 射鵰三部曲",
+      "title": "一百年的江湖",
+      "lead": "三本書、三代人、三片群島。從南宋寫到元末，跟著航線把故事走完。",
+      "books": [
+        {"key": "sd", "name": "射鵰英雄傳", "go": "s7"},
+        {"key": "sh", "name": "神鵰俠侶", "go": "s10"},
+        {"key": "yt", "name": "倚天屠龍記", "go": "s12"}
+      ]
+    },
+    {
+      "id": "s2", "wiki": ["concepts/jin-yong"], "type": "stats",
+      "eyebrow": "作者",
+      "title": "金庸是誰？",
+      "lead": "本名查良鏞，一邊辦報、一邊在報上連載小說的香港報人。",
+      "items": [
+        {"big": "1924", "label": "生於浙江海寧"},
+        {"big": "1959", "label": "創辦《明報》"},
+        {"big": "15 部", "label": "武俠小說"},
+        {"big": "1955–1972", "label": "全部作品在這段期間寫成"},
+        {"big": "2018", "label": "逝於香港"}
+      ]
+    },
+    {
+      "id": "s3", "wiki": ["concepts/jin-yong"], "type": "couplet",
+      "eyebrow": "一副對聯",
+      "title": "十四個字，十四部書",
+      "lead": "點任何一個字，看它是哪一部書。三部曲藏在其中三個字裡。",
+      "lines": [
+        [["飛","飛狐外傳"],["雪","雪山飛狐"],["連","連城訣"],["天","天龍八部"],["射","射鵰英雄傳"],["白","白馬嘯西風"],["鹿","鹿鼎記"]],
+        [["笑","笑傲江湖"],["書","書劍恩仇錄"],["神","神鵰俠侶"],["俠","俠客行"],["倚","倚天屠龍記"],["碧","碧血劍"],["鴛","鴛鴦刀"]]
+      ],
+      "highlight": ["射", "神", "倚"]
+    },
+    {
+      "id": "s4", "wiki": ["concepts/trilogy"], "type": "books",
+      "eyebrow": "三部曲",
+      "title": "同一個江湖的三代人",
+      "items": [
+        {"key": "sd", "go": "s7", "name": "射鵰英雄傳", "hero": "郭靖、黃蓉", "era": "南宋寧宗", "serial": "1957年起連載於《香港商報》", "theme": "憨厚少年成為大俠"},
+        {"key": "sh", "go": "s10", "name": "神鵰俠侶", "hero": "楊過、小龍女", "era": "南宋理宗", "serial": "1959年5月20日《明報》創刊號起連載", "theme": "叛逆少年與師父的愛情"},
+        {"key": "yt", "go": "s12", "name": "倚天屠龍記", "hero": "張無忌", "era": "元末順帝", "serial": "1961年7月6日起連載於《明報》", "theme": "心軟的少主統一江湖"}
+      ]
+    },
+    {
+      "id": "s5", "wiki": ["concepts/timeline"], "type": "timeline",
+      "eyebrow": "時間軸",
+      "title": "拖動年份，走過一百多年",
+      "start": 1190, "end": 1370,
+      "bands": [
+        {"key": "sd", "name": "射鵰英雄傳", "from": 1199, "to": 1227},
+        {"key": "sh", "name": "神鵰俠侶", "from": 1236, "to": 1259},
+        {"key": "yt", "name": "倚天屠龍記", "from": 1336, "to": null}
+      ],
+      "events": [
+        {"year": 1199, "book": "sd", "text": "郭靖的故事開始，南宋、金國、蒙古三方角力。"},
+        {"year": 1227, "book": "sd", "text": "成吉思汗逝世，射鵰結束。"},
+        {"year": 1236, "book": "sh", "text": "楊過的故事開始，蒙古大軍南下。"},
+        {"year": 1259, "book": "sh", "text": "楊過擊殺蒙哥，{{襄陽|南宋抵抗蒙古的重鎮，郭靖夫婦鎮守於此}}解圍。"},
+        {"year": 1273, "book": "sh", "text": "襄陽城破，郭靖、黃蓉殉國。"},
+        {"year": 1336, "book": "yt", "text": "張無忌的故事開始，元朝已近尾聲。"},
+        {"year": null, "label": "元末", "book": "yt", "text": "{{明教|源自波斯的教派，在倚天裡帶領義軍反元}}義軍起事，朱元璋建立明朝。"}
+      ]
+    },
+    {
+      "id": "s6", "wiki": ["concepts/trilogy", "concepts/shediao-islands", "concepts/shendiao-islands", "concepts/yitian-islands"], "type": "atlas",
+      "eyebrow": "江湖航海圖",
+      "title": "三片群島，一條航線",
+      "lead": "一本書是一片群島，一座島是一段故事；走到最後一座島，航線會帶你到下一本書。",
+      "groups": [
+        {"key": "sd", "go": "s7", "name": "射鵰群島", "count": "十座島", "first": "牛家村", "last": "華山", "text": "郭靖從蒙古草原的笨小孩，一路成為守護南宋的大俠。"},
+        {"key": "sh", "go": "s10", "name": "神鵰群島", "count": "十二座島", "first": "嘉興", "last": "華山", "text": "楊康的遺孤楊過，和師父小龍女相愛、分離、等了十六年。"},
+        {"key": "yt", "go": "s12", "name": "倚天群島", "count": "十一座島", "first": "少林寺", "last": "濠州", "text": "近百年後，一把屠龍刀讓江湖大亂，張無忌最後終結了亂局。"}
+      ],
+      "lanes": [
+        {"from": "sd", "to": "sh", "text": "郭靖夫婦移居襄陽，楊康的遺孤登場"},
+        {"from": "sh", "to": "yt", "text": "郭襄、張君寶，和兩把藏著秘密的神兵"}
+      ]
+    },
+    {
+      "id": "s7", "wiki": ["concepts/shediao-islands"], "type": "islands",
+      "book": "sd", "eyebrow": "第一部 · 射鵰英雄傳",
+      "title": "射鵰十座島",
+      "lead": "郭靖：笨拙的少年，成了大俠。",
+      "next": {"label": "前往神鵰群島", "go": "s10"},
+      "islands": [
+        {"place": "牛家村", "h": "兩個孩子的名字", "year": "1199", "text": "丘處機在臨安郊外的牛家村結識郭嘯天、楊鐵心，替兩家還沒出生的孩子取名郭靖、楊康。金國六王爺完顏洪烈看上包惜弱，迫害兩家：郭嘯天被殺，李萍流落蒙古；包惜弱被騙改嫁，楊康在金國王府長大。丘處機與江南七怪約定各教一個孩子，十八年後比武。", "cast": ["丘處機", "郭嘯天", "楊鐵心", "完顏洪烈", "江南七怪"], "gist": "一正一邪兩個孩子的起點"},
+        {"place": "蒙古大漠", "h": "草原長大的笨小孩", "text": "郭靖六歲時捨命保護神射手哲別，被鐵木真帶回軍營，和拖雷結為安答。江南七怪找到他，嚴格傳授武功；他天資魯鈍卻肯苦練，又得馬鈺傳授內功。鐵木真統一大漠成為成吉思汗，招郭靖為金刀駙馬，把華箏公主許配給他。", "cast": ["郭靖", "哲別", "拖雷", "江南七怪", "成吉思汗"], "gist": "這門婚約是後面的大麻煩"},
+        {"place": "張家口・中都", "h": "遇見黃蓉", "text": "郭靖南下，在張家口遇見女扮男裝的小叫化子黃蓉，一見如故。在金國中都，小王爺完顏康在比武招親打敗穆念慈，卻不肯娶她。賣藝的穆易其實就是楊鐵心；他和包惜弱相認後逃不出王府，夫妻雙雙自殺，楊康仍不肯認生父。", "cast": ["郭靖", "黃蓉", "楊康", "穆念慈", "楊鐵心"], "gist": "楊康選了富貴"},
+        {"place": "長江・歸雲莊", "h": "拜師洪七公", "text": "兩人在長江邊遇到丐幫幫主「北丐」洪七公。他喜歡郭靖樸實、黃蓉聰明，收兩人為徒，把{{降龍十八掌|洪七公傳給郭靖的招牌掌法}}傳給郭靖。在太湖歸雲莊，楊康得知身世，和郭靖結義；但他捨不得榮華富貴，轉身就洩漏了郭靖的行刺計畫。", "cast": ["郭靖", "黃蓉", "洪七公", "楊康"], "gist": "結義之後的第一次背叛"},
+        {"place": "桃花島", "h": "老頑童與秘笈", "text": "郭靖到黃藥師的桃花島，遇見老頑童周伯通，兩人結拜，學會雙手互搏，還在不知情下背熟了{{九陰真經|射鵰裡人人想搶的武學秘笈}}。西毒歐陽鋒來替歐陽克提親，郭靖比試勝出。歐陽鋒逼郭靖寫出真經，郭靖照洪七公的指示寫了一份「九陰假經」。", "cast": ["郭靖", "周伯通", "黃藥師", "歐陽鋒"], "gist": "歐陽鋒拿到的是假經"},
+        {"place": "荒島・臨安", "h": "女幫主", "text": "洪七公被歐陽鋒暗算重傷，眾人流落荒島，黃蓉臨危接下丐幫幫主。回到臨安，他們阻止完顏洪烈奪取{{武穆遺書|岳飛留下的兵法書；射鵰裡金人想奪，倚天裡藏在屠龍刀中}}，郭靖卻被歐陽鋒打成重傷。郭靖向黃蓉坦承金刀駙馬的婚約，決定守信。", "cast": ["黃蓉", "洪七公", "歐陽鋒", "郭靖"], "gist": "黃蓉成為丐幫幫主"},
+        {"place": "岳州・鐵掌峰", "h": "打狗棒與一燈", "text": "丐幫大會上，楊康拿著偷來的打狗棒冒充幫主，想帶丐幫投降金國；黃蓉用真正的打狗棒法打敗他。之後黃蓉被鐵掌幫幫主裘千仞打成重傷，郭靖背著她找到已出家的南帝一燈大師，用一陽指救回一命。", "cast": ["黃蓉", "楊康", "郭靖", "一燈"], "gist": "南帝一燈登場"},
+        {"place": "嘉興鐵槍廟", "h": "真相", "text": "歐陽鋒和楊康在桃花島殺害江南七怪中的五人，嫁禍黃藥師，郭靖因此遷怒黃蓉。黃蓉在鐵槍廟揭穿陰謀，讓躲在石像後的柯鎮惡聽見。楊康誤觸黃蓉軟蝟甲上的蛇毒而死；黃蓉卻被歐陽鋒擄走，兩人失散半年。", "cast": ["黃蓉", "楊康", "歐陽鋒", "柯鎮惡"], "gist": "楊康之死"},
+        {"place": "西域", "h": "西征與訣別", "text": "郭靖隨成吉思汗西征花剌子模，在禿木峰與黃蓉重逢，三次擒住歐陽鋒；他攻下撒馬爾罕，殺了完顏洪烈報父仇。成吉思汗要南下攻宋，郭靖不肯攻打父母之邦；母親李萍為保他忠義而自殺，郭靖在哲別、拖雷幫助下逃離蒙古。", "cast": ["郭靖", "黃蓉", "成吉思汗", "完顏洪烈", "李萍"], "gist": "郭靖選擇了南宋"},
+        {"place": "華山", "h": "第二次論劍", "text": "東邪、西毒、北丐和郭靖在{{華山論劍|頂尖高手在華山比武，排出天下前五}}中交手，逆練九陰真經而瘋癲的歐陽鋒奪得天下第一。郭靖與黃蓉解開誤會訂下婚約。郭靖去見臨終的成吉思汗，談什麼才是英雄。兩人成親，定居桃花島；蒙古侵宋後，舉家遷到襄陽禦敵。", "cast": ["郭靖", "黃蓉", "歐陽鋒", "成吉思汗"], "gist": "郭靖成為大俠"}
+      ]
+    },
+    {
+      "id": "s8", "wiki": ["concepts/people-shediao"], "type": "profiles",
+      "book": "sd", "map": "s7", "eyebrow": "射鵰人物",
+      "title": "七個人，撐起射鵰",
+      "people": [
+        {"name": "郭靖", "tag": "主角", "line": "天資魯鈍，靠苦練與忠義成為大俠。", "isl": [1, 2, 3, 4, 5, 9, 10], "sec": [
+          ["身世", "郭嘯天與李萍之子，生在蒙古大漠。"],
+          ["經歷", "先後師承江南七怪、哲別、馬鈺、洪七公和周伯通。多次被結義兄弟楊康背叛，仍希望他回頭；不願隨蒙古攻宋。"],
+          ["武功", "降龍十八掌、空明拳、雙手互搏，練成九陰真經。"],
+          ["結局", "娶黃蓉，定居桃花島；後來鎮守襄陽，第三次華山論劍成為「北俠」，1273年襄陽城破時殉國。"]]},
+        {"name": "黃蓉", "tag": "主角", "line": "東邪之女，聰明絕頂的丐幫女幫主。", "isl": [3, 4, 6, 7, 8, 9, 10], "sec": [
+          ["身世", "東邪黃藥師的獨生女。"],
+          ["經歷", "在張家口女扮男裝結識郭靖；拜洪七公為師；在荒島上接下丐幫幫主，是第一位女幫主；在鐵槍廟揭穿歐陽鋒與楊康的陰謀。"],
+          ["武功", "奇門遁甲、落英神劍掌、打狗棒法。"],
+          ["結局", "嫁給郭靖，和他一起守襄陽，城破時一同殉國。"]]},
+        {"name": "楊康", "tag": "對照組", "line": "在金國王府長大，最後選了富貴。", "isl": [3, 4, 7, 8], "sec": [
+          ["身世", "楊鐵心與包惜弱之子，以完顏康之名在金國王府長大，認完顏洪烈為父。"],
+          ["經歷", "比武招親時愛上穆念慈；知道身世後仍幫金人奪武穆遺書；後拜歐陽鋒為師，一起殺害江南七怪、嫁禍黃藥師。"],
+          ["武功", "九陰白骨爪、摧心掌。"],
+          ["結局", "誤觸黃蓉軟蝟甲上的蛇毒，死在嘉興鐵槍廟；遺腹子就是楊過。"]]},
+        {"name": "洪七公", "tag": "北丐", "line": "愛吃的丐幫幫主，郭靖黃蓉的師父。", "isl": [4, 6, 10], "sec": [
+          ["身世", "丐幫幫主，人稱北丐。"],
+          ["經歷", "喜歡郭靖樸實、黃蓉聰明，收兩人為徒；被歐陽鋒暗算重傷，把幫主之位傳給黃蓉。"],
+          ["武功", "降龍十八掌、打狗棒法。"],
+          ["結局", "神鵰裡在華山和歐陽鋒相鬥而亡，楊過在旁目睹。"]]},
+        {"name": "黃藥師", "tag": "東邪", "line": "桃花島主，亦正亦邪的宗師。", "isl": [5, 10], "sec": [
+          ["身世", "桃花島島主，人稱東邪，黃蓉的父親。"],
+          ["經歷", "弟子梅超風偷走九陰真經下卷，他把所有弟子逐出師門；江南七怪命案被嫁禍給他。"],
+          ["武功", "彈指神通、玉簫劍法。"],
+          ["結局", "神鵰裡傳楊過武功，在襄陽命宋軍布下二十八宿大陣；第三次華山論劍仍是東邪。"]]},
+        {"name": "歐陽鋒", "tag": "西毒", "line": "為了天下第一，不擇手段。", "isl": [5, 6, 8, 9, 10], "sec": [
+          ["身世", "人稱西毒，歐陽克的叔叔。"],
+          ["經歷", "上桃花島提親；暗算洪七公；逼郭靖寫九陰真經，拿到的卻是假經；和楊康殺害江南七怪。"],
+          ["武功", "蛤蟆功；逆練九陰真經而瘋癲。"],
+          ["結局", "第二次華山論劍奪得天下第一；神鵰裡收楊過為義子，最後和洪七公在華山相鬥而亡。"]]},
+        {"name": "周伯通", "tag": "老頑童", "line": "嗜武成痴、像個孩子的高手。", "isl": [5], "sec": [
+          ["身世", "全真教創始人王重陽的師弟。"],
+          ["經歷", "在桃花島和郭靖結拜，讓郭靖在不知情下背熟九陰真經；和歐陽鋒打賭輸了跳海，騎著鯊魚活了下來。"],
+          ["武功", "雙手互搏、空明拳。"],
+          ["結局", "第三次華山論劍成為「中頑童」。"]]}
+      ]
+    },
+    {
+      "id": "s9", "wiki": ["concepts/five-greats"], "type": "compass",
+      "eyebrow": "天下五絕",
+      "title": "江湖排行榜：東西南北中",
+      "lead": "華山論劍選出的五位高手，稱為{{五絕|依東、西、南、北、中分配稱號的五大高手}}。點方位，再切換兩屆看看誰換人了。",
+      "editions": [
+        {"label": "第一次華山論劍", "pos": {
+          "E": {"title": "東邪", "name": "黃藥師", "skill": "彈指神通"},
+          "W": {"title": "西毒", "name": "歐陽鋒", "skill": "蛤蟆功"},
+          "S": {"title": "南帝", "name": "段智興", "skill": "一陽指"},
+          "N": {"title": "北丐", "name": "洪七公", "skill": "降龍十八掌"},
+          "C": {"title": "中神通", "name": "王重陽", "skill": "先天功"}}},
+        {"label": "第三次華山論劍", "pos": {
+          "E": {"title": "東邪", "name": "黃藥師", "skill": "彈指神通"},
+          "W": {"title": "西狂", "name": "楊過", "skill": "黯然銷魂掌"},
+          "S": {"title": "南僧", "name": "一燈大師", "skill": "一陽指"},
+          "N": {"title": "北俠", "name": "郭靖", "skill": "降龍十八掌"},
+          "C": {"title": "中頑童", "name": "周伯通", "skill": "空明拳"}}}
+      ]
+    },
+    {
+      "id": "s10", "wiki": ["concepts/shendiao-islands"], "type": "islands",
+      "book": "sh", "eyebrow": "第二部 · 神鵰俠侶",
+      "title": "神鵰十二座島",
+      "lead": "楊過：沒人要的孩子，成了神鵰大俠。",
+      "next": {"label": "前往倚天群島", "go": "s12"},
+      "islands": [
+        {"place": "嘉興", "h": "中毒的少年", "text": "赤練仙子李莫愁殺害陸立鼎夫婦、擄走陸無雙。流浪少年楊過撿起她的冰魄銀針而中毒，瘋癲的歐陽鋒收他為義子，傳他蛤蟆功。郭靖、黃蓉找到並救了他，才知道他是楊康與穆念慈的兒子；母親已病逝，他孤苦無依。", "cast": ["楊過", "李莫愁", "歐陽鋒", "郭靖", "黃蓉"], "gist": "楊過登場"},
+        {"place": "桃花島・全真教", "h": "沒人要的徒弟", "text": "黃蓉想起楊康生前的所作所為，只教楊過讀書、不教武功。楊過被郭芙和武氏兄弟欺負，用蛤蟆功打傷武修文，被郭靖送到全真教。師父趙志敬不傳武功還處處刁難，楊過忍無可忍，逃進終南山。", "cast": ["楊過", "黃蓉", "郭芙", "趙志敬"], "gist": "楊過和名門正派結下心結"},
+        {"place": "古墓", "h": "師父小龍女", "text": "楊過誤闖活死人墓，被{{古墓派|小龍女所屬的門派，她是第三代傳人}}傳人小龍女收為徒弟。兩人在墓中一起練武、一起長大，修練《玉女心經》，漸生情意。小龍女的師姊李莫愁闖進古墓逼交秘笈，小龍女啟動機關，帶楊過逃了出來。", "cast": ["楊過", "小龍女", "李莫愁"], "gist": "師徒之情"},
+        {"place": "終南山・華山", "h": "誤會", "text": "歐陽鋒點了小龍女的穴道，全真道士甄志丙趁機侵犯她，小龍女誤以為是楊過。她向楊過表白，楊過卻答得不明不白，她傷心離開。楊過四處尋找，才明白她的心意；在華山，他目睹洪七公與歐陽鋒相鬥而亡。", "cast": ["楊過", "小龍女", "甄志丙", "洪七公", "歐陽鋒"], "gist": "小龍女第一次離開"},
+        {"place": "陸家莊", "h": "英雄大會", "text": "中原群雄在陸家莊召開抗蒙英雄大會，楊過與小龍女重逢。蒙古高手金輪國師來挑戰，兩人合使玉女素心劍打敗他。郭靖想把郭芙許配給楊過，楊過堅持要娶師父；師徒相戀違背禮教，小龍女受黃蓉勸說，黯然離去。", "cast": ["楊過", "小龍女", "金輪國師", "郭靖", "黃蓉"], "gist": "師徒戀不被世俗接受"},
+        {"place": "絕情谷", "h": "情花", "text": "楊過懷疑郭靖、黃蓉是殺父仇人，投靠蒙古親王忽必烈，誤入絕情谷，發現小龍女竟要嫁給谷主公孫止。兩人被情花刺傷，一動情就毒發。谷主之妻裘千尺要他們拿郭靖、黃蓉的人頭換解藥，楊過答應了。", "cast": ["楊過", "小龍女", "公孫止", "裘千尺"], "gist": "殺郭靖的承諾"},
+        {"place": "襄陽", "h": "下不了手", "text": "楊過潛入襄陽想殺郭靖，卻被郭靖的仁義打動，反而在蒙古軍營救他脫險。黃蓉生下龍鳳胎，楊過和小龍女拚命保護女嬰郭襄。郭芙誤會楊過，盛怒之下抓起淑女劍，斬斷了楊過的右臂。", "cast": ["楊過", "郭靖", "黃蓉", "郭襄", "郭芙"], "gist": "斷臂"},
+        {"place": "劍塚", "h": "神鵰與重劍", "text": "重傷的楊過被一隻大鵰所救，帶到前輩高手獨孤求敗的石墳。他在神鵰幫助下練成獨孤求敗的武功，用{{玄鐵重劍|獨孤求敗留下、後來歸楊過的重劍}}練成劍法。傷癒後，他從李莫愁手中抱走郭襄，帶回終南山古墓。", "cast": ["楊過", "獨孤求敗", "郭襄", "李莫愁"], "gist": "重劍到了楊過手上"},
+        {"place": "重陽宮・絕情谷", "h": "十六年之約", "text": "楊過用重劍打敗金輪國師，和小龍女在王重陽畫像前拜堂成親。郭芙誤用冰魄銀針傷了正在療傷的小龍女，毒入臟腑。小龍女在石崖刻下「十六年後，在此相會」，不辭而別；黃蓉騙楊過說她被南海神尼收為徒弟，楊過服下斷腸草，開始等待。", "cast": ["楊過", "小龍女", "郭芙", "黃蓉"], "gist": "十六年之約"},
+        {"place": "風陵渡・襄陽", "h": "神鵰俠與郭襄", "text": "十六年間，楊過帶著神鵰行俠仗義，成了人人知道的神鵰俠。少女郭襄在風陵渡聽到他的故事，跟去相見，得到三枚金針、三個心願。她十六歲生日那天，楊過發動江湖朋友燒掉蒙古的糧倉和火藥庫，當作賀禮。", "cast": ["楊過", "郭襄"], "gist": "郭襄的三個心願"},
+        {"place": "絕情谷底", "h": "重逢", "text": "約定那天不見小龍女，楊過以為她早已死去，從懸崖跳下，郭襄也跟著跳。楊過發現谷底寒潭另有洞天：小龍女當年墜潭不死，靠玉蜂蜜和潭中白魚解了劇毒。分離十六年的兩人終於重逢。", "cast": ["楊過", "小龍女", "郭襄"], "gist": "十六年後重逢"},
+        {"place": "襄陽・華山", "h": "新天下五絕", "text": "楊過殺死要燒死郭襄的金輪國師，又用石頭擊殺蒙古大汗蒙哥，襄陽解圍。華山上重訂五絕，楊過成為西狂、郭靖成為北俠。下山時遇到覺遠與弟子張君寶追討被盜的{{九陽真經|一部內功經書，在神鵰結尾分成三份流傳}}，楊過傳張君寶三招，與小龍女隱居。", "cast": ["楊過", "小龍女", "金輪國師", "蒙哥", "張君寶"], "gist": "張君寶登場"}
+      ]
+    },
+    {
+      "id": "s11", "wiki": ["concepts/people-shendiao"], "type": "profiles",
+      "book": "sh", "map": "s10", "eyebrow": "神鵰人物",
+      "title": "七個人，撐起神鵰",
+      "people": [
+        {"name": "楊過", "tag": "主角", "line": "自卑又驕傲，為愛對抗整個江湖。", "isl": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "sec": [
+          ["身世", "楊康與穆念慈之子，出身貧寒，性格自卑偏激、衝動，嫉惡如仇。"],
+          ["經歷", "被歐陽鋒收為義子；在全真教受欺負，逃進古墓拜小龍女為師；斷臂後在神鵰幫助下練成獨孤求敗的武功；十六年間行俠，人稱神鵰大俠。"],
+          ["武功", "玉女心經、打狗棒法、彈指神通、蛤蟆功，自創黯然銷魂掌。"],
+          ["結局", "擊殺蒙哥，成為新五絕的西狂，與小龍女隱居。"]]},
+        {"name": "小龍女", "tag": "主角", "line": "在古墓長大，清冷卻深情。", "isl": [3, 4, 5, 6, 7, 9, 11, 12], "sec": [
+          ["身世", "古墓派第三代傳人，清麗脫俗、個性封閉。"],
+          ["經歷", "收少年楊過為徒，日久生情；兩度因誤會離開楊過；被郭芙誤傷中毒，留下十六年之約後跳崖，意外解毒存活。"],
+          ["武功", "玉女心經、雙手互搏、白綢金鈴。"],
+          ["結局", "十六年後在絕情谷底與楊過重逢，一起救出郭襄，之後絕跡江湖。"]]},
+        {"name": "郭芙", "tag": "郭家長女", "line": "任性衝動，傷了楊過兩次。", "isl": [2, 7, 9], "sec": [
+          ["身世", "郭靖、黃蓉的長女。"],
+          ["經歷", "小時候和武氏兄弟欺負楊過；誤會楊過，用淑女劍斬斷他的右臂；又誤用冰魄銀針傷了小龍女。"],
+          ["結局", "嫁給耶律齊；最後求楊過救丈夫時，才明白自己對楊過的怨恨其實是忌妒。"]]},
+        {"name": "郭襄", "tag": "郭家次女", "line": "十六歲遇見神鵰俠，記了他一輩子。", "isl": [7, 8, 10, 11, 12], "sec": [
+          ["身世", "郭靖、黃蓉的次女，和弟弟郭破虜是龍鳳胎。"],
+          ["經歷", "剛出生就被李莫愁擄走，楊過把她帶回古墓；在風陵渡遇見神鵰俠，得到三枚金針，第三個心願是要楊過不能尋死。"],
+          ["結局", "襄陽城破時身在西川，後來出家，創立{{峨嵋派|郭襄創立的門派，到倚天時由周芷若當掌門}}。"]]},
+        {"name": "李莫愁", "tag": "反派", "line": "因愛生恨的赤練仙子。", "isl": [1, 3, 8], "sec": [
+          ["身世", "外號赤練仙子，小龍女的師姊。"],
+          ["經歷", "因愛生恨殺害陸立鼎夫婦；闖古墓逼交玉女心經；擄走嬰兒郭襄。"],
+          ["武功", "冰魄銀針。"],
+          ["結局", "中了情花毒，自焚身亡。"]]},
+        {"name": "金輪國師", "tag": "蒙古高手", "line": "蒙古陣營最強的對手。", "isl": [5, 9, 12], "sec": [
+          ["身世", "蒙古帝國的高手，忽必烈旗下；舊版叫金輪法王。"],
+          ["經歷", "在英雄大會挑戰中原群雄，被楊過與小龍女的玉女素心劍打敗；收郭襄為徒，又在陣前要燒死她逼郭靖投降。"],
+          ["結局", "被楊過殺死。"]]},
+        {"name": "張君寶", "tag": "伏筆", "line": "神鵰最後一頁出場的少年。", "isl": [12], "sec": [
+          ["身世", "少林寺覺遠的弟子。"],
+          ["經歷", "在華山和覺遠追討被盜的九陽真經，楊過傳他三招打敗瀟湘子；後來記下覺遠背誦的一部分九陽真經。"],
+          ["結局", "改名張三丰，成為倚天屠龍記裡的一代宗師。"]]}
+      ]
+    },
+    {
+      "id": "s12", "wiki": ["concepts/yitian-islands"], "type": "islands",
+      "book": "yt", "eyebrow": "第三部 · 倚天屠龍記",
+      "title": "倚天十一座島",
+      "lead": "張無忌：心軟的少年，成了明教教主。",
+      "next": {"label": "追蹤兩把神兵", "go": "s14"},
+      "islands": [
+        {"place": "少林寺", "h": "郭襄與張君寶", "text": "第三次華山論劍後，郭襄騎著青驢走遍天下找楊過。她在少林寺遇見覺遠和弟子張君寶；覺遠坐化前背誦九陽真經，無色、郭襄、張君寶各記住一部分。張君寶上了武當山，改名張三丰，創立{{武當派|張三丰創立的門派}}。", "cast": ["郭襄", "張君寶", "覺遠", "無色"], "gist": "九陽真經一分為三"},
+        {"place": "襄陽", "h": "城破之後", "year": "1273", "text": "襄陽城破，郭靖、黃蓉和兒子郭破虜殉國。屠龍刀原本交給郭破虜，從此流入江湖；倚天劍留在郭襄手上，成為峨嵋派的鎮派之寶。南宋滅亡後，江湖流傳一句話：「武林至尊，寶刀屠龍。號令天下，莫敢不從。倚天不出，誰與爭鋒。」", "cast": ["郭靖", "黃蓉", "郭破虜", "郭襄"], "gist": "刀劍分開，傳言開始"},
+        {"place": "王盤山島", "h": "屠龍刀現世", "year": "1336", "text": "武當弟子俞岱巖意外得到屠龍刀，卻遭暗算重傷癱瘓。師弟張翠山下山調查，結識天鷹教的殷素素。王盤山島的英雄宴上展示屠龍刀，明教金毛獅王謝遜突然現身奪刀，用獅吼功震倒眾人，逼兩人隨他出海。", "cast": ["俞岱巖", "張翠山", "殷素素", "謝遜"], "gist": "屠龍刀落入謝遜手中"},
+        {"place": "冰火島", "h": "十年", "text": "三人在海上遇難，漂流到冰火島，一住十年。張翠山與殷素素成親，生下張無忌，謝遜收他為義子。張無忌十歲時隨父母回中原；謝遜留在島上，苦思屠龍刀「號令天下」的秘密，想向殺他妻兒的師父報仇。", "cast": ["張無忌", "謝遜", "張翠山", "殷素素"], "gist": "謝遜成為義父"},
+        {"place": "武當山", "h": "家破人亡", "text": "各派逼問謝遜的下落。張翠山不肯說，又得知妻子正是當年傷害俞岱巖的兇手，羞憤自殺，殷素素隨之殉夫。張無忌中了玄冥神掌，寒毒纏身，少林拒絕救治。回程時張三丰救下孤女周芷若，把她送進峨嵋派。", "cast": ["張無忌", "張三丰", "張翠山", "殷素素", "周芷若"], "gist": "張無忌成了孤兒"},
+        {"place": "蝴蝶谷・崑崙山", "h": "九陽神功", "text": "張無忌跟蝶谷醫仙胡青牛學會高明醫術，卻治不好自己的寒毒。他把孤女楊不悔送到崑崙山交給父親楊逍，又被朱長齡設計騙取謝遜的下落。逃跑時墜崖，在山谷裡一隻猿猴的肚子中找到完整的九陽真經，練成後寒毒盡除。", "cast": ["張無忌", "胡青牛", "楊不悔", "楊逍", "朱長齡"], "gist": "完整的九陽真經"},
+        {"place": "光明頂", "h": "少年教主", "text": "張無忌又學會明教的護教神功乾坤大挪移。謝遜的仇人成崑挑動六大派圍攻明教總壇光明頂，化名曾阿牛的張無忌出手化解；周芷若用倚天劍刺中他的右胸。他不願正邪互相殘殺，救下明教，當上新任教主。", "cast": ["張無忌", "成崑", "周芷若"], "gist": "張無忌成為教主"},
+        {"place": "萬安寺", "h": "趙敏", "text": "六大派回程被元朝高手擒住，囚禁在大都萬安寺，峨嵋派的倚天劍落入汝陽王之女趙敏手中。張無忌帶明教高手救回六大派。滅絕師太自盡前，把倚天劍與屠龍刀的由來告訴周芷若，要她奪得刀劍。", "cast": ["張無忌", "趙敏", "滅絕師太", "周芷若"], "gist": "周芷若接下師父遺命"},
+        {"place": "靈蛇島・荒島", "h": "刀劍裡的秘密", "text": "為找謝遜，張無忌一行到了靈蛇島；小昭為救眾人，被迫成為波斯總教教主，隨母親離去。眾人流落荒島，周芷若迷倒大家，盜走倚天劍與屠龍刀，以刀劍相斬，取出藏在裡面的九陰真經與武穆遺書，再把趙敏放上小船漂走、嫁禍給她。", "cast": ["張無忌", "周芷若", "趙敏", "謝遜", "小昭"], "gist": "刀劍的秘密被取出"},
+        {"place": "少室山", "h": "屠獅大會", "text": "成崑擒住謝遜，挑動少林舉行屠獅英雄大會，想讓各派自相殘殺。張無忌、趙敏和楊過的後人黃衫女子出手，成崑的詭計失敗，被謝遜廢去武功。周芷若想殺謝遜滅口，被黃衫女子制服，荒島上的事也被揭穿。", "cast": ["張無忌", "趙敏", "黃衫女子", "謝遜", "周芷若", "成崑"], "gist": "真相大白"},
+        {"place": "濠州・大都", "h": "結局", "text": "張無忌與周芷若成婚當天，趙敏現身，張無忌跟她離去。他把武穆遺書送給義軍將領徐達，義軍連敗元兵、攻陷大都。張無忌把教主之位交給楊逍，與趙敏歸隱蒙古；朱元璋奪得明教兵權，建立明朝。", "cast": ["張無忌", "趙敏", "徐達", "朱元璋"], "gist": "三部曲結束"}
+      ]
+    },
+    {
+      "id": "s13", "wiki": ["concepts/people-yitian"], "type": "profiles",
+      "book": "yt", "map": "s12", "eyebrow": "倚天人物",
+      "title": "八個人，撐起倚天",
+      "people": [
+        {"name": "張無忌", "tag": "主角", "line": "武功天下第一，心卻最軟。", "isl": [4, 5, 6, 7, 8, 9, 10, 11], "sec": [
+          ["身世", "武當張翠山與天鷹教殷素素之子，生在冰火島，謝遜的義子。"],
+          ["經歷", "回中原後父母雙亡，身中玄冥神掌；跟胡青牛學醫；在猿猴腹中得到九陽真經；光明頂一戰後成為明教教主。"],
+          ["武功", "九陽神功、乾坤大挪移、太極拳與太極劍，醫術也很高明。"],
+          ["結局", "個性仁厚但感情上優柔寡斷；把武穆遺書交給徐達，辭去教主，與趙敏歸隱蒙古。"]]},
+        {"name": "趙敏", "tag": "女主角", "line": "蒙古郡主，為愛背叛家國。", "isl": [8, 9, 10, 11], "sec": [
+          ["身世", "蒙古紹敏郡主，汝陽王之女，趙敏是她自取的漢名。"],
+          ["經歷", "一開始與張無忌為敵，在萬安寺奪得倚天劍；後來與他相愛，為他和父親決裂；在荒島上被周芷若嫁禍。"],
+          ["專長", "機智多謀、心思敏捷、敢愛敢恨。"],
+          ["結局", "在張無忌與周芷若的婚禮上現身，最後和張無忌一同歸隱。"]]},
+        {"name": "周芷若", "tag": "峨嵋掌門", "line": "背負師命，從溫柔到狠絕。", "isl": [5, 7, 8, 9, 10, 11], "sec": [
+          ["身世", "孤女，被張三丰救下送進峨嵋派，拜滅絕師太為師。"],
+          ["經歷", "在光明頂用倚天劍刺傷張無忌；繼任峨嵋掌門後，照師父遺命取出刀劍裡的秘笈，並嫁禍趙敏。"],
+          ["武功", "照九陰真經的速成法門練出九陰白骨爪、白蟒鞭法，不是正宗的九陰武功。"],
+          ["結局", "在少室山被黃衫女子制服；確認張無忌愛的是趙敏後，回到峨嵋派。"]]},
+        {"name": "謝遜", "tag": "金毛獅王", "line": "為報家仇搶刀的義父。", "isl": [3, 4, 9, 10], "sec": [
+          ["身世", "明教四大法王之一金毛獅王，妻兒被他的師父成崑所殺。"],
+          ["經歷", "在王盤山奪走屠龍刀，帶張翠山夫婦漂到冰火島，住了十年，苦思寶刀的秘密。"],
+          ["武功", "獅吼功、七傷拳。"],
+          ["結局", "被成崑擒住，成了屠獅大會的誘餌；最後用七傷拳廢了成崑。"]]},
+        {"name": "張三丰", "tag": "武當祖師", "line": "神鵰裡的少年，倚天裡的宗師。", "isl": [1, 5], "sec": [
+          ["身世", "就是神鵰結尾的少年張君寶。"],
+          ["經歷", "在武當山自創內家拳，創立武當派；帶張無忌到少林求醫被拒；救下常遇春與周芷若。"],
+          ["武功", "九陽功、內家拳、太極拳。"],
+          ["結局", "武當派成為內家之宗，與少林齊名。"]]},
+        {"name": "滅絕師太", "tag": "峨嵋掌門", "line": "一心完成祖師遺志的嚴師。", "isl": [8], "sec": [
+          ["身世", "峨嵋派第三代掌門，郭襄的傳人。"],
+          ["經歷", "師兄孤鴻子借倚天劍和楊逍比武落敗，劍被官府取走，她後來盜回；一心要奪回屠龍刀，完成郭靖夫婦和祖師郭襄的遺志。"],
+          ["結局", "在萬安寺自盡前，把刀劍的秘密傳給周芷若。"]]},
+        {"name": "小昭", "tag": "波斯少女", "line": "默默守護張無忌的丫鬟。", "isl": [9], "sec": [
+          ["身世", "紫衫龍王黛綺絲之女，有波斯血統。"],
+          ["經歷", "被母親派到明教找乾坤大挪移，成為張無忌的貼身丫鬟並暗戀他，卻一直替他守密。"],
+          ["結局", "在靈蛇島為救眾人，被迫成為波斯總教教主，隨母親回波斯。"]]},
+        {"name": "殷離", "tag": "表妹", "line": "記住童年那一口咬痕的表妹。", "isl": [9], "sec": [
+          ["身世", "又名蛛兒，張無忌的表妹。"],
+          ["經歷", "小時候想帶走張無忌，被他咬傷手掌，從此念念不忘；跟著金花婆婆住在靈蛇島。"],
+          ["結局", "在靈蛇島被周芷若用倚天劍砍傷，眾人以為她死了，最後卻活著出現。"]]}
+      ]
+    },
+    {
+      "id": "s14", "wiki": ["concepts/treasures"], "type": "saga",
+      "eyebrow": "倚天劍 · 屠龍刀",
+      "title": "神兵百年：刀劍裡藏著什麼",
+      "verse": ["武林至尊，寶刀屠龍", "號令天下，莫敢不從", "倚天不出，誰與爭鋒"],
+      "stations": [
+        {"book": "sh", "state": "pre1", "place": "劍塚", "h": "一切的起點：重劍", "text": "楊過斷臂後，在獨孤求敗的石墳練劍，得到玄鐵重劍。這把劍後來成了屠龍刀的原料。", "sword": "還不存在", "saber": "玄鐵重劍・楊過"},
+        {"book": "sh", "state": "pre2", "place": "絕情谷", "h": "君子劍與淑女劍", "text": "淑女劍是楊過從絕情谷帶出的寶劍，郭芙就是用它斬斷楊過的右臂。君子劍、淑女劍後來成了楊過、小龍女夫婦的佩劍。", "sword": "君子劍、淑女劍・楊過夫婦", "saber": "玄鐵重劍・楊過"},
+        {"book": "sh", "state": "forge", "place": "襄陽", "h": "熔鑄：把希望藏進去", "text": "襄陽城破前，郭靖、黃蓉決心以死報國，又怕絕學失傳，命匠人把楊過夫婦所贈的劍熔鑄成倚天劍與屠龍刀，把兵書和秘笈藏在裡面，寄望後人用來復國。", "sword": "郭襄", "saber": "郭破虜"},
+        {"book": "yt", "state": "apart", "place": "襄陽城破", "h": "刀劍分離", "text": "郭破虜和父母一起殉國，屠龍刀從此流入江湖。倚天劍隨郭襄成為峨嵋派的鎮派之寶；刀劍的秘密只在峨嵋掌門之間口傳。", "sword": "峨嵋派掌門", "saber": "下落不明"},
+        {"book": "yt", "state": "apart", "place": "王盤山島", "h": "人人搶屠龍刀", "text": "江湖只聽說「寶刀屠龍，號令天下」，卻不知道真正的意思。俞岱巖得刀被奪，王盤山島上，謝遜奪走屠龍刀。", "sword": "峨嵋派", "saber": "謝遜"},
+        {"book": "yt", "state": "apart", "place": "冰火島", "h": "十年想不通", "text": "謝遜帶著屠龍刀在冰火島住了十年，日夜苦思「號令天下」的秘密，始終想不通。", "sword": "峨嵋派", "saber": "謝遜"},
+        {"book": "yt", "state": "apart", "place": "光明頂", "h": "倚天劍的流浪", "text": "滅絕師太的師兄孤鴻子借劍和楊逍比武落敗，倚天劍被官府獻給朝廷、轉賜汝陽王；滅絕師太把它盜回。光明頂上，周芷若用它刺傷張無忌。", "sword": "滅絕師太、周芷若", "saber": "謝遜"},
+        {"book": "yt", "state": "apart", "place": "萬安寺", "h": "師父的遺命", "text": "倚天劍落入趙敏手中。滅絕師太自盡前把秘密告訴周芷若，要她奪得刀劍、取出裡面的東西。", "sword": "趙敏", "saber": "謝遜"},
+        {"book": "yt", "state": "broken", "place": "靈蛇島・荒島", "h": "秘密被取出", "text": "周芷若從謝遜和趙敏手上奪得刀劍，在荒島上讓兩把神兵相斬，刀劍各斷成兩截，藏了近百年的兵書與秘笈終於現身。", "sword": "周芷若", "saber": "周芷若"},
+        {"book": "yt", "state": "broken", "place": "少室山", "h": "物歸原主", "text": "黃衫女子揭穿周芷若。兵書與秘笈後來被趙敏取走，最後交到張無忌手上。", "sword": "張無忌", "saber": "張無忌"},
+        {"book": "yt", "state": "end", "place": "尾聲", "h": "遺願完成", "text": "明教的吳勁草重鑄屠龍刀，倚天劍仍斷成兩截。張無忌把武穆遺書交給徐達，義軍推翻元朝，郭靖、黃蓉的遺願終於完成。", "sword": "斷劍・張無忌", "saber": "重鑄・張無忌"}
+      ],
+      "editions": [
+        {"label": "修訂版", "sword": ["九陰真經", "降龍十八掌精義"], "saber": ["武穆遺書"], "text": "屠龍刀裡的兵書給打天下的人；倚天劍裡的武功，是用來教訓得了天下卻作威作福的人。"},
+        {"label": "世紀新修版", "sword": ["玄鐵片：桃花島方位"], "saber": ["玄鐵片：桃花島地形"], "text": "{{世紀新修版|金庸 1999 年起再次修改的版本}}裡，刀劍改成藏著玄鐵片，刻著桃花島的地形與方位，要到桃花島才取得到書；倚天劍改由君子劍、淑女劍合鑄。"}
+      ],
+      "meaning": "「武林至尊」不在寶刀本身，而在刀中的兵書：用它帶兵，戰必勝、攻必克。若得天下的人作威作福，終會有英雄拿著倚天劍，來取暴君首級。"
+    },
+    {
+      "id": "s15", "wiki": ["concepts/jiuyang"], "type": "tree",
+      "eyebrow": "九陽真經",
+      "title": "一部經書，分成三個門派",
+      "root": {"name": "覺遠", "note": "臨終背出九陽真經"},
+      "branches": [
+        {"who": "無色禪師", "became": "少林九陽功", "sect": "少林"},
+        {"who": "郭襄", "became": "創立峨嵋派", "sect": "峨嵋"},
+        {"who": "張君寶", "became": "成為張三丰，創立武當派", "sect": "武當"}
+      ],
+      "after": "一百年後，張無忌找到了完整的經書。"
+    },
+    {
+      "id": "s16", "wiki": ["concepts/relations"], "type": "graph",
+      "eyebrow": "人物關係",
+      "title": "點一個人，看他和誰有關",
+      "nodes": [
+        {"id": "hys", "name": "黃藥師", "book": "sd", "x": 90, "y": 80},
+        {"id": "hqg", "name": "洪七公", "book": "sd", "x": 250, "y": 70},
+        {"id": "zbt", "name": "周伯通", "book": "sd", "x": 70, "y": 235},
+        {"id": "oyf", "name": "歐陽鋒", "book": "sd", "x": 390, "y": 150},
+        {"id": "gj", "name": "郭靖", "book": "sd", "x": 190, "y": 330},
+        {"id": "hr", "name": "黃蓉", "book": "sd", "x": 300, "y": 215},
+        {"id": "yk", "name": "楊康", "book": "sd", "x": 110, "y": 440},
+        {"id": "mnc", "name": "穆念慈", "book": "sd", "x": 230, "y": 545},
+        {"id": "gx", "name": "郭襄", "book": "sh", "x": 540, "y": 125},
+        {"id": "gf", "name": "郭芙", "book": "sh", "x": 345, "y": 290},
+        {"id": "yg", "name": "楊過", "book": "sh", "x": 450, "y": 440},
+        {"id": "xln", "name": "小龍女", "book": "sh", "x": 570, "y": 545},
+        {"id": "lmc", "name": "李莫愁", "book": "sh", "x": 390, "y": 570},
+        {"id": "jl", "name": "金輪國師", "book": "sh", "x": 600, "y": 400},
+        {"id": "zjb", "name": "張君寶", "book": "sh", "x": 630, "y": 245},
+        {"id": "mj", "name": "滅絕師太", "book": "yt", "x": 690, "y": 80},
+        {"id": "zsf", "name": "張三丰", "book": "yt", "x": 790, "y": 205},
+        {"id": "zcs", "name": "張翠山", "book": "yt", "x": 905, "y": 115},
+        {"id": "yss", "name": "殷素素", "book": "yt", "x": 945, "y": 245},
+        {"id": "zzr", "name": "周芷若", "book": "yt", "x": 720, "y": 330},
+        {"id": "zwj", "name": "張無忌", "book": "yt", "x": 845, "y": 375},
+        {"id": "xx", "name": "謝遜", "book": "yt", "x": 955, "y": 400},
+        {"id": "zm", "name": "趙敏", "book": "yt", "x": 750, "y": 500},
+        {"id": "xz", "name": "小昭", "book": "yt", "x": 870, "y": 555},
+        {"id": "yl", "name": "殷離", "book": "yt", "x": 960, "y": 510}
+      ],
+      "edges": [
+        ["gj", "hr", "夫妻"], ["hys", "hr", "父女"], ["hqg", "gj", "師徒"], ["hqg", "hr", "師徒"],
+        ["zbt", "gj", "結拜兄弟"], ["oyf", "hqg", "宿敵，華山同歸"], ["oyf", "yk", "師徒"],
+        ["yk", "mnc", "戀人"], ["gj", "yk", "結義兄弟，一正一邪"], ["yk", "yg", "父子"], ["mnc", "yg", "母子"],
+        ["oyf", "yg", "義父"], ["gj", "yg", "想殺他，最後救了他"], ["xln", "yg", "師徒、夫妻"], ["lmc", "xln", "師姊妹"],
+        ["gj", "gx", "父女"], ["hr", "gf", "母女"], ["gf", "yg", "斬斷右臂"], ["yg", "gx", "三枚金針"],
+        ["jl", "yg", "死敵"], ["yg", "zjb", "傳授三招"], ["gx", "zjb", "各記一部分九陽真經"],
+        ["gx", "mj", "峨嵋祖師與後代掌門"], ["mj", "zzr", "師徒"], ["zjb", "zsf", "同一人"],
+        ["zsf", "zcs", "師徒"], ["zcs", "yss", "夫妻"], ["zcs", "zwj", "父子"], ["yss", "zwj", "母子"],
+        ["xx", "zwj", "義父"], ["zsf", "zzr", "救下孤女"], ["zzr", "zwj", "婚約、倚天劍一刺"],
+        ["zm", "zwj", "由敵到愛，一同歸隱"], ["zzr", "zm", "情敵"], ["xz", "zwj", "丫鬟，暗戀"], ["yl", "zwj", "表妹"]
+      ]
+    },
+    {
+      "id": "s17", "wiki": ["concepts/shediao-islands", "concepts/shendiao-islands", "concepts/yitian-islands", "concepts/treasures", "concepts/five-greats"], "type": "quiz",
+      "eyebrow": "小測驗",
+      "title": "八題，看你記住多少",
+      "questions": [
+        {"q": "郭靖在哪裡長大？", "opts": ["桃花島", "蒙古大漠", "襄陽"], "a": 1, "why": "李萍流落蒙古生下郭靖，他在草原長大。"},
+        {"q": "黃蓉在荒島上接下了什麼位置？", "opts": ["丐幫幫主", "桃花島主", "峨嵋掌門"], "a": 0, "why": "洪七公重傷，黃蓉臨危接下丐幫幫主。"},
+        {"q": "楊過的父親是誰？", "opts": ["郭靖", "楊康", "洪七公"], "a": 1, "why": "楊過是楊康與穆念慈的兒子。"},
+        {"q": "斬斷楊過右臂的是誰？", "opts": ["李莫愁", "金輪國師", "郭芙"], "a": 2, "why": "郭芙誤會楊過，用淑女劍斬斷他的右臂。"},
+        {"q": "小龍女在石崖上刻的約定，是幾年後相會？", "opts": ["十年", "十六年", "二十年"], "a": 1, "why": "「十六年後，在此相會」。"},
+        {"q": "張無忌在哪裡找到完整的九陽真經？", "opts": ["猿猴的肚子裡", "冰火島", "少林寺"], "a": 0, "why": "他墜崖後在山谷裡的猿猴腹中找到經書。"},
+        {"q": "修訂版裡，屠龍刀藏的是什麼？", "opts": ["九陽真經", "武穆遺書", "玉女心經"], "a": 1, "why": "屠龍刀裡是兵書武穆遺書；倚天劍裡是九陰真經與降龍十八掌精義。"},
+        {"q": "第三次華山論劍的「北俠」是誰？", "opts": ["郭靖", "洪七公", "楊過"], "a": 0, "why": "北丐洪七公的位置，由徒弟郭靖接下。"}
+      ]
+    },
+    {
+      "id": "s18", "wiki": ["concepts/editions"], "type": "tabs",
+      "eyebrow": "開始讀",
+      "title": "從哪裡開始？",
+      "tabs": [
+        {"label": "閱讀順序", "items": ["射鵰英雄傳", "神鵰俠侶", "倚天屠龍記"], "text": "照順序讀。後兩本埋了大量上一代的伏筆，跳著讀會錯過。"},
+        {"label": "三個版本", "items": ["連載版", "修訂版", "世紀新修版"], "text": "連載版是最早的報紙版本；修訂版完成於 1970 年代，流傳最廣；世紀新修版 1999 年起推出，改了部分人名和情節。"},
+        {"label": "新修版改了什麼", "items": ["金輪法王 → 金輪國師", "刀劍裡的秘笈 → 玄鐵片"], "text": "兩個版本都買得到。讀之前先知道差異，跟朋友聊起來就不會對不上。"}
+      ]
+    }
+  ]
+};
+
+</script>
+<script>
+/* engine.js — 簡報的渲染與互動引擎（v3：A 串流平台風定版，新增島嶼地圖、人物檔案、神兵百年、航海圖）。
+   內容只來自 window.DECK（content.js）；版型只提供 CSS 與少量選項。 */
+(function () {
+  const BOOK_CHAR = { sd: '射', sh: '神', yt: '倚' };
+  const BOOK_NAME = { sd: '射鵰英雄傳', sh: '神鵰俠侶', yt: '倚天屠龍記' };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const rich = s => esc(s)
+    .replace(/\{\{([^|}]+)\|([^}]+)\}\}/g, '<button type="button" class="dfn" data-def="$2">$1</button>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  const plain = s => String(s).replace(/\{\{([^|}]+)\|[^}]+\}\}/g, '$1');
+  const ping = (kind) => document.dispatchEvent(new CustomEvent('deck:interact', { detail: { kind } }));
+
+  const head = s => `
+    ${s.eyebrow ? `<p class="eyebrow">${rich(s.eyebrow)}</p>` : ''}
+    <h2 class="title">${rich(s.title)}</h2>
+    ${s.lead ? `<p class="lead">${rich(s.lead)}</p>` : ''}`;
+
+  const R = {};
+
+  R.cover = s => `
+    <div class="cover-art" aria-hidden="true">${s.books.map(b => `<span data-book="${b.key}">${BOOK_CHAR[b.key]}</span>`).join('')}</div>
+    <p class="eyebrow">${rich(s.eyebrow)}</p>
+    <h1 class="title">${rich(s.title)}</h1>
+    <p class="lead">${rich(s.lead)}</p>
+    <div class="cover-books">${s.books.map((b, i) => `<button type="button" class="chip" data-book="${b.key}" data-go="${b.go}"><span class="chip-k">${i + 1}</span>${esc(b.name)}</button>`).join('')}</div>`;
+
+  R.stats = s => head(s) + `<div class="stats">${s.items.map(it => `<div class="stat"><div class="stat-big">${esc(it.big)}</div><div class="stat-label">${rich(it.label)}</div></div>`).join('')}</div>`;
+
+  R.couplet = s => head(s) + `
+    <div class="couplet">${s.lines.map(line => `<div class="couplet-line">${line.map(([c, b]) =>
+      `<button type="button" class="glyph${s.highlight.includes(c) ? ' is-trilogy' : ''}" data-book-name="${esc(b)}"><span class="glyph-c">${esc(c)}</span><span class="glyph-b">${esc(b)}</span></button>`).join('')}</div>`).join('')}</div>
+    <div class="couplet-out" aria-live="polite"><span class="couplet-out-name">　</span></div>
+    <div class="row-actions"><button type="button" class="btn ghost" data-act="reveal-all">全部翻開</button><button type="button" class="btn ghost" data-act="trilogy">只看三部曲</button></div>`;
+
+  R.books = s => head(s) + `<div class="books">${s.items.map((b, i) => `
+    <article class="book" data-book="${b.key}" tabindex="0">
+      <div class="book-art"><span>${BOOK_CHAR[b.key]}</span><em>第 ${i + 1} 部</em></div>
+      <div class="book-body"><h3>${esc(b.name)}</h3><p class="book-hero">${esc(b.hero)}</p>
+        <p class="book-theme">${esc(b.theme)}</p>
+        <dl><div><dt>時代</dt><dd>${esc(b.era)}</dd></div><div><dt>首次連載</dt><dd>${esc(b.serial)}</dd></div></dl>
+        <button type="button" class="btn small" data-go="${b.go}">看島嶼地圖</button></div>
+    </article>`).join('')}</div>`;
+
+  R.timeline = s => {
+    const span = s.end - s.start, pos = y => ((y == null ? s.end : y) - s.start) / span * 100;
+    return head(s) + `
+    <div class="tl" data-start="${s.start}" data-end="${s.end}">
+      <div class="tl-now"><span class="tl-year">${s.events[0].year}</span><span class="tl-book"></span></div>
+      <div class="tl-track">
+        ${s.bands.map(b => `<div class="tl-band" data-book="${b.key}" style="left:${pos(b.from)}%;width:${pos(b.to) - pos(b.from)}%"><span>${esc(b.name)}</span></div>`).join('')}
+        ${s.events.map((e, i) => `<button type="button" class="tl-dot" data-book="${e.book}" data-i="${i}" style="left:${pos(e.year)}%" aria-label="${e.year || e.label}"></button>`).join('')}
+      </div>
+      <input type="range" class="tl-range" id="tlRange" min="${s.start}" max="${s.end}" value="${s.events[0].year}" aria-label="年份">
+      <div class="tl-ticks">${[1200, 1250, 1300, 1350].map(y => `<span style="left:${pos(y)}%">${y}</span>`).join('')}</div>
+      <div class="tl-card" aria-live="polite"></div>
+    </div>`;
+  };
+
+  R.story = s => head(s) + `
+    <div class="story" data-book="${s.book}">
+      <ol class="story-steps">${s.steps.map((st, i) => `<li><button type="button" class="story-pill" data-i="${i}" aria-pressed="${i === 0}"><span>${i + 1}</span>${esc(st.h)}</button></li>`).join('')}</ol>
+      <div class="story-panels">${s.steps.map((st, i) => `<div class="story-panel" data-i="${i}" ${i ? 'hidden' : ''}><h3>${esc(st.h)}</h3><p>${rich(st.p)}</p></div>`).join('')}</div>
+      <div class="row-actions"><button type="button" class="btn" data-act="story-next">下一步</button></div>
+    </div>`;
+
+  R.cards = s => head(s) + `<div class="cards" data-book="${s.book}">${s.items.map(c => `
+    <button type="button" class="flip" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-tag">${esc(c.tag)}</span><span class="flip-name">${esc(c.name)}</span></span>
+      <span class="flip-back"><span class="flip-name small">${esc(c.name)}</span><span class="flip-text">${rich(c.back)}</span></span></span>
+    </button>`).join('')}</div>`;
+
+  R.compass = s => head(s) + `
+    <div class="compass-wrap">
+      <div class="seg" role="group">${s.editions.map((e, i) => `<button type="button" data-ed="${i}" aria-pressed="${i === 0}">${esc(e.label)}</button>`).join('')}</div>
+      <div class="compass-row">
+        <div class="compass">${['N', 'W', 'C', 'E', 'S'].map(k => `<button type="button" class="cp cp-${k}" data-k="${k}"><span class="cp-title"></span><span class="cp-name"></span></button>`).join('')}</div>
+        <div class="cp-detail" aria-live="polite"></div>
+      </div>
+    </div>`;
+
+  R.reveal = s => head(s) + `
+    <div class="reveal">
+      <div class="verse">${s.verse.map(v => `<span>${esc(v)}</span>`).join('')}</div>
+      <div class="forge"><span class="mat">${s.materials.map(esc).join('<i>＋</i>')}</span><span class="arrow">→</span><span class="mat-out">倚天劍 · 屠龍刀</span><span class="maker">${esc(s.maker)}</span></div>
+      <div class="blades">
+        <div class="blade blade-l"><span>倚天劍</span></div>
+        <div class="inside">${s.inside.map(x => `<div class="scroll"><strong>${rich(x.name)}</strong><span>${esc(x.for)}</span></div>`).join('')}</div>
+        <div class="blade blade-r"><span>屠龍刀</span></div>
+      </div>
+      <div class="row-actions"><button type="button" class="btn" data-act="clash">刀劍互砍</button></div>
+      <div class="ed-switch" hidden>
+        <div class="seg" role="group">${s.editions.map((e, i) => `<button type="button" data-ed="${i}" aria-pressed="${i === 0}">${rich(e.label)}</button>`).join('')}</div>
+        <p class="ed-text">${rich(s.editions[0].text)}</p>
+      </div>
+    </div>`;
+
+  R.tree = s => head(s) + `
+    <div class="tree">
+      <div class="tree-root"><strong>${esc(s.root.name)}</strong><span>${esc(s.root.note)}</span></div>
+      <svg class="tree-lines" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true"><path d="M300 0 V20 H100 V60 M300 20 V60 M300 20 H500 V60"/></svg>
+      <div class="tree-branches">${s.branches.map(b => `<button type="button" class="branch" aria-pressed="false"><span class="branch-who">${esc(b.who)}</span><span class="branch-sect">${esc(b.sect)}</span><span class="branch-became">${esc(b.became)}</span></button>`).join('')}</div>
+      <p class="tree-after" hidden>${esc(s.after)}</p>
+    </div>`;
+
+  const nodeR = n => Math.max(31, n.name.length * 9 + 6);
+  R.graph = s => {
+    const byId = Object.fromEntries(s.nodes.map(n => [n.id, n]));
+    return head(s) + `
+    <div class="graph-wrap">
+      <div class="graph-tools">
+        <div class="graph-legend">${['sd', 'sh', 'yt'].map(k => `<span data-book="${k}"><i></i>${BOOK_NAME[k]}</span>`).join('')}</div>
+        <div class="seg graph-filter" role="group"><button type="button" data-f="all" aria-pressed="true">全部</button>${['sd', 'sh', 'yt'].map(k => `<button type="button" data-f="${k}" aria-pressed="false">${BOOK_CHAR[k]}</button>`).join('')}</div>
+      </div>
+      <div class="graph-row">
+        <div class="graph-scroll"><svg class="graph" viewBox="0 0 1010 620" role="img" aria-label="三部曲人物關係圖">
+          ${s.edges.map(([a, b], i) => `<line class="g-edge" data-a="${a}" data-b="${b}" data-i="${i}" x1="${byId[a].x}" y1="${byId[a].y}" x2="${byId[b].x}" y2="${byId[b].y}"/>`).join('')}
+          ${s.nodes.map(n => `<g class="g-node" data-id="${n.id}" data-book="${n.book}" tabindex="0" role="button" aria-label="${n.name}"><circle cx="${n.x}" cy="${n.y}" r="${nodeR(n)}"/><text x="${n.x}" y="${n.y + 6}" text-anchor="middle">${n.name}</text></g>`).join('')}
+          ${s.edges.map(([a, b, label], i) => `<text class="g-elabel" data-i="${i}" x="${(byId[a].x + byId[b].x) / 2}" y="${(byId[a].y + byId[b].y) / 2 - 6}" text-anchor="middle">${esc(label)}</text>`).join('')}
+        </svg></div>
+        <div class="graph-detail" aria-live="polite"></div>
+      </div>
+    </div>`;
+  };
+
+  R.quiz = s => head(s) + `
+    <div class="quiz" data-n="${s.questions.length}">
+      <div class="quiz-bar"><i></i></div>
+      ${s.questions.map((q, qi) => `<div class="quiz-q" data-qi="${qi}" ${qi ? 'hidden' : ''}>
+        <p class="quiz-count">${qi + 1} / ${s.questions.length}</p><h3>${esc(q.q)}</h3>
+        <div class="quiz-opts">${q.opts.map((o, oi) => `<button type="button" class="opt" data-oi="${oi}">${esc(o)}</button>`).join('')}</div>
+        <p class="quiz-why" hidden>${esc(q.why)}</p>
+        <div class="row-actions"><button type="button" class="btn" data-act="quiz-next" hidden>${qi + 1 < s.questions.length ? '下一題' : '看結果'}</button></div>
+      </div>`).join('')}
+      <div class="quiz-done" hidden><div class="quiz-score"></div><p class="quiz-msg"></p><button type="button" class="btn ghost" data-act="quiz-retry">再玩一次</button></div>
+    </div>`;
+
+  R.tabs = s => head(s) + `
+    <div class="tabs">
+      <div class="seg tab-bar" role="tablist">${s.tabs.map((t, i) => `<button type="button" role="tab" data-t="${i}" aria-pressed="${i === 0}">${esc(t.label)}</button>`).join('')}</div>
+      ${s.tabs.map((t, i) => `<div class="tab-panel" data-t="${i}" ${i ? 'hidden' : ''}>
+        <ol class="tab-items">${t.items.map(x => `<li>${esc(x)}</li>`).join('')}</ol><p>${rich(t.text)}</p></div>`).join('')}
+    </div>`;
+
+  /* ---------- v3：島嶼地圖、人物檔案、神兵百年、航海圖 ---------- */
+  const CIRC = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫', '⑬', '⑭', '⑮'];
+  const rng = seed => () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  // 有機的島嶼外形：繞圓取點、半徑加入雜訊，再用 Catmull-Rom 轉成平滑貝茲曲線
+  function blob(cx, cy, r, seed, k = 11) {
+    const rand = rng(seed), pts = [];
+    for (let i = 0; i < k; i++) { const a = i / k * Math.PI * 2, rr = r * (0.74 + rand() * 0.42); pts.push([cx + Math.cos(a) * rr * 1.15, cy + Math.sin(a) * rr * 0.9]); }
+    let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+    for (let i = 0; i < k; i++) {
+      const p0 = pts[(i - 1 + k) % k], p1 = pts[i], p2 = pts[(i + 1) % k], p3 = pts[(i + 2) % k];
+      const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      d += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+    }
+    return d + 'Z';
+  }
+  const islandPos = n => Array.from({ length: n }, (_, i) => ({
+    x: Math.round(78 + i * (844 / (n - 1))),
+    y: Math.round((i % 2 ? 392 : 178) + Math.sin(i * 1.9 + 0.6) * 34)
+  }));
+  const seaDeco = (seed, w, h) => {
+    const rand = rng(seed); let s = '';
+    for (let i = 0; i < 26; i++) { const x = rand() * w, y = rand() * h; s += `<path class="wave" d="M${x.toFixed(0)} ${y.toFixed(0)} q6 -5 12 0 t12 0"/>`; }
+    return s;
+  };
+  const compassRose = (x, y) => `<g class="rose" transform="translate(${x} ${y})"><circle r="26"/><path d="M0 -34 L6 0 L0 34 L-6 0Z"/><path d="M-34 0 L0 6 L34 0 L0 -6Z" opacity=".5"/><text y="-40" text-anchor="middle">北</text></g>`;
+
+  R.islands = s => {
+    const P = islandPos(s.islands.length), seed = { sd: 7, sh: 19, yt: 31 }[s.book] || 3;
+    const seg = (a, b, i) => { const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 + (i % 2 ? -46 : 46); return `<path class="route" data-i="${i}" d="M${a.x} ${a.y} Q${mx} ${my} ${b.x} ${b.y}"/>`; };
+    return head(s) + `
+    <div class="isl-wrap" data-book="${s.book}">
+      <div class="isl-map">
+        <svg class="isl-svg" viewBox="0 0 1000 560" role="group" aria-label="${esc(plain(s.title))}地圖">
+          <defs><radialGradient id="land-${s.id}" cx="40%" cy="35%" r="75%"><stop offset="0" class="land-hi"/><stop offset="1" class="land-lo"/></radialGradient></defs>
+          <rect class="sea" width="1000" height="560"/>
+          ${seaDeco(seed, 1000, 560)}
+          ${compassRose(950, 500)}
+          ${P.slice(1).map((p, i) => seg(P[i], p, i)).join('')}
+          ${P.map((p, i) => `<g class="isl" data-i="${i}" tabindex="0" role="button" aria-label="第 ${i + 1} 座島：${esc(s.islands[i].place)}">
+              <path class="shoal" d="${blob(p.x, p.y, 52, seed * 13 + i * 7)}"/>
+              <path class="land" fill="url(#land-${s.id})" d="${blob(p.x, p.y, 38, seed * 17 + i * 11)}"/>
+              <text class="isl-n" x="${p.x}" y="${p.y + 8}" text-anchor="middle">${i + 1}</text>
+              <text class="isl-label" x="${p.x}" y="${p.y + 66}" text-anchor="middle">${esc(s.islands[i].place)}</text>
+            </g>`).join('')}
+          <g class="flag" transform="translate(${P[0].x - 8} ${P[0].y - 70})"><path d="M0 0 V34"/><path class="flag-cloth" d="M0 0 H26 L20 8 L26 16 H0Z"/></g>
+          <g class="ship" style="transform:translate(${P[0].x + 34}px,${P[0].y - 46}px)"><path class="hull" d="M-18 6 H18 L11 16 H-11Z"/><path class="sail" d="M0 4 V-22 L15 2Z"/><path class="sail2" d="M-2 2 V-16 L-13 2Z"/></g>
+        </svg>
+      </div>
+      <div class="isl-panel" aria-live="polite"></div>
+    </div>`;
+  };
+
+  R.profiles = (s, deck) => {
+    const map = deck.slides.find(x => x.id === s.map);
+    return head(s) + `
+    <div class="posters" data-book="${s.book}">${s.people.map((p, i) => `
+      <button type="button" class="poster" data-p="${i}">
+        <span class="poster-art" aria-hidden="true"><span class="poster-glyph">${esc(p.name[0])}</span></span>
+        <span class="poster-tag">${esc(p.tag)}</span>
+        <span class="poster-name">${esc(p.name)}</span>
+        <span class="poster-line">${rich(p.line)}</span>
+      </button>`).join('')}</div>
+    ${s.people.map((p, i) => `
+    <div class="sheet" data-p="${i}" data-book="${s.book}" hidden role="dialog" aria-modal="true" aria-label="${esc(p.name)}">
+      <div class="sheet-card">
+        <button type="button" class="sheet-x" aria-label="關閉">×</button>
+        <div class="sheet-hero"><span class="sheet-glyph" aria-hidden="true">${esc(p.name[0])}</span>
+          <div><span class="poster-tag">${esc(p.tag)}</span><h3>${esc(p.name)}</h3><p>${rich(p.line)}</p></div></div>
+        <dl class="sheet-secs">${p.sec.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${rich(v)}</dd></div>`).join('')}</dl>
+        <div class="sheet-isl"><span class="sheet-isl-h">出場的島</span>${p.isl.map(k => `<button type="button" class="isl-chip" data-go="${s.map}" data-isl="${k - 1}">${CIRC[k - 1]} ${esc(map.islands[k - 1].place)}</button>`).join('')}</div>
+        <div class="row-actions sheet-nav"><button type="button" class="btn ghost small" data-act="sheet-prev">‹ 上一位</button><button type="button" class="btn ghost small" data-act="sheet-next">下一位 ›</button></div>
+      </div>
+    </div>`).join('')}`;
+  };
+
+  // 神兵：倚天劍（上，直劍）、屠龍刀（下，闊刀）；左右兩半，方便「斷成兩截」
+  const SAGA_SVG = `
+  <svg class="saga-svg" viewBox="0 0 560 300" role="img" aria-label="倚天劍與屠龍刀">
+    <defs>
+      <linearGradient id="g-sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f4f4"/><stop offset=".5" stop-color="#9a9a9a"/><stop offset="1" stop-color="#d9d9d9"/></linearGradient>
+      <linearGradient id="g-sb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff4d4d"/><stop offset=".55" stop-color="#8c0a0a"/><stop offset="1" stop-color="#3a0505"/></linearGradient>
+      <linearGradient id="g-xt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#555"/><stop offset="1" stop-color="#111"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g class="pre">
+      <g class="xt"><rect x="60" y="132" width="40" height="36" rx="4" class="hilt"/><path d="M100 128 H470 L500 150 L470 172 H100Z" fill="url(#g-xt)" stroke="#777"/><text x="285" y="155" text-anchor="middle">玄鐵重劍</text></g>
+      <g class="twin"><path d="M110 70 H420 L440 78 L420 86 H110Z" fill="url(#g-sw)"/><text x="270" y="62" text-anchor="middle">君子劍</text>
+        <path d="M110 216 H420 L440 224 L420 232 H110Z" fill="url(#g-sw)"/><text x="270" y="252" text-anchor="middle">淑女劍</text></g>
+    </g>
+    <g class="wp">
+      <g class="sw"><text class="wp-name" x="40" y="62">倚天劍</text>
+        <g class="half a"><rect x="24" y="84" width="46" height="18" rx="5" class="hilt"/><rect x="68" y="72" width="10" height="42" rx="3" class="guard"/><path d="M78 86 H290 V100 H78Z" fill="url(#g-sw)"/></g>
+        <g class="half b"><path d="M290 86 H500 L532 93 L500 100 H290Z" fill="url(#g-sw)"/></g>
+      </g>
+      <g class="sb"><text class="wp-name" x="40" y="182">屠龍刀</text>
+        <g class="half a"><rect x="24" y="210" width="46" height="22" rx="5" class="hilt"/><rect x="68" y="196" width="12" height="50" rx="3" class="guard"/><path d="M80 204 H290 V244 Q170 248 80 238Z" fill="url(#g-sb)"/></g>
+        <g class="half b"><path d="M290 204 H470 Q530 206 536 236 Q420 250 290 244Z" fill="url(#g-sb)"/></g>
+      </g>
+      <g class="inner in-sw" transform="translate(0 93)"></g>
+      <g class="inner in-sb" transform="translate(0 224)"></g>
+    </g>
+    <g class="sparks">${[0, 1, 2, 3, 4, 5, 6, 7].map(i => `<circle cx="${150 + i * 38}" cy="${150 + (i % 3 - 1) * 26}" r="${2 + i % 3}"/>`).join('')}</g>
+  </svg>`;
+
+  R.saga = s => head(s) + `
+    <div class="saga">
+      <p class="saga-verse">${s.verse.map(esc).join('　')}</p>
+      <div class="saga-main">
+        <div class="saga-stage" data-state="${s.stations[0].state}" data-xray="false" data-ed="0">
+          ${SAGA_SVG}
+          <div class="saga-tools">
+            <button type="button" class="btn ghost small" data-act="xray" aria-pressed="false">透視刀劍</button>
+            <div class="seg saga-ed" role="group">${s.editions.map((e, i) => `<button type="button" data-ed="${i}" aria-pressed="${i === 0}">${esc(e.label)}</button>`).join('')}</div>
+          </div>
+          <p class="saga-ed-text" hidden></p>
+        </div>
+        <div class="saga-card" aria-live="polite"></div>
+      </div>
+      <ol class="saga-track">${s.stations.map((st, i) => `<li><button type="button" class="st-dot" data-i="${i}" data-book="${st.book}"><i></i><span>${esc(st.place)}</span></button></li>`).join('')}</ol>
+    </div>`;
+
+  R.atlas = s => {
+    const C = { sd: [175, 118], sh: [500, 128], yt: [825, 112] }, N = { sd: 10, sh: 12, yt: 11 };
+    const cluster = g => {
+      const [cx, cy] = C[g.key], rand = rng({ sd: 5, sh: 11, yt: 23 }[g.key]);
+      let out = '';
+      for (let i = 0; i < N[g.key]; i++) { const a = i / N[g.key] * Math.PI * 2 + rand(), r = 26 + rand() * 52; out += `<path class="mini" d="${blob(cx + Math.cos(a) * r * 1.25, cy + Math.sin(a) * r * .62, 9 + rand() * 7, i * 31 + cx)}"/>`; }
+      return `<g class="cluster" data-k="${g.key}" data-book="${g.key}" tabindex="0" role="button" aria-label="${esc(g.name)}"><ellipse class="halo" cx="${cx}" cy="${cy}" rx="135" ry="76"/>${out}<text class="cl-name" x="${cx}" y="${cy + 108}" text-anchor="middle">${esc(g.name)}</text></g>`;
+    };
+    const lane = (l, i) => { const [ax, ay] = C[l.from], [bx, by] = C[l.to]; return `<path class="lane" d="M${ax + 118} ${ay - 20} Q${(ax + bx) / 2} ${ay - 95 + i * 20} ${bx - 118} ${by - 20}"/>`; };
+    return head(s) + `
+    <div class="atlas">
+      <div class="atlas-map"><svg class="atlas-svg" viewBox="0 0 1000 250" role="group" aria-label="三片群島">
+        <rect class="sea" width="1000" height="250"/>${seaDeco(41, 1000, 250)}
+        ${s.lanes.map(lane).join('')}
+        ${s.groups.map(cluster).join('')}
+      </svg></div>
+      <div class="atlas-lanes">${s.lanes.map(l => `<p><span data-book="${l.from}">${BOOK_NAME[l.from]}</span> → <span data-book="${l.to}">${BOOK_NAME[l.to]}</span>　${rich(l.text)}</p>`).join('')}</div>
+      <div class="atlas-cards">${s.groups.map(g => `
+        <article class="atlas-card" data-k="${g.key}" data-book="${g.key}">
+          <h3>${esc(g.name)}</h3><p class="ac-meta">${esc(g.count)} · ${esc(g.first)} → ${esc(g.last)}</p>
+          <p>${rich(g.text)}</p><button type="button" class="btn small" data-go="${g.go}">登島</button>
+        </article>`).join('')}</div>
+    </div>`;
+  };
+
+  /* ---------- behaviours ---------- */
+  const B = {};
+  B.couplet = (el) => {
+    const out = el.querySelector('.couplet-out-name');
+    el.querySelectorAll('.glyph').forEach(g => g.onclick = () => {
+      g.classList.add('is-open'); out.textContent = g.dataset.bookName;
+      out.parentElement.classList.toggle('is-trilogy', g.classList.contains('is-trilogy')); ping('couplet');
+    });
+    el.querySelector('[data-act=reveal-all]').onclick = () => { el.classList.remove('only-trilogy'); el.querySelectorAll('.glyph').forEach(g => g.classList.add('is-open')); ping('couplet'); };
+    el.querySelector('[data-act=trilogy]').onclick = () => { el.classList.toggle('only-trilogy'); el.querySelectorAll('.glyph.is-trilogy').forEach(g => g.classList.add('is-open')); ping('couplet'); };
+  };
+  B.timeline = (el, s) => {
+    const range = el.querySelector('.tl-range'), yearEl = el.querySelector('.tl-year'), bookEl = el.querySelector('.tl-book'), card = el.querySelector('.tl-card');
+    const evs = s.events.map((e, i) => ({ ...e, y: e.year == null ? s.end : e.year, i }));
+    function upd(v) {
+      const cur = [...evs].reverse().find(e => e.y <= v) || evs[0];
+      const band = s.bands.find(b => v >= b.from && v <= (b.to == null ? s.end : b.to));
+      yearEl.textContent = v >= s.end ? cur.label || v : v;
+      bookEl.textContent = band ? band.name : '兩部書之間';
+      bookEl.dataset.book = band ? band.key : '';
+      card.dataset.book = cur.book;
+      card.innerHTML = `<span class="tl-card-y">${cur.year == null ? cur.label : cur.year}</span><p>${rich(cur.text)}</p>`;
+      el.querySelectorAll('.tl-dot').forEach(d => d.classList.toggle('is-on', +d.dataset.i === cur.i));
+      el.querySelectorAll('.tl-band').forEach(b => b.classList.toggle('is-on', band && b.dataset.book === band.key));
+    }
+    range.oninput = () => { upd(+range.value); ping('timeline'); };
+    el.querySelectorAll('.tl-dot').forEach(d => d.onclick = () => { range.value = evs[+d.dataset.i].y; upd(+range.value); ping('timeline'); });
+    upd(+range.value);
+  };
+  B.story = (el) => {
+    const pills = el.querySelectorAll('.story-pill'), panels = el.querySelectorAll('.story-panel'), next = el.querySelector('[data-act=story-next]');
+    let cur = 0;
+    const go = i => { cur = i; pills.forEach((p, k) => { p.setAttribute('aria-pressed', k === i); p.classList.toggle('is-done', k < i); }); panels.forEach((p, k) => p.hidden = k !== i); next.textContent = i === pills.length - 1 ? '從頭看' : '下一步'; ping('story'); };
+    pills.forEach((p, i) => p.onclick = () => go(i));
+    next.onclick = () => go(cur === pills.length - 1 ? 0 : cur + 1);
+  };
+  B.cards = (el) => el.querySelectorAll('.flip').forEach(f => f.onclick = (e) => {
+    if (e.target.closest('.dfn')) return;
+    f.setAttribute('aria-pressed', f.getAttribute('aria-pressed') !== 'true'); ping('card');
+  });
+  B.compass = (el, s) => {
+    let ed = 0, sel = 'C';
+    const det = el.querySelector('.cp-detail');
+    function paint() {
+      const P = s.editions[ed].pos, O = s.editions[0].pos;
+      el.querySelectorAll('.cp').forEach(b => {
+        const k = b.dataset.k; b.querySelector('.cp-title').textContent = P[k].title; b.querySelector('.cp-name').textContent = P[k].name;
+        b.classList.toggle('is-new', ed > 0 && P[k].name !== O[k].name); b.setAttribute('aria-pressed', k === sel);
+      });
+      const p = P[sel], changed = ed > 0 && p.name !== O[sel].name;
+      det.innerHTML = `<span class="cp-d-title">${p.title}</span><strong>${p.name}</strong><span class="cp-d-skill">${p.skill}</span>${changed ? `<span class="cp-d-new">取代了上一代的 ${O[sel].title}・${O[sel].name}</span>` : ''}`;
+    }
+    el.querySelectorAll('.cp').forEach(b => b.onclick = () => { sel = b.dataset.k; paint(); ping('compass'); });
+    el.querySelectorAll('.seg button').forEach(b => b.onclick = () => { ed = +b.dataset.ed; el.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); paint(); ping('compass'); });
+    paint();
+  };
+  B.reveal = (el, s) => {
+    const btn = el.querySelector('[data-act=clash]'), box = el.querySelector('.reveal');
+    btn.onclick = () => {
+      const open = !box.classList.contains('is-open');
+      box.classList.toggle('is-open', open); el.querySelector('.ed-switch').hidden = !open;
+      btn.textContent = open ? '把刀劍合回去' : '刀劍互砍'; ping('reveal');
+    };
+    el.querySelectorAll('.ed-switch .seg button').forEach(b => b.onclick = () => {
+      el.querySelectorAll('.ed-switch .seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      el.querySelector('.ed-text').innerHTML = rich(s.editions[+b.dataset.ed].text); ping('reveal');
+    });
+  };
+  B.tree = (el) => {
+    const br = el.querySelectorAll('.branch');
+    br.forEach(b => b.onclick = () => {
+      b.setAttribute('aria-pressed', 'true'); ping('tree');
+      if ([...br].every(x => x.getAttribute('aria-pressed') === 'true')) el.querySelector('.tree-after').hidden = false;
+    });
+  };
+  B.graph = (el, s) => {
+    const byId = Object.fromEntries(s.nodes.map(n => [n.id, n]));
+    const det = el.querySelector('.graph-detail');
+    let filter = 'all', sel = 'gj';
+    function paint() {
+      const rel = s.edges.map((e, i) => [e, i]).filter(([[a, b]]) => a === sel || b === sel);
+      const ids = new Set([sel, ...rel.flatMap(([[a, b]]) => [a, b])]);
+      const inF = id => filter === 'all' || byId[id].book === filter;
+      el.querySelectorAll('.g-node').forEach(n => { const id = n.dataset.id; n.classList.toggle('is-sel', id === sel); n.classList.toggle('is-dim', !ids.has(id)); n.classList.toggle('is-out', !inF(id) && !ids.has(id)); });
+      el.querySelectorAll('.g-edge').forEach(l => { const on = rel.some(([, i]) => i === +l.dataset.i); l.classList.toggle('is-on', on); l.classList.toggle('is-dim', !on); l.classList.toggle('is-out', !on && !(inF(l.dataset.a) && inF(l.dataset.b))); });
+      el.querySelectorAll('.g-elabel').forEach(t => t.classList.toggle('is-on', rel.some(([, i]) => i === +t.dataset.i)));
+      const n = byId[sel];
+      det.dataset.book = n.book;
+      det.innerHTML = `<span class="gd-book">${BOOK_NAME[n.book]}</span><strong>${n.name}</strong><span class="gd-count">${rel.length} 條關係</span><ul>${rel.map(([[a, b, label]]) => { const o = byId[a === sel ? b : a]; return `<li><button type="button" data-id="${o.id}" data-book="${o.book}">${o.name}</button><span>${esc(label)}</span></li>`; }).join('')}</ul>`;
+      det.querySelectorAll('button').forEach(b => b.onclick = () => pick(b.dataset.id));
+    }
+    function pick(id) { sel = id; paint(); ping('graph'); }
+    el.querySelectorAll('.g-node').forEach(n => { n.onclick = () => pick(n.dataset.id); n.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(n.dataset.id); } }; });
+    el.querySelectorAll('.graph-filter button').forEach(b => b.onclick = () => {
+      filter = b.dataset.f; el.querySelectorAll('.graph-filter button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      if (filter !== 'all' && byId[sel].book !== filter) sel = s.nodes.find(n => n.book === filter).id;
+      paint(); ping('graph');
+    });
+    paint();
+  };
+  B.quiz = (el, s) => {
+    let score = 0;
+    const n = s.questions.length, bar = el.querySelector('.quiz-bar i');
+    el.querySelectorAll('.quiz-q').forEach((qEl, qi) => {
+      const q = s.questions[qi];
+      qEl.querySelectorAll('.opt').forEach(o => o.onclick = () => {
+        if (qEl.classList.contains('answered')) return;
+        qEl.classList.add('answered');
+        const ok = +o.dataset.oi === q.a; if (ok) score++;
+        o.classList.add(ok ? 'is-right' : 'is-wrong');
+        qEl.querySelectorAll('.opt')[q.a].classList.add('is-right');
+        qEl.querySelector('.quiz-why').hidden = false;
+        qEl.querySelector('[data-act=quiz-next]').hidden = false;
+        bar.style.width = ((qi + 1) / n * 100) + '%';
+        ping(ok ? 'quiz-right' : 'quiz-wrong');
+      });
+      qEl.querySelector('[data-act=quiz-next]').onclick = () => {
+        qEl.hidden = true;
+        const nx = el.querySelector(`.quiz-q[data-qi="${qi + 1}"]`);
+        if (nx) nx.hidden = false; else {
+          const d = el.querySelector('.quiz-done'); d.hidden = false;
+          d.querySelector('.quiz-score').textContent = `${score} / ${n}`;
+          d.querySelector('.quiz-msg').textContent = score === n ? '全對，可以去華山論劍了。' : score >= 3 ? '不錯！翻回前面看看答錯的那幾題。' : '回到前面再逛一圈，再來挑戰。';
+        }
+      };
+    });
+    el.querySelector('[data-act=quiz-retry]').onclick = () => {
+      score = 0; bar.style.width = '0';
+      el.querySelector('.quiz-done').hidden = true;
+      el.querySelectorAll('.quiz-q').forEach((q, i) => { q.hidden = i > 0; q.classList.remove('answered'); q.querySelector('.quiz-why').hidden = true; q.querySelector('[data-act=quiz-next]').hidden = true; q.querySelectorAll('.opt').forEach(o => o.classList.remove('is-right', 'is-wrong')); });
+    };
+  };
+  B.tabs = (el) => {
+    el.querySelectorAll('[role=tab]').forEach(t => t.onclick = () => {
+      el.querySelectorAll('[role=tab]').forEach(x => x.setAttribute('aria-pressed', x === t));
+      el.querySelectorAll('.tab-panel').forEach(p => p.hidden = p.dataset.t !== t.dataset.t); ping('tabs');
+    });
+  };
+  B.stats = (el) => {
+    el._count = () => el.querySelectorAll('.stat-big').forEach(b => {
+      const m = /^(\d{4})$/.exec(b.textContent.trim()); if (!m || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const target = +m[1], from = target - 60; let t0 = null;
+      const step = ts => { t0 = t0 || ts; const k = Math.min(1, (ts - t0) / 700); b.textContent = Math.round(from + (target - from) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+  };
+
+  B.islands = (el, s) => {
+    const P = islandPos(s.islands.length), panel = el.querySelector('.isl-panel'), ship = el.querySelector('.ship');
+    const isls = [...el.querySelectorAll('.isl')], routes = [...el.querySelectorAll('.route')];
+    const seen = new Set();
+    let cur = 0;
+    function select(i, quiet) {
+      cur = i; seen.add(i);
+      const d = s.islands[i], last = i === s.islands.length - 1;
+      isls.forEach((g, k) => { g.classList.toggle('is-cur', k === i); g.classList.toggle('is-seen', seen.has(k) && k !== i); });
+      routes.forEach((r, k) => r.classList.toggle('is-done', k < i));
+      ship.style.transform = `translate(${P[i].x + 34}px,${P[i].y - 46}px)`;
+      const nextBtn = last
+        ? `<button type="button" class="btn" data-go="${s.next.go}">${esc(s.next.label)} ›</button>`
+        : `<button type="button" class="btn" data-act="isl-next">下一站：${esc(s.islands[i + 1].place)} ›</button>`;
+      panel.innerHTML = `
+        <div class="isl-meta"><span class="isl-no">第 ${i + 1} 座島 / ${s.islands.length}</span>${d.year ? `<span class="isl-year">${esc(d.year)}</span>` : ''}</div>
+        <h3 class="isl-place">${esc(d.place)}</h3>
+        <p class="isl-h">${esc(d.h)}</p>
+        <p class="isl-text">${rich(d.text)}</p>
+        <div class="isl-cast"><span class="isl-k">登場</span>${d.cast.map(c => `<span class="cast">${esc(c)}</span>`).join('')}</div>
+        <p class="isl-gist"><span class="isl-k">關鍵</span>${rich(d.gist)}</p>
+        <div class="row-actions">${i ? `<button type="button" class="btn ghost" data-act="isl-prev">‹ 上一站</button>` : ''}${nextBtn}</div>`;
+      const nx = panel.querySelector('[data-act=isl-next]'), pv = panel.querySelector('[data-act=isl-prev]');
+      if (nx) nx.onclick = () => select(cur + 1);
+      if (pv) pv.onclick = () => select(cur - 1);
+      if (!quiet) ping('island');
+    }
+    isls.forEach((g, k) => { g.onclick = () => select(k); g.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(k); } }; });
+    el._open = i => select(i, true);
+    select(0, true);
+  };
+  B.profiles = (el) => {
+    const sheets = [...el.querySelectorAll('.sheet')];
+    const open = i => { sheets.forEach((sh, k) => sh.hidden = k !== i); const x = sheets[i].querySelector('.sheet-x'); x && x.focus({ preventScroll: true }); ping('profile'); };
+    const close = () => sheets.forEach(sh => sh.hidden = true);
+    el.querySelectorAll('.poster').forEach(p => p.onclick = () => open(+p.dataset.p));
+    sheets.forEach((sh, i) => {
+      sh.querySelector('.sheet-x').onclick = close;
+      sh.onclick = e => { if (e.target === sh) close(); };
+      sh.querySelector('[data-act=sheet-prev]').onclick = () => open((i - 1 + sheets.length) % sheets.length);
+      sh.querySelector('[data-act=sheet-next]').onclick = () => open((i + 1) % sheets.length);
+      sh.querySelectorAll('.isl-chip').forEach(c => c.addEventListener('click', close));
+    });
+    el._close = close;
+  };
+  B.saga = (el, s) => {
+    const stage = el.querySelector('.saga-stage'), card = el.querySelector('.saga-card'), dots = [...el.querySelectorAll('.st-dot')];
+    const inSw = el.querySelector('.in-sw'), inSb = el.querySelector('.in-sb'), edText = el.querySelector('.saga-ed-text'), xr = el.querySelector('[data-act=xray]');
+    let cur = 0, ed = 0;
+    const scrolls = items => items.map((t, k) => `<g transform="translate(${(items.length === 1 ? 300 : 210 + k * 170)} 0)"><g class="scroll-i"><rect x="-74" y="-13" width="148" height="26" rx="5"/><text y="5" text-anchor="middle">${esc(plain(t))}</text></g></g>`).join('');
+    function paintInner() {
+      const E = s.editions[ed];
+      inSw.innerHTML = scrolls(E.sword);
+      inSb.innerHTML = scrolls(E.saber);
+      edText.innerHTML = rich(E.text);
+      stage.dataset.ed = ed;
+    }
+    function go(i, quiet) {
+      cur = i; const st = s.stations[i], last = i === s.stations.length - 1;
+      stage.dataset.state = st.state;
+      dots.forEach((d, k) => { d.classList.toggle('is-cur', k === i); d.classList.toggle('is-past', k < i); });
+      card.dataset.book = st.book;
+      card.innerHTML = `
+        <div class="isl-meta"><span class="sc-book" data-book="${st.book}">${BOOK_NAME[st.book]}</span><span class="isl-no">第 ${i + 1} 站 / ${s.stations.length}</span></div>
+        <h3 class="isl-place">${esc(st.place)}</h3><p class="isl-h">${esc(st.h)}</p>
+        <p class="isl-text">${rich(st.text)}</p>
+        <div class="holders">
+          <div class="holder"><span class="holder-k">倚天劍</span><span class="holder-v">${esc(st.sword)}</span></div>
+          <div class="holder sb"><span class="holder-k">屠龍刀</span><span class="holder-v">${esc(st.saber)}</span></div>
+        </div>
+        ${last ? `<p class="saga-meaning">${rich(s.meaning)}</p>` : ''}
+        <div class="row-actions">${i ? `<button type="button" class="btn ghost" data-act="st-prev">‹ 上一站</button>` : ''}${last ? `<button type="button" class="btn" data-act="st-first">從頭再走一次</button>` : `<button type="button" class="btn" data-act="st-next">下一站：${esc(s.stations[i + 1].place)} ›</button>`}</div>`;
+      const b = (a, f) => { const x = card.querySelector(`[data-act=${a}]`); if (x) x.onclick = f; };
+      b('st-next', () => go(cur + 1)); b('st-prev', () => go(cur - 1)); b('st-first', () => go(0));
+      if (!quiet) ping('saga');
+    }
+    dots.forEach((d, k) => d.onclick = () => go(k));
+    xr.onclick = () => { const on = stage.dataset.xray !== 'true'; stage.dataset.xray = on; xr.setAttribute('aria-pressed', on); xr.textContent = on ? '收起透視' : '透視刀劍'; edText.hidden = !on; ping('saga'); };
+    el.querySelectorAll('.saga-ed button').forEach(b => b.onclick = () => { ed = +b.dataset.ed; el.querySelectorAll('.saga-ed button').forEach(x => x.setAttribute('aria-pressed', x === b)); paintInner(); ping('saga'); });
+    paintInner(); go(0, true);
+  };
+  B.atlas = (el) => {
+    const pick = k => { el.querySelectorAll('[data-k]').forEach(n => n.classList.toggle('is-on', n.dataset.k === k)); ping('atlas'); };
+    el.querySelectorAll('.cluster').forEach(c => { c.onclick = () => pick(c.dataset.k); c.onmouseenter = () => pick(c.dataset.k); c.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(c.dataset.k); } }; });
+    el.querySelectorAll('.atlas-card').forEach(c => c.onmouseenter = () => pick(c.dataset.k));
+  };
+
+  /* ---------- 結構 CSS（版型只負責顏色、字體、質感） ---------- */
+  const BASE_CSS = `
+  html,body{height:100%}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg)}
+  [hidden]{display:none!important}
+  button{font:inherit;color:inherit;cursor:pointer}
+  [data-book=sd]{--book:var(--sd)} [data-book=sh]{--book:var(--sh)} [data-book=yt]{--book:var(--yt)}
+  #deck{height:100%;position:relative}
+  .slide{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .inner{max-width:var(--maxw,1100px);margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:var(--gap,20px);padding-block:var(--pad-top,48px) var(--pad-bottom,112px)}
+  .inner>*{min-width:0}
+  .title{margin:0;text-wrap:balance} .lead,.eyebrow,.lesson{margin:0}
+  .lead{max-width:40em}
+  .row-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .dfn{border:0;background:none;padding:0;font-weight:inherit;border-bottom:2px dotted currentColor;line-height:inherit}
+  .pop{position:fixed;z-index:50;padding:12px 14px;display:flex;flex-direction:column;gap:4px;font-size:.92rem;line-height:1.5}
+  .deck-nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;justify-content:center;gap:14px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  .nav-dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-width:0}
+  .nav-dots button{padding:0;border:0}
+  .seg{display:inline-flex;flex-wrap:wrap;align-self:flex-start}
+  .seg button{border:0}
+  /* couplet */
+  .couplet{display:flex;flex-direction:column;gap:12px}
+  .couplet-line{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+  .glyph{position:relative;aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:4px}
+  .glyph-c{font-size:clamp(1.6rem,4.4vw,3.2rem);line-height:1}
+  .glyph-b{font-size:clamp(.6rem,1.2vw,.82rem);opacity:0;transform:translateY(4px);transition:.25s;text-align:center;line-height:1.25}
+  .glyph.is-open .glyph-b{opacity:1;transform:none}
+  .couplet.only-trilogy .glyph:not(.is-trilogy),.only-trilogy .glyph:not(.is-trilogy){opacity:.22}
+  .couplet-out{min-height:2.4em}
+  /* books */
+  .books{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}
+  .book{display:flex;flex-direction:column;overflow:hidden}
+  .book-art{position:relative;display:flex;align-items:center;justify-content:center}
+  .book-art em{position:absolute;left:12px;top:10px;font-style:normal}
+  .book-body{display:flex;flex-direction:column;gap:6px;padding:16px}
+  .book-body h3,.book-body p{margin:0}
+  .book dl{margin:4px 0 8px;display:grid;gap:4px} .book dl div{display:flex;gap:10px} .book dd{margin:0}
+  .book .btn{align-self:flex-start}
+  /* timeline */
+  .tl{display:flex;flex-direction:column;gap:14px}
+  .tl-now{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .tl-track{position:relative;height:64px}
+  .tl-band{position:absolute;top:8px;height:30px;display:flex;align-items:center;padding:0 8px;overflow:hidden;white-space:nowrap}
+  .tl-dot{position:absolute;top:44px;width:16px;height:16px;margin-left:-8px;border-radius:50%;padding:0}
+  .tl-range{width:100%}
+  .tl-ticks{position:relative;height:1.2em}
+  .tl-ticks span{position:absolute;transform:translateX(-50%);font-size:.75rem}
+  .tl-card{display:flex;gap:16px;align-items:baseline;min-height:4.5em}
+  .tl-card p{margin:0}
+  /* story */
+  .story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:24px;align-items:start}
+  .story .row-actions{grid-column:2}
+  @media (max-width:760px){.story{grid-template-columns:1fr}.story .row-actions{grid-column:1}}
+  .story-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .story-pill{width:100%;display:flex;align-items:center;gap:12px;text-align:left}
+  .story-panel h3{margin:0 0 8px} .story-panel p{margin:0}
+  /* flip cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:14px}
+  .flip{border:0;padding:0;background:none;perspective:900px;aspect-ratio:4/5;text-align:center}
+  .flip-inner{position:relative;display:block;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .flip[aria-pressed=true] .flip-inner{transform:rotateY(180deg)}
+  .flip-front,.flip-back{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .flip-back{transform:rotateY(180deg)}
+  /* compass */
+  .compass-wrap{display:flex;flex-direction:column;gap:16px}
+  .compass-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:24px;align-items:center}
+  @media (max-width:760px){.compass-row{grid-template-columns:1fr}}
+  .compass{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". n ." "w c e" ". s .";gap:10px;max-width:440px;width:100%;margin:0 auto}
+  .cp{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px}
+  .cp-N{grid-area:n}.cp-W{grid-area:w}.cp-C{grid-area:c}.cp-E{grid-area:e}.cp-S{grid-area:s}
+  .cp-detail{display:flex;flex-direction:column;gap:6px}
+  /* reveal */
+  .reveal{display:flex;flex-direction:column;gap:18px}
+  .verse{display:flex;flex-wrap:wrap;gap:6px 18px}
+  .forge{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+  .forge i{font-style:normal;margin:0 6px;opacity:.6}
+  .maker{flex-basis:100%}
+  .blades{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:120px}
+  .blade{height:56px;display:flex;align-items:center;justify-content:center;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .blade-l{grid-column:1;grid-row:1;transform:translateX(50%)} .blade-r{grid-column:3;grid-row:1;transform:translateX(-50%)}
+  .inside{grid-column:2;grid-row:1;display:flex;gap:10px;opacity:0;transform:scale(.8);transition:.5s .15s}
+  .reveal.is-open .blade-l,.reveal.is-open .blade-r{transform:none}
+  .reveal.is-open .inside{opacity:1;transform:none}
+  .scroll{display:flex;flex-direction:column;gap:4px;padding:10px 12px;text-align:center}
+  @media (max-width:760px){.blades{grid-template-columns:1fr;gap:10px}.blade-l,.blade-r,.inside{grid-column:1;transform:none}.blade-l{grid-row:1}.inside{grid-row:2;flex-direction:column}.blade-r{grid-row:3}}
+  .ed-switch{display:flex;flex-direction:column;gap:10px}
+  .ed-text{margin:0}
+  /* tree */
+  .tree{display:flex;flex-direction:column;align-items:center;gap:0;max-width:760px;width:100%;margin:0 auto}
+  .tree-root{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 26px}
+  .tree-lines{width:66%;height:44px;fill:none}
+  .tree-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%}
+  .branch{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center}
+  .branch-became{opacity:0;transition:.3s;font-size:.9rem}
+  .branch[aria-pressed=true] .branch-became{opacity:1}
+  .tree-after{margin:18px 0 0;text-align:center}
+  /* graph */
+  .graph-wrap{display:flex;flex-direction:column;gap:12px}
+  .graph-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem}
+  .graph-legend span{display:inline-flex;align-items:center;gap:6px} .graph-legend i{width:10px;height:10px;border-radius:50%;background:var(--book)}
+  .graph-row{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.7fr);gap:20px;align-items:start}
+  @media (max-width:860px){.graph-row{grid-template-columns:1fr}}
+  .graph-scroll{overflow-x:auto}
+  .graph{width:100%;min-width:560px;height:auto;display:block}
+  .g-node{cursor:pointer} .g-node text{font-size:17px;pointer-events:none}
+  .g-edge,.g-node{transition:opacity .2s}
+  .g-edge.is-dim,.g-node.is-dim{opacity:.18}
+  .graph-detail{display:flex;flex-direction:column;gap:8px}
+  .graph-detail ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .graph-detail li{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .graph-detail li button{border:0}
+  /* quiz */
+  .quiz{display:flex;flex-direction:column;gap:16px;max-width:720px;width:100%}
+  .quiz-bar{height:10px;overflow:hidden} .quiz-bar i{display:block;height:100%;width:0;transition:width .3s}
+  .quiz-q{display:flex;flex-direction:column;gap:12px} .quiz-q h3,.quiz-count,.quiz-why{margin:0}
+  .quiz-opts{display:flex;flex-direction:column;gap:10px}
+  .opt{text-align:left}
+  .quiz-done{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .quiz-msg{margin:0}
+  /* tabs */
+  .tabs{display:flex;flex-direction:column;gap:18px}
+  .tab-panel{display:flex;flex-direction:column;gap:14px} .tab-panel p{margin:0;max-width:40em}
+  .tab-items{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;counter-reset:ti}
+  .tab-items li{counter-increment:ti;display:flex;align-items:center;gap:10px}
+  /* cover & stats */
+  .cover-books{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{display:inline-flex;align-items:center;gap:10px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:14px}
+  .stat{display:flex;flex-direction:column;gap:6px}
+  .stat-big{font-variant-numeric:tabular-nums;line-height:1.05}
+  /* islands */
+  .isl-wrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:22px;align-items:start}
+  @media (max-width:900px){.isl-wrap{grid-template-columns:minmax(0,1fr)}}
+  .isl-map{overflow:hidden}
+  @media (max-width:600px){.isl-map{overflow-x:auto}.isl-svg{min-width:640px}}
+  .isl-svg{display:block;width:100%;height:auto}
+  .isl{cursor:pointer;outline:none}
+  .isl .land,.isl .shoal{transition:transform .25s,filter .25s;transform-box:fill-box;transform-origin:center}
+  .isl:hover .land,.isl:focus-visible .land{transform:scale(1.08)}
+  .ship{transition:transform .9s cubic-bezier(.45,.05,.3,1);pointer-events:none}
+  .route{fill:none;transition:stroke .4s}
+  .isl-panel{display:flex;flex-direction:column;gap:10px;min-height:340px}
+  .isl-panel h3,.isl-panel p{margin:0}
+  .isl-meta{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .isl-cast{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .isl-panel .row-actions{margin-top:6px}
+  /* profiles */
+  .posters{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:14px}
+  .poster{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:0 0 12px;text-align:left;border:0;overflow:hidden}
+  .poster-art{align-self:stretch;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+  .poster>span:not(.poster-art){padding:0 12px}
+  .poster-tag{display:inline-block}
+  .sheet{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;padding:16px}
+  .sheet-card{position:relative;width:min(760px,100%);max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:0 0 22px}
+  .sheet-card>*:not(.sheet-hero):not(.sheet-x){margin-inline:24px}
+  .sheet-x{position:absolute;right:12px;top:12px;width:40px;height:40px;border-radius:50%;border:0;font-size:1.5rem;line-height:1;z-index:1}
+  .sheet-hero{display:flex;align-items:flex-end;gap:18px;padding:28px 24px 20px}
+  .sheet-hero h3,.sheet-hero p{margin:0}
+  .sheet-secs{margin:0;display:grid;gap:12px}
+  .sheet-secs div{display:grid;grid-template-columns:4em minmax(0,1fr);gap:12px}
+  .sheet-secs dd{margin:0}
+  .sheet-isl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .isl-chip{border:0}
+  .sheet-nav{justify-content:space-between}
+  /* saga */
+  .saga{display:flex;flex-direction:column;gap:16px}
+  .saga-verse{margin:0}
+  .saga-main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+  @media (max-width:900px){.saga-main{grid-template-columns:minmax(0,1fr)}}
+  .saga-stage{display:flex;flex-direction:column;gap:12px}
+  .saga-svg{width:100%;height:auto;display:block;overflow:visible}
+  .saga-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .saga-ed-text{margin:0}
+  .saga-card{display:flex;flex-direction:column;gap:10px;min-height:300px}
+  .saga-card h3,.saga-card p{margin:0}
+  .holders{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .holder{display:flex;flex-direction:column;gap:2px;padding:10px 12px}
+  .saga-track{list-style:none;margin:0;padding:8px 0 4px;display:flex;overflow-x:auto;scrollbar-width:thin}
+  .saga-track li{flex:1 0 76px;display:flex}
+  .st-dot{flex:1;border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+  .st-dot::before{content:"";position:absolute;top:8px;left:0;right:0;height:2px}
+  .st-dot i{position:relative;width:18px;height:18px;border-radius:50%}
+  .st-dot span{font-size:.75rem;text-align:center;line-height:1.25;padding:0 2px}
+  /* 刀劍狀態 */
+  .saga-svg .pre,.saga-svg .wp,.saga-svg .twin,.saga-svg .sparks,.saga-svg .inner{transition:opacity .5s}
+  .saga-svg .half,.saga-svg .sw,.saga-svg .sb,.saga-svg .scroll-i{transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s;transform-box:view-box}
+  .saga-stage .wp{opacity:0}
+  .saga-stage .twin,.saga-stage .sparks,.saga-stage .inner{opacity:0}
+  .saga-stage[data-state=pre2] .twin{opacity:1}
+  .saga-stage:not([data-state^=pre]) .pre{opacity:0}
+  .saga-stage:not([data-state^=pre]) .wp{opacity:1}
+  .saga-stage[data-state=forge] .sparks{opacity:1}
+  .saga-stage[data-state=forge] .wp{filter:url(#glow)}
+  .saga-stage[data-state=apart] .sw{transform:translate(-14px,-10px)}
+  .saga-stage[data-state=apart] .sb{transform:translate(14px,14px)}
+  .saga-stage[data-state=broken] .sw .half.b,.saga-stage[data-state=end] .sw .half.b{transform:translate(26px,-16px) rotate(4deg)}
+  .saga-stage[data-state=broken] .sb .half.b{transform:translate(26px,18px) rotate(-4deg)}
+  .saga-stage[data-xray=true]:not([data-state^=pre]) .inner,.saga-stage[data-state=broken] .inner{opacity:1}
+  .saga-stage[data-xray=true]:not([data-state^=pre]) .half{opacity:.35}
+  .saga-stage[data-state=broken] .in-sw .scroll-i{transform:translate(0,-34px)}
+  .saga-stage[data-state=broken] .in-sb .scroll-i{transform:translate(0,40px)}
+  .saga-stage[data-state=end] .sb{filter:url(#glow)}
+  /* atlas */
+  .atlas{display:flex;flex-direction:column;gap:14px}
+  .atlas-svg{display:block;width:100%;height:auto}
+  .cluster{cursor:pointer;outline:none}
+  .cluster .halo,.cluster .mini{transition:.3s}
+  .lane{fill:none}
+  .atlas-lanes{display:flex;flex-wrap:wrap;gap:4px 28px}
+  .atlas-lanes p{margin:0}
+  .atlas-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+  .atlas-card{display:flex;flex-direction:column;gap:6px;padding:16px;transition:.25s}
+  .atlas-card h3,.atlas-card p{margin:0}
+  .atlas-card .btn{align-self:flex-start;margin-top:4px}
+  /* graph v3 */
+  .graph-tools{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .g-elabel{pointer-events:none;opacity:0;transition:opacity .2s}
+  .g-elabel.is-on{opacity:1}
+  .g-node.is-out,.g-edge.is-out{opacity:.08}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  `;
+
+  /* ---------- deck ---------- */
+  function mount(opts) {
+    opts = opts || {};
+    const st = document.createElement('style'); st.textContent = BASE_CSS; document.head.prepend(st);
+    const deck = window.DECK, root = document.getElementById('deck');
+    root.innerHTML = deck.slides.map((s, i) => `
+      <section class="slide t-${s.type}" id="${s.id}" ${s.book ? `data-book="${s.book}"` : ''} data-n="${i + 1}" ${i ? 'hidden' : ''}>
+        <div class="inner">${opts.label ? `<p class="lesson">${opts.label(i + 1, deck.slides.length, s)}</p>` : ''}${R[s.type](s, deck)}</div>
+      </section>`).join('') + `
+      <nav class="deck-nav" aria-label="投影片導覽">
+        <button type="button" class="nav-btn" data-nav="-1" aria-label="上一頁">‹</button>
+        <div class="nav-dots">${deck.slides.map((s, i) => `<button type="button" data-to="${i}" aria-label="第 ${i + 1} 頁：${esc(plain(s.title))}"></button>`).join('')}</div>
+        <button type="button" class="nav-btn" data-nav="1" aria-label="下一頁">›</button>
+      </nav>
+      <div class="pop" role="tooltip" hidden></div>`;
+    const slides = [...root.querySelectorAll('.slide')];
+    slides.forEach((el, i) => { const s = deck.slides[i]; if (B[s.type]) B[s.type](el.querySelector('.inner'), s, deck); });
+    let cur = 0;
+    const dots = [...root.querySelectorAll('.nav-dots button')];
+    function show(i) {
+      cur = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((s, k) => s.hidden = k !== cur);
+      dots.forEach((d, k) => { d.classList.toggle('is-on', k === cur); d.classList.toggle('is-past', k < cur); });
+      root.dataset.cur = cur + 1;
+      if (location.hash !== '#' + slides[cur].id) history.replaceState(null, '', '#' + slides[cur].id);
+      slides[cur].scrollTop = 0; hidePop(); closeSheets();
+      const st = slides[cur].querySelector('.inner'); if (st._count) st._count();
+      const detail = { index: cur, total: slides.length };
+      setTimeout(() => document.dispatchEvent(new CustomEvent('deck:slide', { detail })), 0);
+    }
+    const fromHash = () => { const k = slides.findIndex(s => '#' + s.id === location.hash); show(k < 0 ? 0 : k); };
+    root.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => show(cur + +b.dataset.nav));
+    dots.forEach(d => d.onclick = () => show(+d.dataset.to));
+    function closeSheets() { root.querySelectorAll('.sheet').forEach(sh => sh.hidden = true); }
+    root.addEventListener('click', e => {
+      const g = e.target.closest('[data-go]'); if (!g) return;
+      const k = slides.findIndex(s => s.id === g.dataset.go); show(k);
+      const inner = slides[k].querySelector('.inner');
+      if (g.dataset.isl != null && inner._open) inner._open(+g.dataset.isl);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.target.matches('input')) return;
+      if (root.querySelector('.sheet:not([hidden])') && e.key !== 'Escape') return;
+      if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); show(cur + 1); }
+      if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(cur - 1); }
+      if (e.key === 'Escape') { hidePop(); closeSheets(); }
+    });
+    // 名詞解釋：點一下才出現的小浮層，不佔畫面
+    const pop = root.querySelector('.pop');
+    function hidePop() { pop.hidden = true; }
+    root.addEventListener('click', e => {
+      const d = e.target.closest('.dfn');
+      if (!d) { if (!e.target.closest('.pop')) hidePop(); return; }
+      e.stopPropagation();
+      pop.innerHTML = `<strong>${esc(d.textContent)}</strong>${esc(d.dataset.def)}`; pop.hidden = false;
+      const r = d.getBoundingClientRect(), w = Math.min(300, innerWidth - 32);
+      pop.style.width = w + 'px';
+      pop.style.left = Math.max(16, Math.min(innerWidth - w - 16, r.left + r.width / 2 - w / 2)) + 'px';
+      const below = r.bottom + 10 + pop.offsetHeight < innerHeight;
+      pop.style.top = (below ? r.bottom + 10 : r.top - pop.offsetHeight - 10) + 'px';
+      ping('dfn');
+    }, true);
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  }
+  window.Deck = { mount, BOOK_NAME };
+})();
+
+</script>
+<script>Deck.mount();</script>
+</body>
+</html>
